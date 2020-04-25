@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import database.AccountCRUD;
+import database.AccountDAO;
 import entites.Account;
 
 /**
@@ -28,8 +28,8 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		AccountCRUD accCRUD = new AccountCRUD();
-		List<Account> list = accCRUD.getAll();
+		AccountDAO accDAO = new AccountDAO();
+		List<Account> list = accDAO.getAll();
 		System.out.println(list);
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
