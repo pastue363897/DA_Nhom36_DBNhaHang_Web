@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+.carousel-inner {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.carousel-item {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: calc(100vh - 117px);
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	content: '';
+	background: #404044;
+	opacity: .5;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.criteria {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	line-height: 1.2;
+	color: rgb(255, 255, 255);
+	opacity: 1 !important;
+}
+.criteria-item {
+	font-family: 'Dancing Script', cursive;
+    font-size: 72px;
+    font-weight: 400px;
+    margin-bottom: 20px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+	-moz-transition: all 0.7s ease;
+	-o-transition: all 0.7s ease;
+	-webkit-transition: all 0.7s ease;
+	-ms-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+	opacity: 0;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+	opacity: 1;
+}
+
+.carousel:hover .carousel-control-prev {
+	visibility: visible;
+	opacity: 1;
+}
+.carousel:hover .carousel-control-next {
+	visibility: visible;
+    opacity: 1;
+}
+.carousel:hover .carousel-control-prev {
+	left: 20px;
+}
+
+.carousel:hover .carousel-control-next {
+	right: 20px;
+}
+
+.btn:not(:disabled ):not(.disabled ) {
+    cursor: pointer;
+}
+
+.btn.btn-outline-white {
+	font-size: 20px;
+	border-color: rgba(255, 255, 255, 0.8);
+	background: none;
+	border-radius: 0px;
+	border-width: 2px;
+	color: white;
+}
+
+.btn.btn-outline-white:hover, .btn.btn-outline-white:focus, .btn.btn-outline-white:active {
+	background: #fff;
+	border-color: #fff;
+	color: #404044;
+}

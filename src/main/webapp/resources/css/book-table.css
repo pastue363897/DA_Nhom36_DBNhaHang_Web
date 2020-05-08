@@ -1,0 +1,28 @@
+@charset "UTF-8";
+.reservation {
+	margin-top: -145px;
+    background: #ffb400;
+}
+.form-control {
+	background: transparent !important;
+	border: 1px solid black;
+	border-radius: 0px;
+	height: 52px !important;
+}
+form .fields .one-third {
+    width: 20%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+form .search-submit {
+    width: 120px;
+    margin-left: 20px;
+    background: #fff;
+    border: 2px solid #fff;
+    color: #404044;
+}
+.btn-primary:hover {
+    color: #212529;
+    background-color: #ffb400;
+    border-color: #fff;
+}

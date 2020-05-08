@@ -1,0 +1,15 @@
+@charset "UTF-8";
+.ftco-footer {
+    font-size: 16px;
+    background: #27272b;
+    padding: 8em 0;
+    line-height: 1.8;
+    font-weight: 300;
+    color: #8b8b92;
+}
+.ftco-footer .ftco-footer-widget h2 {
+    font-weight: normal;
+    color: #fff;
+    margin-bottom: 40px;
+    font-size: 24px;
+}

@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.manager-account, #btnManagerAccount {
+	color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+}
+.manager-account:hover {
+    background-color: #212529;
+    border-color: #212529;
+    box-shadow: none;
+    border-radius: 50px !important;
+}
+.manager-account img {
+	width: 16px !important;
+    height: 16px !important;
+    margin-right: 5px;
+}
+#btnManagerAccount img {
+	border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(147,112,219,.5);
+}
+#btnManagerAccount {
+	display: flex;
+    align-items:center;
+}

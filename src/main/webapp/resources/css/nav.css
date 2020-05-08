@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.navbar-brand {
+	font-size: 25px;
+	font-weight: 600px;
+}
+
+.navbar-brand>span {
+	font-family: 'Dancing Script', cursive;
+	font-size: 32px;
+	font-weight: 400px;
+	font-style: italic;
+	color: red;
+}
+
+#navBar>.navbar-nav>.nav-item>.nav-link {
+	font-size: 16px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	opacity: 1 !important;
+}

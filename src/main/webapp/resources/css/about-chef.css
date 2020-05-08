@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.about-chef {
+	color: #404044;
+	line-height: 1.8;
+}
+.ftco-section-2 .section-2-blocks-wrapper .text {
+	position: relative;
+	z-index: -1;
+	padding: 15px;
+}
+@media ( min-width : 768px) {
+    .ftco-section-2 .section-2-blocks-wrapper .text {
+        padding: 10% 7%;
+    }
+}
+.img, .chef-img, .insta-img, .menu-img, .user-img {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.ftco-section-2 .section-2-blocks-wrapper .subheading {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(0, 0, 0, 0.2);
+}
+.ftco-section-2 .section-2-blocks-wrapper .text .heading {
+    margin-bottom: 50px;
+    font-size: 30px;
+    font-weight: 400px;
+}
+.ftco-section-2 .section-2-blocks-wrapper p {
+	color: #8b8b92;
+}

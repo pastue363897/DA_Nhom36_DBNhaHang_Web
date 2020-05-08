@@ -1,0 +1,56 @@
+@charset "UTF-8";
+.table {
+	color: #404044;
+}
+.parallax-img {
+	min-height: 470px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 10em 0 !important;
+}
+.heading-section.heading-section-white h2 {
+    color: #fff;
+}
+.heading-section h2 {
+    font-size: 34px;
+    font-weight: 600;
+}
+.ftco-section {
+	position: relative;
+    padding: 7em 0;
+}
+.special-dish {
+    margin-top: -200px;
+}
+.text-center {
+    text-align: center !important;
+}
+.block-3 .text, .block-3 .image {
+    width: 100%;
+    padding: 7%;
+}
+.block-3 .image {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.block-3 .text {
+    background: #fff;
+}
+.block-3 .text .heading {
+    font-size: 20px;
+}
+.block-3 .text p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #8b8b92;
+}
+.block-3 .text .price {
+    color: #ffb400;
+    font-weight: 700;
+    text-transform: uppercase;
+}
