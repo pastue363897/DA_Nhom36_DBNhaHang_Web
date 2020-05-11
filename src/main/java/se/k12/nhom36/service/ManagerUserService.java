@@ -38,4 +38,13 @@ public class ManagerUserService {
     Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), ac);
     return managerUserDao.registerUser(ac, c);
   }
+  public boolean updateAccount(AccountModel account, String userNameOld) {
+    Account ac = new Account(account.getUsername(), account.getPassword());
+    return managerUserDao.updateAccount(ac, userNameOld);
+  }
+  public boolean updateCustomer(CustomerModel customer) {
+    Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), null);
+    c.setMaKH(customer.getMaKH());
+    return managerUserDao.updateCustomer(c);
+  }
 }

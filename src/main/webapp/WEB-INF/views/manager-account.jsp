@@ -8,7 +8,7 @@
                 <img alt="icon-avatar" src="<c:url value="/resources/images/icons/avatar.png" />"> ${account.username }
             </button>
             <div class="dropdown-menu" aria-labelledby="btnManagerAccount">
-                <a class="dropdown-item" href="manager-account"> <img alt="icon-info"
+                <a class="dropdown-item" href="user-manager"> <img alt="icon-info"
                     src="<c:url value="/resources/images/icons/info.png" />"> Thông tin tài khoản
                 </a> <a class="dropdown-item" href="logout"><img alt="icon-logout"
                     src="<c:url value="/resources/images/icons/logout.png" />"> Thoát </a>

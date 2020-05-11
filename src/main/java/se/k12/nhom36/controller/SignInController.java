@@ -36,8 +36,9 @@ public class SignInController {
   
   @RequestMapping(value = "sign-in", method = RequestMethod.POST)
   public String signIn(@ModelAttribute("account") AccountModel account, BindingResult accountBind, HttpSession session) {
-      System.out.println(account);
+      System.out.println(account.getUsername());
       CustomerModel customer = managerUserService.login(account);
+      System.out.println(customer);
       if (customer != null) {
         session.setAttribute("account", account);
         session.setAttribute("customer", customer);

@@ -40,4 +40,10 @@ public class ManagerUserDao {
   public Customer getCustomer(Account account) {
     return customerDao.getCustomer(account);
   }
+  public boolean updateAccount(Account account, String userNameOld) {
+    return accountDao.updateAccount(account, userNameOld);
+  }
+  public boolean updateCustomer(Customer customer) {
+    return customerDao.updateCustomer(customer);
+  }
 }
