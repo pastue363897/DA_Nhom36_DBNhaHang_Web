@@ -16,7 +16,10 @@ public class ManagerBanDatDao {
   @Autowired
   private TTBanDatDAO ttBanDatDao;
   
-  public boolean themBanDat(TTBanDat ttBanDat) {
-    return ttBanDatDao.addBanDat(ttBanDat) == null ? false : true;
+  public String themBanDat(TTBanDat ttBanDat) {
+    return ttBanDatDao.addBanDat(ttBanDat);
+  }
+  public boolean capNhatTongTienBanDat(String maBD, long tongTien) {
+    return ttBanDatDao.updateTongTien(maBD, tongTien);
   }
 }

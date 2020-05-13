@@ -17,6 +17,7 @@ import entites.MonAn;
 import entites.TTBanDat;
 import se.k12.nhom36.model.CTTTBanDatModel;
 import se.k12.nhom36.model.TTBanDatModel;
+import se.k12.nhom36.repository.ManagerBanAnDao;
 import se.k12.nhom36.repository.ManagerBanDatDao;
 import se.k12.nhom36.repository.ManagerCTTTBanDatMonAnDao;
 import se.k12.nhom36.repository.ManagerMonAnDao;
@@ -26,6 +27,8 @@ public class ManagerBanDatService {
   @Autowired
   private ManagerBanDatDao managerBanDatDao;
   @Autowired
+  private ManagerBanAnDao managerBanAnDao;
+  @Autowired
   private ManagerMonAnDao managerMonAnDao;
   @Autowired
   private ManagerCTTTBanDatMonAnDao managerCTTTBanDatMonAnDao;
@@ -33,13 +36,14 @@ public class ManagerBanDatService {
   public boolean datBan(TTBanDatModel banDat) {
     Customer khachHang = new Customer();
     khachHang.setMaKH(banDat.getMaKH());
-    BanAn banAn = new BanAn();
-    banAn.setMaBA(banDat.getMaBA());
+    BanAn banAn = managerBanAnDao.getBanAn(banDat.getMaBA());
     
     TTBanDat ttBanDat = new TTBanDat(khachHang, banDat.getNgayDat(), banDat.getNgayPhucVu(), banAn);
-    if (!managerBanDatDao.themBanDat(ttBanDat)) {
+    String maBD = managerBanDatDao.themBanDat(ttBanDat);
+    if (maBD == null) {
       return false;
     }
+    long tongTien = banAn.getGiaTien();
     List<CTTTBanDatModel> ds = banDat.getDsMonAn();
     CTTTBanDatMonAn detail;
     MonAn monAn;
@@ -47,7 +51,9 @@ public class ManagerBanDatService {
       monAn = managerMonAnDao.getMonAn(ct.getMaMA());
       detail = new CTTTBanDatMonAn(ttBanDat, monAn, ct.getSoLuong(), monAn.getGiaTien());
       managerCTTTBanDatMonAnDao.addCTTTBanDatMonAn(detail);
+      tongTien += monAn.getGiaTien();
     }
-    return true;
+    
+    return managerBanDatDao.capNhatTongTienBanDat(maBD, tongTien);
   }
 }
