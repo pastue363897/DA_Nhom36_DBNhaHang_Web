@@ -35,6 +35,7 @@
 										<c:when test="${i >= halfLength}">
 											</div><div class="col-lg-6">
 											<div class="menus d-flex ftco-animate">
+											    <input type="hidden" class="maMA" value="${monan.maMA }">
 												<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
 												<div class="text d-flex">
 													<div class="one-half">
@@ -51,6 +52,7 @@
 										</c:when>
 										<c:otherwise>
 											<div class="menus d-flex ftco-animate">
+											    <input type="hidden" class="maMA" value="${monan.maMA }">
 												<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
 												<div class="text d-flex">
 													<div class="one-half">
@@ -525,13 +527,13 @@
 							</div>
 						</div>
 					</div> --%>
-				<div class="col-sm-12 pt-4 text-center ftco-animate">
+				<div class="col-sm-12 pt-4 text-center ftco-animate quotations-food">
 					<p>Tất cả chúng ta đều ăn vì thế sẽ thật là lãng phí và buồn tẻ nếu ăn những thứ chả ra gì</p>
 					<span><a href="reservation.html" class="btn btn-primary btn-outline-primary p-3">Đặt bàn ngay</a></span>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+	<!-- </div> -->
 </section>
 <!-- end food -->

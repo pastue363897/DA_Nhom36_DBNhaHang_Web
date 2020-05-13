@@ -17,7 +17,7 @@
     </section>
     <section class="ftco-section bg-light table">
         <div class="container special-dish">
-            <div class="row d-flex no-gutters">
+            <div class="row d-flex no-gutters row-table">
             
                 <c:set var="halfLength" value="${dsBanAn.size() / 2 }"></c:set>
                 <c:set var="i" value="0"></c:set>
@@ -26,7 +26,8 @@
                         <c:choose>
                             <c:when test="${i >= halfLength}">
                                 </div><div class="col-lg-6">
-                                <div class="block-3 d-md-flex ftco-animate">
+                                <div class="block-3 d-md-flex ftco-animate item-table">
+                                    <input type="hidden" value="${banan.maBA }">
 			                        <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
 			                        <div class="text text-center order-first">
 			                            <h2 class="heading">${banan.kySoBA }</h2>
@@ -39,7 +40,8 @@
                                 <c:set var="i" value="${0 }"></c:set>
                             </c:when>
                             <c:otherwise>
-                                <div class="block-3 d-md-flex ftco-animate">
+                                <div class="block-3 d-md-flex ftco-animate item-table">
+                                    <input type="hidden" value="${banan.maBA }" >
                                     <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
                                     <div class="text text-center order-first">
                                         <h2 class="heading">${banan.kySoBA }</h2>
@@ -54,6 +56,9 @@
                         </c:choose>
                     </c:forEach>
                 </div>
+                <form action="dat-ban" id="order" method="POST">
+                    <input type="hidden" id="maBA" name="maBA" value="">
+                </form>
             
                 <%-- <div class="col-lg-6">
                     <div class="block-3 d-md-flex ftco-animate">

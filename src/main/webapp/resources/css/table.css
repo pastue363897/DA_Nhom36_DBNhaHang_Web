@@ -54,3 +54,18 @@
     font-weight: 700;
     text-transform: uppercase;
 }
+.row-table:hover div:hover {
+	z-index: 1;
+}
+.item-table {
+	transition: 0.7s;
+}
+.item-table:hover {
+	transform: scale(1.2);
+    z-index: 1 !important;
+    box-shadow: 2px 2px 2px #000;
+    cursor: pointer;
+}
+.item-table:hover .text {
+	background-color: rgba(247, 235, 203, 1);
+}

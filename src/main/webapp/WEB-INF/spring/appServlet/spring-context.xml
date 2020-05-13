@@ -37,5 +37,11 @@
     <beans:bean name="banAnDao" class="database.BanAnDAO">
     
     </beans:bean>
+    <beans:bean name="ttBanDatDao" class="database.TTBanDatDAO">
+    
+    </beans:bean>
+    <beans:bean name="cTTTTBanDatMonAnDao" class="database.CTTTTBanDatMonAnDAO">
+    
+    </beans:bean>
 	
 </beans:beans>

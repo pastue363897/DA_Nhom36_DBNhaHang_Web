@@ -25,6 +25,8 @@ public class ManagerMonAnService {
     int count = Integer.parseInt("10"/* evm.getProperty("monan.visiable-home") */);
     return managerMonAnDao.getDanhSachMonAnHome(count);
   }
-  
+  public List<MonAn> danhSachMonAn(){
+    return managerMonAnDao.getDanhSachMonAn();
+  }
   
 }

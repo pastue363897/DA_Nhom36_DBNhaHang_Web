@@ -18,8 +18,13 @@ public class ManagerBanAnDao {
   
   @Autowired
   private BanAnDAO banAnDao;
-  
+  public BanAn getBanAn(String idBA) {
+    return banAnDao.get(idBA);
+  }
   public List<BanAn> getDanhSachBanAnHome(int count){
-    return banAnDao.danhSachBonAnHome(count);
+    return banAnDao.danhSachBanAnHome(count);
+  }
+  public List<BanAn> getDanhSachBanAn(){
+    return banAnDao.danhSachBanAnCoTheDat();
   }
 }

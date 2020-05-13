@@ -18,10 +18,15 @@ public class ManagerBanAnService {
   
   @Autowired
   private ManagerBanAnDao managerBanAnDao;
-  
+  public BanAn layThongTinBanAn(String idBA) {
+    return managerBanAnDao.getBanAn(idBA);
+  }
   public List<BanAn> danhSachBanAnHome() {
     int count = Integer.parseInt("4");
     return managerBanAnDao.getDanhSachBanAnHome(count);
+  }
+  public List<BanAn> danhSachBanAn() {
+    return managerBanAnDao.getDanhSachBanAn();
   }
   
 }

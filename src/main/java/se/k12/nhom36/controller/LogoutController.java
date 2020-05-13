@@ -16,6 +16,6 @@ public class LogoutController {
   @RequestMapping(value = "logout")
   public String requestLogout(HttpSession session) {
     session.invalidate();
-    return "forward: /home";
+    return "forward:home";
   }
 }
