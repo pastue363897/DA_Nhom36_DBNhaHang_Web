@@ -12,6 +12,7 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/manager-account.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/food.js" />'></script>
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>

@@ -28,5 +28,7 @@ public class ManagerMonAnService {
   public List<MonAn> danhSachMonAn(){
     return managerMonAnDao.getDanhSachMonAn();
   }
-  
+  public MonAn thongTinChiTietMonAn(String maMA) {
+    return managerMonAnDao.getMonAn(maMA);
+  }
 }

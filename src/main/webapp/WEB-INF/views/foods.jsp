@@ -45,6 +45,9 @@
 													<div class="one-forth">
 														<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
 																Đ</span></span>
+																<div>
+																    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
+																</div>
 													</div>
 												</div>
 											</div>
@@ -62,6 +65,9 @@
 													<div class="one-forth">
 														<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
 																Đ</span></span>
+																<div>
+                                                                    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
+                                                                </div>
 													</div>
 												</div>
 											</div>
@@ -73,7 +79,38 @@
 						</div>
 					</div>
 				</div>
-
+                <!-- Modal -->
+				<div class="modal fade" id="chitiet-monan" tabindex="-1" role="dialog">
+				  <div class="modal-dialog modal-dialog-centered">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="tenMonAn">Tên món ăn</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <div id="modal-body-left">
+				            <img id="hinhAnh" alt="hinh-anh-mon-an" src="#">
+				        </div>
+				        <div id="modal-body-right">
+				            <div>
+				                Nguyên liệu chính: <span id="nguyenLieu"></span>
+				            </div>
+				            <div>
+                                Mô tả: <span id="moTa"></span>
+                            </div>
+                            <div>
+                                Số người dùng: <span id="soNguoi"></span>
+                            </div>
+                            <div>
+                                Giá: <span id="giaTien"></span> Đ
+                            </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 				<%-- 
 				<div class="tab-content py-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">

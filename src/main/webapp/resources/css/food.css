@@ -146,3 +146,18 @@
     background: #ffb400;
     color: #404044;
 }
+#modal-body-left {
+	width: 30%;
+	float: left;
+}
+#hinhAnh {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 5px;
+}
+#modal-body-right {
+    width: 70%;
+    padding-left: 10px;
+    float: right;
+    text-align: justify;
+}

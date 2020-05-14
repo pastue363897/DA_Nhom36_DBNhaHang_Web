@@ -15,6 +15,7 @@
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery-ui.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/food.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/select-food.js" />'></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -26,7 +27,7 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-7" id="first">
 				<jsp:include page="foods.jsp"></jsp:include>
