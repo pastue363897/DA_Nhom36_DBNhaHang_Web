@@ -12,6 +12,19 @@ $(document).ready(function() {
 		$(".manager-content").hide();
 		$("#manager-bill-content").show();
 		console.log("manager-bill")
+		$.ajax({
+			type : "POST",
+			url : "danhsach-bandat",
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+			}
+		});
 	});
 	$("#manager-order").on("click", function() {
 		activeManager(this);

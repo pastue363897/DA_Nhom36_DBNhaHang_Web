@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,12 @@ import entites.CTTTBanDatMonAn;
 import entites.Customer;
 import entites.MonAn;
 import entites.TTBanDat;
+import se.k12.nhom36.model.BanAnViewModel;
 import se.k12.nhom36.model.CTTTBanDatModel;
+import se.k12.nhom36.model.CTTTBanDatMonAnViewModel;
+import se.k12.nhom36.model.MonAnViewModel;
 import se.k12.nhom36.model.TTBanDatModel;
+import se.k12.nhom36.model.TTBanDatViewModel;
 import se.k12.nhom36.repository.ManagerBanAnDao;
 import se.k12.nhom36.repository.ManagerBanDatDao;
 import se.k12.nhom36.repository.ManagerCTTTBanDatMonAnDao;
@@ -55,5 +60,37 @@ public class ManagerBanDatService {
     }
     
     return managerBanDatDao.capNhatTongTienBanDat(maBD, tongTien);
+  }
+  public List<TTBanDatViewModel> getDSBanDatKH(String maKH){
+    List<TTBanDatViewModel> ds = null;
+    List<TTBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH);
+    if (dsBanDat != null) {
+      ds = new ArrayList<TTBanDatViewModel>();
+      TTBanDatViewModel b;
+      BanAnViewModel banAn;
+      MonAnViewModel monAn;
+      CTTTBanDatMonAnViewModel ct;
+      List<CTTTBanDatMonAnViewModel> dsMonAn;
+      for (TTBanDat tt : dsBanDat) {
+        banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getGiaTien(), tt.getBanAn().getHinhAnh());
+        dsMonAn = new ArrayList<CTTTBanDatMonAnViewModel>();
+        for (CTTTBanDatMonAn c : tt.getDsMonAn()) {
+          monAn = new MonAnViewModel(c.getMonAn().getMaMA(), c.getMonAn().getNguyenLieu(), c.getMonAn().getMoTaMA(), c.getMonAn().getSoLuongNguoi(), c.getMonAn().getHinhAnhMA(), c.getMonAn().getGiaTien());
+          ct = new CTTTBanDatMonAnViewModel(monAn, c.getSoLuong(), c.getDonGia());
+          dsMonAn.add(ct);
+        }
+        b = new TTBanDatViewModel(banAn, tt.getNgayDatBan(), tt.getNgayPhucVu(), dsMonAn, tt.isDaHuy());
+        ds.add(b);
+      }
+    }
+    return ds;
+  }
+  public TTBanDat getBanDat(String maBD) {
+    TTBanDat ttBD = managerBanDatDao.getBanDat(maBD);
+    if (ttBD != null) {
+      List<CTTTBanDatMonAn> ds = managerCTTTBanDatMonAnDao.getDSCTTheoMaBD(ttBD.getMaBD());
+      ttBD.setDsMonAn(ds);
+    }
+    return ttBD;
   }
 }

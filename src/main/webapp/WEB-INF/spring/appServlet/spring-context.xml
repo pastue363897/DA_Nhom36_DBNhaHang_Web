@@ -40,7 +40,7 @@
     <beans:bean name="ttBanDatDao" class="database.TTBanDatDAO">
     
     </beans:bean>
-    <beans:bean name="cTTTTBanDatMonAnDao" class="database.CTTTTBanDatMonAnDAO">
+    <beans:bean name="cTTTBanDatMonAnDao" class="database.CTTTBanDatMonAnDAO">
     
     </beans:bean>
 	
