@@ -8,13 +8,13 @@ package se.k12.nhom36.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import database.CTTTTBanDatMonAnDAO;
+import database.CTTTBanDatMonAnDAO;
 import entites.CTTTBanDatMonAn;
 
 @Repository
 public class ManagerCTTTBanDatMonAnDao {
   @Autowired
-  private CTTTTBanDatMonAnDAO cTTTTBanDatMonAnDao;
+  private CTTTBanDatMonAnDAO cTTTTBanDatMonAnDao;
   
   public boolean addCTTTBanDatMonAn(CTTTBanDatMonAn ct) {
     return cTTTTBanDatMonAnDao.saveOrUpdate(ct);

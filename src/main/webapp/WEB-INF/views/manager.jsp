@@ -28,8 +28,8 @@
 					<img id="id-iconbarleft" src='<c:url value="/resources/images/icons/icon-barleft.png" />'>
 				</label>
 			</div>
-			<ul>
-				<li id="manager-account"><img class="icon" alt=""
+			<ul class="manger">
+				<li id="manager-account" class="manager-active"><img class="icon" alt=""
 					src='<c:url value="/resources/images/icons/manager-account.png" />'> <span>Quản lý tài khoản</span></li>
 				<li id="manager-bill"><img class="icon" alt="" src='<c:url value="/resources/images/icons/bill-table.png" />'>
 					<span>Quản lý bàn đặt</span></li>
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div id="manager-account-content" class="col-md-6">
+				<div id="manager-account-content" class="col-md-6 manager-content">
 					<div>
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -169,6 +169,15 @@
 					</div>
 				</div>
 			</div>
+			<div id="manager-bill-content" class="manager-content">
+			 <p>Bill</p>
+			</div>
+			<div id="manager-order-content" class="manager-content">
+             <p>Order</p>
+            </div>
+            <div id="manager-shopping-cart-content" class="manager-content">
+             <p>Shopping Cart</p>
+            </div>
 		</div>
 	</div>
 

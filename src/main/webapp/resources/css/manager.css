@@ -57,12 +57,15 @@
 	background: rgba(255, 191, 0, 0.8);
 	cursor: pointer;
 }
+.manager-active {
+	background: rgba(146, 219, 222, 1);
+}
 .sidebar .icon {
 	width: 18px;
 	height: 18px;
 	margin-right: 10px;
 	opacity: 0.8;
-}
+} 
 .content-manager {
     margin-left: 250px;
     min-height: 100vh;
@@ -107,4 +110,7 @@
 }
 fieldset {
 	margin: 15px;
+}
+.top {
+	margin-bottom: 20px;
 }

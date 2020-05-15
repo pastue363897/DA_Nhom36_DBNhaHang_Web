@@ -1,14 +1,28 @@
 $(document).ready(function() {
+	$(".manager-content").hide();
+	$("#manager-account-content").show();
 	$("#manager-account").on("click", function() {
+		activeManager(this);
+		$(".manager-content").hide();
+		$("#manager-account-content").show();
 		console.log("manager-account")
 	});
 	$("#manager-bill").on("click", function() {
+		activeManager(this);
+		$(".manager-content").hide();
+		$("#manager-bill-content").show();
 		console.log("manager-bill")
 	});
 	$("#manager-order").on("click", function() {
+		activeManager(this);
+		$(".manager-content").hide();
+		$("#manager-order-content").show();
 		console.log("manager-order")
 	});
 	$("#shopping-cart").on("click", function() {
+		activeManager(this);
+		$(".manager-content").hide();
+		$("#manager-shopping-cart-content").show();
 		console.log("shopping-cart")
 	});
 	$("#close").on("click", function() {
@@ -66,4 +80,8 @@ $(document).ready(function() {
 			}
 		});
 	});
+	function activeManager(typeManager) {
+		$(".manger > li").removeClass();
+		$(typeManager).addClass("manager-active");
+	}
 });

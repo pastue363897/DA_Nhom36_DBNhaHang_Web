@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$(".a").on("click", function(event) {
 		event.preventDefault();
 		var url = $(this).attr('href');
+		event.stopPropagation();
 		$.ajax({
 			type : "POST",
 			url : url,

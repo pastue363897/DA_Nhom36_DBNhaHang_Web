@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Roboto&display=swap" rel="stylesheet">
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/bootstrap.min.css" />'>
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery-ui.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/nav.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/manager-account.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/food.css" />'>
