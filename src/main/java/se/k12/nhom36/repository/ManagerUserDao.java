@@ -24,16 +24,16 @@ public class ManagerUserDao {
   
   
   public boolean loginAccount(Account account) {
-    if (accountDao.signIn(account.getUsername(), account.getPasswordHash()) == 1) {
+    if (accountDao.signIn(account) == 1) {
       return true;
     }
     return false;
   }
   
-  public boolean registerUser(Account account, Customer customer) {
-    if (!accountDao.addAccount(account)) {
+  public boolean registerUser(Customer customer) {
+    /*if (!accountDao.addAccount(account)) {
       return false;
-    }
+    }*/
     return customerDao.addCustomer(customer);
   }
   

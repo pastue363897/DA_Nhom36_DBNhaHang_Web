@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import entites.Account;
 import entites.BanAn;
 import entites.CTTTBanDatMonAn;
 import entites.Customer;
@@ -40,7 +41,9 @@ public class ManagerBanDatService {
   
   public boolean datBan(TTBanDatModel banDat) {
     Customer khachHang = new Customer();
-    khachHang.setMaKH(banDat.getMaKH());
+    Account tk = new Account();
+    khachHang.setTaiKhoan(tk);
+    khachHang.getTaiKhoan().setMaTK(banDat.getMaKH());
     BanAn banAn = managerBanAnDao.getBanAn(banDat.getMaBA());
     
     TTBanDat ttBanDat = new TTBanDat(khachHang, banDat.getNgayDat(), banDat.getNgayPhucVu(), banAn);
@@ -48,7 +51,7 @@ public class ManagerBanDatService {
     if (maBD == null) {
       return false;
     }
-    long tongTien = banAn.getGiaTien();
+    long tongTien = banAn.getPhuGia();
     List<CTTTBanDatModel> ds = banDat.getDsMonAn();
     CTTTBanDatMonAn detail;
     MonAn monAn;
@@ -59,7 +62,7 @@ public class ManagerBanDatService {
       tongTien += monAn.getGiaTien();
     }
     
-    return managerBanDatDao.capNhatTongTienBanDat(maBD, tongTien);
+    return true;
   }
   public List<TTBanDatViewModel> getDSBanDatKH(String maKH){
     List<TTBanDatViewModel> ds = null;
@@ -72,7 +75,7 @@ public class ManagerBanDatService {
       CTTTBanDatMonAnViewModel ct;
       List<CTTTBanDatMonAnViewModel> dsMonAn;
       for (TTBanDat tt : dsBanDat) {
-        banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getGiaTien(), tt.getBanAn().getHinhAnh());
+        banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getPhuGia(), tt.getBanAn().getHinhAnh());
         dsMonAn = new ArrayList<CTTTBanDatMonAnViewModel>();
         for (CTTTBanDatMonAn c : tt.getDsMonAn()) {
           monAn = new MonAnViewModel(c.getMonAn().getMaMA(), c.getMonAn().getNguyenLieu(), c.getMonAn().getMoTaMA(), c.getMonAn().getSoLuongNguoi(), c.getMonAn().getHinhAnhMA(), c.getMonAn().getGiaTien());

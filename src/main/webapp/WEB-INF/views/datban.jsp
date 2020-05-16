@@ -43,7 +43,7 @@
 						<p>${banAn.soLuongGhe }</p>
 						<div class="price">
 							giá
-							<fmt:formatNumber pattern="#,###">${banAn.giaTien }</fmt:formatNumber>
+							<fmt:formatNumber pattern="#,###">${banAn.phuGia }</fmt:formatNumber>
 							<span> Đ</span>
 						</div>
 					</div>

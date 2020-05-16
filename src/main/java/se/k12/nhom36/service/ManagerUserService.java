@@ -26,8 +26,9 @@ public class ManagerUserService {
     CustomerModel customer = null;
     if (managerUserDao.loginAccount(ac)) {
       Customer c = managerUserDao.getCustomer(ac);
+      System.out.println(ac.getMaTK());
       if (c != null) {
-        customer = new CustomerModel(c.getMaKH(), c.getHoTen(), c.getDiaChi(), c.getCmnd(), c.getSdt(), c.getEmail());
+        customer = new CustomerModel(c.getTaiKhoan().getMaTK(), c.getHoTen(), c.getDiaChi(), c.getCmnd(), c.getSdt(), c.getEmail());
       }
     }
     return customer;
@@ -36,7 +37,7 @@ public class ManagerUserService {
   public boolean register(AccountModel account, CustomerModel customer) {
     Account ac = new Account(account.getUsername(), account.getPassword());
     Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), ac);
-    return managerUserDao.registerUser(ac, c);
+    return managerUserDao.registerUser(c);
   }
   public boolean updateAccount(AccountModel account, String userNameOld) {
     Account ac = new Account(account.getUsername(), account.getPassword());
@@ -44,7 +45,7 @@ public class ManagerUserService {
   }
   public boolean updateCustomer(CustomerModel customer) {
     Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), null);
-    c.setMaKH(customer.getMaKH());
+    c.getTaiKhoan().setMaTK(customer.getMaKH());
     return managerUserDao.updateCustomer(c);
   }
 }

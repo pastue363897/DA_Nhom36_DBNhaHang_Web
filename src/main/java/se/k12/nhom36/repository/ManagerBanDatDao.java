@@ -27,7 +27,8 @@ public class ManagerBanDatDao {
   public TTBanDat getBanDat(String maBD) {
     return ttBanDatDao.get(maBD);
   }
+  /*
   public boolean capNhatTongTienBanDat(String maBD, long tongTien) {
     return ttBanDatDao.updateTongTien(maBD, tongTien);
-  }
+  }*/
 }

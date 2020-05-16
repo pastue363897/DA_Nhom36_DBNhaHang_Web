@@ -33,7 +33,7 @@
 			                            <h2 class="heading">${banan.kySoBA }</h2>
 			                            <p>${banan.motaBA }</p>
 			                            <div class="price">
-			                                giá <fmt:formatNumber pattern="#,###">${banan.giaTien }</fmt:formatNumber> <span> Đ</span>
+			                                giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
 			                            </div>
 			                        </div>
 			                    </div>
@@ -47,7 +47,7 @@
                                         <h2 class="heading">${banan.kySoBA }</h2>
                                         <p>${banan.motaBA }</p>
                                         <div class="price">
-                                            giá <fmt:formatNumber pattern="#,###">${banan.giaTien }</fmt:formatNumber> <span> Đ</span>
+                                            giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
                                         </div>
                                     </div>
                                 </div>
