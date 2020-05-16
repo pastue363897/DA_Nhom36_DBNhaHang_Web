@@ -37,10 +37,10 @@
     <beans:bean name="banAnDao" class="database.BanAnDAO">
     
     </beans:bean>
-    <beans:bean name="ttBanDatDao" class="database.TTBanDatDAO">
+    <beans:bean name="ttBanDatDao" class="database.HoaDonBanDatDAO">
     
     </beans:bean>
-    <beans:bean name="cTTTBanDatMonAnDao" class="database.CTTTBanDatMonAnDAO">
+    <beans:bean name="cTTTBanDatMonAnDao" class="database.CTHoaDonBanDatDAO">
     
     </beans:bean>
 	

@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 
 import entites.Account;
 import entites.BanAn;
-import entites.CTTTBanDatMonAn;
+import entites.CTHoaDonBanDat;
 import entites.Customer;
 import entites.MonAn;
-import entites.TTBanDat;
+import entites.HoaDonBanDat;
 import se.k12.nhom36.model.BanAnViewModel;
 import se.k12.nhom36.model.CTTTBanDatModel;
 import se.k12.nhom36.model.CTTTBanDatMonAnViewModel;
@@ -46,18 +46,18 @@ public class ManagerBanDatService {
     khachHang.getTaiKhoan().setMaTK(banDat.getMaKH());
     BanAn banAn = managerBanAnDao.getBanAn(banDat.getMaBA());
     
-    TTBanDat ttBanDat = new TTBanDat(khachHang, banDat.getNgayDat(), banDat.getNgayPhucVu(), banAn);
+    HoaDonBanDat ttBanDat = new HoaDonBanDat(khachHang, banDat.getNgayDat(), banDat.getNgayPhucVu(), banAn);
     String maBD = managerBanDatDao.themBanDat(ttBanDat);
     if (maBD == null) {
       return false;
     }
     long tongTien = banAn.getPhuGia();
     List<CTTTBanDatModel> ds = banDat.getDsMonAn();
-    CTTTBanDatMonAn detail;
+    CTHoaDonBanDat detail;
     MonAn monAn;
     for (CTTTBanDatModel ct : ds) {
       monAn = managerMonAnDao.getMonAn(ct.getMaMA());
-      detail = new CTTTBanDatMonAn(ttBanDat, monAn, ct.getSoLuong(), monAn.getGiaTien());
+      detail = new CTHoaDonBanDat(ttBanDat, monAn, ct.getSoLuong(), monAn.getGiaTien());
       managerCTTTBanDatMonAnDao.addCTTTBanDatMonAn(detail);
       tongTien += monAn.getGiaTien();
     }
@@ -66,7 +66,7 @@ public class ManagerBanDatService {
   }
   public List<TTBanDatViewModel> getDSBanDatKH(String maKH){
     List<TTBanDatViewModel> ds = null;
-    List<TTBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH);
+    List<HoaDonBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH);
     if (dsBanDat != null) {
       ds = new ArrayList<TTBanDatViewModel>();
       TTBanDatViewModel b;
@@ -74,10 +74,10 @@ public class ManagerBanDatService {
       MonAnViewModel monAn;
       CTTTBanDatMonAnViewModel ct;
       List<CTTTBanDatMonAnViewModel> dsMonAn;
-      for (TTBanDat tt : dsBanDat) {
+      for (HoaDonBanDat tt : dsBanDat) {
         banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getPhuGia(), tt.getBanAn().getHinhAnh());
         dsMonAn = new ArrayList<CTTTBanDatMonAnViewModel>();
-        for (CTTTBanDatMonAn c : tt.getDsMonAn()) {
+        for (CTHoaDonBanDat c : tt.getDsMonAn()) {
           monAn = new MonAnViewModel(c.getMonAn().getMaMA(), c.getMonAn().getNguyenLieu(), c.getMonAn().getMoTaMA(), c.getMonAn().getSoLuongNguoi(), c.getMonAn().getHinhAnhMA(), c.getMonAn().getGiaTien());
           ct = new CTTTBanDatMonAnViewModel(monAn, c.getSoLuong(), c.getDonGia());
           dsMonAn.add(ct);
@@ -88,10 +88,10 @@ public class ManagerBanDatService {
     }
     return ds;
   }
-  public TTBanDat getBanDat(String maBD) {
-    TTBanDat ttBD = managerBanDatDao.getBanDat(maBD);
+  public HoaDonBanDat getBanDat(String maBD) {
+    HoaDonBanDat ttBD = managerBanDatDao.getBanDat(maBD);
     if (ttBD != null) {
-      List<CTTTBanDatMonAn> ds = managerCTTTBanDatMonAnDao.getDSCTTheoMaBD(ttBD.getMaBD());
+      List<CTHoaDonBanDat> ds = managerCTTTBanDatMonAnDao.getDSCTTheoMaBD(ttBD.getMaBD());
       ttBD.setDsMonAn(ds);
     }
     return ttBD;

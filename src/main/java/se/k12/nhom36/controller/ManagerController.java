@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import entites.TTBanDat;
+import entites.HoaDonBanDat;
 import se.k12.nhom36.model.AccountModel;
 import se.k12.nhom36.model.CustomerModel;
 import se.k12.nhom36.model.TTBanDatViewModel;
@@ -76,7 +76,7 @@ public class ManagerController {
   }
   @RequestMapping(value = "chitiet-ttbandat/{maBD}", method = RequestMethod.POST)
   public @ResponseBody String detailTTBanDat(@PathVariable("maBD") String maBD) {
-    TTBanDat ttBD = managerBanDatService.getBanDat(maBD);
+    HoaDonBanDat ttBD = managerBanDatService.getBanDat(maBD);
     Gson gson = new Gson();
     return gson.toJson(ttBD);
   }

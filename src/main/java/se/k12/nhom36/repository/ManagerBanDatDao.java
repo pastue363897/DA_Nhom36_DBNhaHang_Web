@@ -10,21 +10,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import database.TTBanDatDAO;
-import entites.TTBanDat;
+import database.HoaDonBanDatDAO;
+import entites.HoaDonBanDat;
 
 @Repository
 public class ManagerBanDatDao {
   @Autowired
-  private TTBanDatDAO ttBanDatDao;
+  private HoaDonBanDatDAO ttBanDatDao;
   
-  public String themBanDat(TTBanDat ttBanDat) {
+  public String themBanDat(HoaDonBanDat ttBanDat) {
     return ttBanDatDao.addBanDat(ttBanDat);
   }
-  public List<TTBanDat> getDSBanDatKhachHang(String maKH) {
+  public List<HoaDonBanDat> getDSBanDatKhachHang(String maKH) {
     return ttBanDatDao.getDSTTBanDatTheoCustomer(maKH);
   }
-  public TTBanDat getBanDat(String maBD) {
+  public HoaDonBanDat getBanDat(String maBD) {
     return ttBanDatDao.get(maBD);
   }
   /*
