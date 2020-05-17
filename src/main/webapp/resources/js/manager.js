@@ -19,7 +19,48 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-
+				var content = $("#manager-bill-content > .row");
+				var item = $("#example-item-bandat > div");
+				var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
+				var monAn = $("#example-item-monan > div");
+				$(content).empty();
+				for (i of data) {
+					item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
+					item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
+					item.find(".content-info-bandat > .tongTien > span").text(i.tongTien)
+					item.find(".content-info-bandat > .soGhe > span").text(i.banAn.soLuongGhe)
+					item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(i.ngayDat)
+					item.find(".content-info-bandat > .bandat-time > .ngayPhucVu > span").text(i.ngayPhucVu)
+					if (i.daHuy) {
+						item.find(".bandat-pay").children().hide();
+						item.find(".bandat-pay > .daHuy").show();
+					} else if (i.daThanhToan) {
+						item.find(".bandat-pay").children().hide();
+						item.find(".bandat-pay > .daThanhToan").show();
+						item.find(".bandat-pay > .chiTietThanhToan > .ngayThanhToan > span").text(item.ngayThanhToan);
+					} else {
+						item.find(".bandat-pay").children().hide();
+						item.find(".bandat-pay > .chuaThanhToan").show();
+					}
+					item.find(".content-detail-bandat > .content-banan > p").text(i.banAn.motaBA);
+					item.find(".content-detail-bandat > .content-banan > .phuGia > span").text(i.banAn.phuGia);
+					$(dsMonAn).empty();
+					for (j of i.dsMonAn) {
+						monAn.find("div > img").attr("src", "data/" + j.monAn.hinhAnhMA);
+						monAn.find("div > .content-monan > h5").text(j.monAn.tenMA);
+						monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text(j.donGia);
+						monAn.find("div > .content-monan > .detail-monan-selectd > .soLuongChon > span").text(j.soLuong);
+						$(dsMonAn).append($(monAn).clone());
+					}					
+					$(content).append($(item).clone());
+					console.log("a")
+				}
+				$(".a").on("click", function(event) {
+					event.preventDefault();
+					event.stopPropagation();
+					console.log($(this).parent(".item-bandat"))
+					$(this).parent().parent().parent().parent(".item-bandat").find(".content-detail-bandat").toggle();
+				});
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);

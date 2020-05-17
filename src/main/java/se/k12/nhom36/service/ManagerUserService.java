@@ -44,8 +44,9 @@ public class ManagerUserService {
     return managerUserDao.updateAccount(ac, userNameOld);
   }
   public boolean updateCustomer(CustomerModel customer) {
-    Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), null);
-    c.getTaiKhoan().setMaTK(customer.getMaKH());
+    Account ac = new Account();
+    ac.setMaTK(customer.getMaKH());
+    Customer c = new Customer(customer.getHoTen(), customer.getDiaChi(), customer.getCmnd(), customer.getSdt(), customer.getEmail(), ac);
     return managerUserDao.updateCustomer(c);
   }
 }

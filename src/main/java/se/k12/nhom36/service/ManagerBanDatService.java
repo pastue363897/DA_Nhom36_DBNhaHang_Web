@@ -51,7 +51,7 @@ public class ManagerBanDatService {
     if (maBD == null) {
       return false;
     }
-    long tongTien = banAn.getPhuGia();
+    //long tongTien = banAn.getPhuGia();
     List<CTTTBanDatModel> ds = banDat.getDsMonAn();
     CTHoaDonBanDat detail;
     MonAn monAn;
@@ -59,7 +59,7 @@ public class ManagerBanDatService {
       monAn = managerMonAnDao.getMonAn(ct.getMaMA());
       detail = new CTHoaDonBanDat(ttBanDat, monAn, ct.getSoLuong(), monAn.getGiaTien());
       managerCTTTBanDatMonAnDao.addCTTTBanDatMonAn(detail);
-      tongTien += monAn.getGiaTien();
+      //tongTien += monAn.getGiaTien();
     }
     
     return true;
@@ -74,15 +74,18 @@ public class ManagerBanDatService {
       MonAnViewModel monAn;
       CTTTBanDatMonAnViewModel ct;
       List<CTTTBanDatMonAnViewModel> dsMonAn;
+      long tongTien;
       for (HoaDonBanDat tt : dsBanDat) {
         banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getPhuGia(), tt.getBanAn().getHinhAnh());
         dsMonAn = new ArrayList<CTTTBanDatMonAnViewModel>();
+        tongTien = banAn.getPhuGia();
         for (CTHoaDonBanDat c : tt.getDsMonAn()) {
-          monAn = new MonAnViewModel(c.getMonAn().getMaMA(), c.getMonAn().getNguyenLieu(), c.getMonAn().getMoTaMA(), c.getMonAn().getSoLuongNguoi(), c.getMonAn().getHinhAnhMA(), c.getMonAn().getGiaTien());
+          monAn = new MonAnViewModel(c.getMonAn().getTenMA(), c.getMonAn().getNguyenLieu(), c.getMonAn().getMoTaMA(), c.getMonAn().getSoLuongNguoi(), c.getMonAn().getHinhAnhMA(), c.getMonAn().getGiaTien());
           ct = new CTTTBanDatMonAnViewModel(monAn, c.getSoLuong(), c.getDonGia());
           dsMonAn.add(ct);
+          tongTien += monAn.getGiaTien();
         }
-        b = new TTBanDatViewModel(banAn, tt.getNgayDatBan(), tt.getNgayPhucVu(), dsMonAn, tt.isDaHuy());
+        b = new TTBanDatViewModel(banAn, tt.getNgayDatBan(), tt.getNgayPhucVu(), dsMonAn, tt.isDaHuy(), tt.isDaThanhToan(), tongTien, tt.getTienDaDua(), tt.getNgayThanhToan());
         ds.add(b);
       }
     }

@@ -10,18 +10,18 @@ public class BanAnViewModel {
   private String kySoBA;
   private int soLuongGhe;
   private String motaBA;
-  private long giaTien;
+  private long phuGia;
   private String hinhAnh;
   public BanAnViewModel() {
     super();
   }
-  public BanAnViewModel(String maBA, String kySoBA, int soLuongGhe, String motaBA, long giaTien, String hinhAnh) {
+  public BanAnViewModel(String maBA, String kySoBA, int soLuongGhe, String motaBA, long phuGia, String hinhAnh) {
     super();
     this.maBA = maBA;
     this.kySoBA = kySoBA;
     this.soLuongGhe = soLuongGhe;
     this.motaBA = motaBA;
-    this.giaTien = giaTien;
+    this.phuGia = phuGia;
     this.hinhAnh = hinhAnh;
   }
   public String getMaBA() {
@@ -48,11 +48,11 @@ public class BanAnViewModel {
   public void setMotaBA(String motaBA) {
     this.motaBA = motaBA;
   }
-  public long getGiaTien() {
-    return giaTien;
+  public long getPhuGia() {
+    return phuGia;
   }
-  public void setGiaTien(long giaTien) {
-    this.giaTien = giaTien;
+  public void setPhuGia(long phuGia) {
+    this.phuGia = phuGia;
   }
   public String getHinhAnh() {
     return hinhAnh;

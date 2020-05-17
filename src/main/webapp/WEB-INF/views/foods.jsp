@@ -91,7 +91,7 @@
 				      </div>
 				      <div class="modal-body">
 				        <div id="modal-body-left">
-				            <img id="hinhAnh" alt="hinh-anh-mon-an" src="#">
+				            <img id="hinhAnh" alt="hinh-anh-mon-an" src="">
 				        </div>
 				        <div id="modal-body-right">
 				            <div>

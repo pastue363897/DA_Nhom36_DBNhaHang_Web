@@ -42,7 +42,7 @@
 			</ul>
 		</nav>
 	</div>
-	<div class="content-manager">
+	<div class="content-manager pm-1">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6">
@@ -56,8 +56,9 @@
 					<div>
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" role="tab" href="#nav-account">Tài khoản</a> <a
-									class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" href="#nav-user">Cá nhân</a>
+								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" role="tab" href="#nav-account">Tài
+									khoản</a> <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" role="tab" href="#nav-user">Cá
+									nhân</a>
 							</div>
 						</nav>
 						<div class="tab-content" id="nav-tabContent">
@@ -118,7 +119,8 @@
 													src="<c:url value="/resources/images/icons/address.png" />">
 												</span>
 											</div>
-											<input class="form-control" id="diaChi" name="diaChi" placeholder="Nhập địa chỉ" type="text" value="${customer.diaChi }">
+											<input class="form-control" id="diaChi" name="diaChi" placeholder="Nhập địa chỉ" type="text"
+												value="${customer.diaChi }">
 
 										</div>
 									</div>
@@ -130,7 +132,8 @@
 													src="<c:url value="/resources/images/icons/identification.png" />">
 												</span>
 											</div>
-											<input class="form-control" id="cmnd" name="cmnd" placeholder="Nhập chứng minh nhân dân" type="text" value="${customer.cmnd }">
+											<input class="form-control" id="cmnd" name="cmnd" placeholder="Nhập chứng minh nhân dân" type="text"
+												value="${customer.cmnd }">
 
 										</div>
 									</div>
@@ -142,7 +145,8 @@
 													src="<c:url value="/resources/images/icons/phone.png" />">
 												</span>
 											</div>
-											<input class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" type="text" value="${customer.sdt }">
+											<input class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" type="text"
+												value="${customer.sdt }">
 
 										</div>
 									</div>
@@ -154,7 +158,8 @@
 													src="<c:url value="/resources/images/icons/email.png" />">
 												</span>
 											</div>
-											<input class="form-control" id="email" name="email" placeholder="Nhập email" type="text" value="${customer.email }">
+											<input class="form-control" id="email" name="email" placeholder="Nhập email" type="text"
+												value="${customer.email }">
 
 										</div>
 									</div>
@@ -169,17 +174,99 @@
 					</div>
 				</div>
 			</div>
-			<div id="manager-bill-content" class="manager-content">
-			 <p>Bill</p>
+			<div class="row">
+				<div id="manager-bill-content" class="col-12 manager-content">
+					<div class="row"></div>
+				</div>
+				<div id="example-item-bandat" style="display: none;">
+					<div class="col-md-6">
+						<div class="item-bandat">
+							<div class="content-bandat">
+								<div class="row">
+									<div class="col-md-4 box">
+										<img alt="" src="data/images/ban-an/BA000001_table_image.jpg">
+									</div>
+									<div class="col-md-8 content-info-bandat">
+										<h3>Bàn ăn <span>A1-01</span></h3>
+										<div class= "tongTien">
+											Tổng tiền: <span>120000</span> Đ
+										</div>
+										<div class="soGhe">
+											Số ghế: <span>2</span>
+										</div>
+										<div class="bandat-time">
+											<div class="ngayDat">
+												Ngày đặt: <span>May 17, 2020, 2:25:57 PM</span>
+											</div>
+											<div class="ngayPhucVu">
+												Ngày phục vụ: <span>May 19, 2020, 12:00:00 PM</span>
+											</div>
+										</div>
+										<div class="bandat-pay">
+											<div class="daHuy">Đã hủy</div>
+											<div class="chuaThanhToan">Chưa thanh toán</div>
+											<div class="daThanhToan">
+												Đã thanh toán
+												<div class="chiTietThanhToan">
+												    <div class="ngayThanhToan">Ngày thanh toán: <span>May 19, 2020, 12:00:00 PM</span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<a class="a" href="">Xem chi tiết</a>
+									</div>
+								</div>
+							</div>
+							<div class="content-detail-bandat">
+								<div class="content-banan">
+									<p>Quý khách nên đặt chỗ trước từ 60 phút để được hỗ trợ tốt nhất.Bàn đặt của Quý khách được giữ tối đa 15
+										phút.</p>
+									<div class="phuGia">
+										Phụ giá: <span>50000</span>
+									</div>
+								</div>
+								<div class="content-danhsach-monan">
+									<div class="row">
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="example-item-monan" style="display: none;">
+				    <div class="col-md-6 monan">
+				        <div>
+		                    <img alt="image-monan" src="data/images/mon-an/MA000002_meal_image.jpg" />
+		                    <div class="content-monan">
+		                        <h5>Bánh cuốn</h5>
+	                            <div class="detail-monan-selectd">
+	                                <div class="giaMA">
+	                                    Đơn giá: <span>50000</span> Đ
+	                                </div>
+	                                <div class="soLuongChon">
+	                                    Số lượng: <span>2</span>
+	                                </div>
+	                            </div>
+		                    </div>
+		                    
+	                    </div>
+	                </div>
+                </div>
 			</div>
-			<div id="manager-order-content" class="manager-content">
-             <p>Order</p>
-            </div>
-            <div id="manager-shopping-cart-content" class="manager-content">
-             <p>Shopping Cart</p>
-            </div>
+			<div class="row">
+				<div id="manager-order-content" class="col-12 manager-content">
+					<p>Order</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div id="manager-shopping-cart-content" class="col-12 manager-content">
+					<p>Shopping Cart</p>
+				</div>
+			</div>
 		</div>
 	</div>
-
 </body>
 </html>
