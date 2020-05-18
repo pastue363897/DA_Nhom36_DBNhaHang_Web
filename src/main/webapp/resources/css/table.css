@@ -2,6 +2,16 @@
 .table {
 	color: #404044;
 }
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: #404044;
+    opacity: .5;
+}
 .parallax-img {
 	min-height: 470px;
     background-size: cover;

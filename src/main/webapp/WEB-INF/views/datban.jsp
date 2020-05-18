@@ -11,6 +11,7 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery-ui.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/nav.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/manager-account.css" />'>
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/search-food.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/food.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/datban.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
@@ -18,19 +19,14 @@
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/food.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/select-food.js" />'></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#ngayPhucVu').datepicker({
-			dateFormat : "dd/mm/yy"
-		});
-	})
-</script>
+<script type='text/javascript' src='<c:url value="/resources/js/datban.js" />'></script>
 </head>
 <body>
 	<jsp:include page="nav.jsp"></jsp:include>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-7" id="first">
+			    <jsp:include page="search-food.jsp"></jsp:include>
 				<jsp:include page="foods.jsp"></jsp:include>
 			</div>
 			<div class="col-md-5 position-sticky" id="second">

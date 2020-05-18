@@ -5,7 +5,9 @@
 
 package se.k12.nhom36.service;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class ManagerBanAnService {
   }
   public List<BanAn> danhSachBanAn() {
     return managerBanAnDao.getDanhSachBanAn();
+  }
+  public List<BanAn> timDanhSachBanAn(String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong) {
+    return managerBanAnDao.searchDanhSachBanAn(moTaBA, gio, ngayPhucVu, soLuong);
   }
   
 }

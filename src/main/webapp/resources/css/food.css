@@ -6,6 +6,13 @@
 	color: #404044;
 }
 
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
 .pb-3, .py-3 {
 	padding-bottom: 1rem !important;
 }

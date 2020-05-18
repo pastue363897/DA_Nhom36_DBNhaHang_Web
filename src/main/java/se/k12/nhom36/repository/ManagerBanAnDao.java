@@ -5,7 +5,9 @@
 
 package se.k12.nhom36.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,8 @@ public class ManagerBanAnDao {
   }
   public List<BanAn> getDanhSachBanAn(){
     return banAnDao.danhSachBanAnCoTheDat();
+  }
+  public List<BanAn> searchDanhSachBanAn(String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong){
+    return banAnDao.timBanAn(moTaBA, gio, ngayPhucVu, soLuong);
   }
 }
