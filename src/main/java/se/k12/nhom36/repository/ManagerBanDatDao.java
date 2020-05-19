@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,10 @@ public class ManagerBanDatDao {
   public boolean capNhatTongTienBanDat(String maBD, long tongTien) {
     return ttBanDatDao.updateTongTien(maBD, tongTien);
   }*/
+  public boolean checkBanDaDat(String maBA, Timestamp date) {
+    return ttBanDatDao.checkBanDaDat(maBA, date);
+  }
+  public boolean checkSoLuongMonAnDat(String maBA, Timestamp date, int soLuongMonAn) {
+    return ttBanDatDao.checkSoLuongMonAnHoaDonBanDat(maBA, date, soLuongMonAn);
+  }
 }

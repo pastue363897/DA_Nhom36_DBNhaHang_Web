@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ManagerBanDatService {
   private ManagerMonAnDao managerMonAnDao;
   @Autowired
   private ManagerCTTTBanDatMonAnDao managerCTTTBanDatMonAnDao;
+   
   
   public boolean datBan(TTBanDatModel banDat) {
     Customer khachHang = new Customer();
@@ -99,4 +101,10 @@ public class ManagerBanDatService {
 //    }
 //    return ttBD;
 //  }
+  public boolean kiemTraBanDaDat(String maBA, Timestamp date) {
+    return managerBanDatDao.checkBanDaDat(maBA, date);
+  }
+  public boolean kiemTraSoLuongMonAnBanDat(String maBA, Timestamp date, int soLuongMonAn) {
+    return managerBanDatDao.checkSoLuongMonAnDat(maBA, date, soLuongMonAn);
+  }
 }

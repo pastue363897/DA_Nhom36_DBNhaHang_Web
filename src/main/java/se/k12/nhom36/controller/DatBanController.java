@@ -6,7 +6,9 @@
 package se.k12.nhom36.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -55,14 +57,33 @@ public class DatBanController {
   @RequestMapping(value = "order", produces = "application/json", method = RequestMethod.POST)
   public @ResponseBody String datBan(@RequestBody(required = false) TTBanDatModel ttBD, HttpSession session) {
     System.out.println(ttBD.toString());
-    boolean result = false;
+    Map<String, Object> message = new HashMap<String, Object>();
+    Map<String, Object> error = new HashMap<String, Object>();
+    Map<String, Object> info = new HashMap<String, Object>();
+    boolean result = true;
     if (ttBD != null) {
-      CustomerModel khachHang = (CustomerModel) session.getAttribute("customer");
-      ttBD.setMaKH(khachHang.getMaKH());
-      result = managerBanDatService.datBan(ttBD);
+      Object customer = session.getAttribute("customer");
+      if (customer != null) {
+        CustomerModel khachHang = (CustomerModel) customer;
+        ttBD.setMaKH(khachHang.getMaKH());
+        if (!managerBanDatService.kiemTraBanDaDat(ttBD.getMaBA(), ttBD.getNgayPhucVu())) {
+          if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(), ttBD.getDsMonAn().size())) {
+            result = managerBanDatService.datBan(ttBD);
+          } else {
+            info.put("soLuongMonAnQuaLon", true);
+          }
+        } else {
+          info.put("dadat", true);
+        }
+      } else {
+        info.put("logged", false);
+      }
     }
+    message.put("result", result);
+    message.put("error", error);
+    message.put("info", info);
     Gson gson = new Gson();
-    return gson.toJson(result);
+    return gson.toJson(message);
   }
   @RequestMapping(value = "add-shopping-cart", produces = "application/json", method = RequestMethod.POST)
   public @ResponseBody String themBanDatGioHang(@RequestBody(required = false) ItemCartBanDat itemCart, HttpSession session) {
