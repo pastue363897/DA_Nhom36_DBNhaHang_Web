@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 
 public class DateUtil {
   public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+  public static SimpleDateFormat sdfz = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
   public static Timestamp getDate(String date) {
     try {
       return new Timestamp(sdf.parse(date).getTime());

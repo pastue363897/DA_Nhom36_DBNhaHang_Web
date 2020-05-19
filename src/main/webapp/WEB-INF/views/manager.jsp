@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Roboto&display=swap" rel="stylesheet">
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/bootstrap.min.css" />'>
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery-ui.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/sign-in&register.css" />'>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/manager.css" />">
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/jquery-ui.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/manager.js" />'></script>
 </head>
@@ -260,10 +262,56 @@
 					<p>Order</p>
 				</div>
 			</div>
-
 			<div class="row">
 				<div id="manager-shopping-cart-content" class="col-12 manager-content">
-					<p>Shopping Cart</p>
+					
+				</div>
+				<div id="example-item-cart-bandat" style="display: none;">
+				    <div class="row item-cart-bandat">
+                       <div class="col-md-3 item-cart-left">
+                           <div class="img img-item-cart" style="background-image: url('/nhom36/data/images/ban-an/BA000001_table_image.jpg');"></div>
+                           <div class="group-button">
+                               <button type="button" class="btn btn-danger">Đặt bàn</button>
+                               <button type="button" class="btn btn-warning">Hủy</button>
+                           </div>
+                           <div>
+                            <input type="time" class="gioPhucVu" value="12:00">
+                            <input type="text" class="itemCartNgayPhucVu form-control">
+                          </div>
+                       </div>
+                       <div class="col-md-9 item-cart-right">
+                            <div class="row info-banan">
+                                <h3 class="heading"><span>A1-01</span></h3>
+                                <p class="moTa">Quý khách nên đặt chỗ trước từ 60 phút để được hỗ trợ tốt nhất.Bàn đặt của Quý khách được giữ tối đa 15 phút.</p>
+                                <p class="soGhe"><span>2</span></p>
+                                <div class="phuGia">giá <span>50,000</span> Đ</div>
+                            </div>
+                            <div class="row dansach-monan">
+                                
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<div id="example-item-cart-monan" style="display: none;">
+				    <div class="col-md-4 d-flex item-food-select">
+	                     <div class="item-food">
+	                         <input type="hidden" class="itemSelectMaMA" value="MA000007">
+	                         <div class="img item-img"
+	                             style="background-image: url(&quot;/nhom36/data/images/mon-an/MA000007_meal_image.jpg&quot;);"></div>
+	                         <div class="info-monan d-flex">
+	                             <div class="item-info">
+	                                 <h5>Cơm sườn nướng</h5>
+	                                 <div>
+	                                  <span>Số lượng: <input type="text" class="itemCount" value="1"></span>
+	                                 </div>
+	                                 <div>
+	                                      <span class="price">30,000</span> Đ
+	                                 </div>
+	                             </div>
+	                         </div>
+	                         <span class="img cancel" style="background-image: url(/nhom36/resources/images/icons/cancel.png)"></span>
+	                     </div>
+	                 </div>
 				</div>
 			</div>
 		</div>

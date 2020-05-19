@@ -70,6 +70,51 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$("#btn-themgiohang").on("click", function() {
+		var $this = $("#foods-select > .row").children();
+		var dataMonAn = [];
+		var monAn;
+		for (i of $this){
+			monAn = {}
+			monAn.maMA = $(i).children(".itemSelectMaMA").val();
+			monAn.tenMA = $(i).find(".text-info > .item-info-left > h5").text();
+			monAn.hinhAnh = $(i).children(".item-img").css("background-image").split(window.location.origin)[1].slice(0, -2);
+			monAn.soLuong = parseInt($(i).find(".itemCount").val());
+			monAn.giaTien = parseInt($(i).find(".price").text().replace(/\D/g, ''));
+			dataMonAn.push(monAn);
+		}
+		var data = {};
+		var banAn = {};
+		banAn.maBA = $("#maBA").val();
+		banAn.kySoBA = $("#kySoBA").text();
+		banAn.moTaBA = $("#moTaBA").text();
+		banAn.hinhAnhBA = $("#hinhAnhBA").css("background-image").split(window.location.origin)[1].slice(0, -2);
+		banAn.soGhe = parseInt($("#soGhe").text().trim());
+		banAn.phuGia = parseInt($("#phuGia").text().trim().replace(/,/g, ''));;
+		var ngayDat = new Date().toLocaleString('en-GB').replace(",", "");
+		var ngayPhucVu = $("#ngayPhucVu").val() + " " + $("#gioPhucVu").val() + ":00";
+		data.banAn = banAn;
+		data.dsMonAn = dataMonAn;
+		data.ngayDat = ngayDat;
+		data.ngayPhucVu = ngayPhucVu;
+		console.log(JSON.stringify(data, null, 4));
+		$.ajax({
+			type : "POST",
+			accept : "application/json",
+			contentType : "application/json",
+			url : "add-shopping-cart",
+			data : JSON.stringify(data, null, 4),
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				window.location.href = 'banan';
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+			}
+		});
+	});
 	$(".item-food-select").on("click", function() {
 		console.log('1')
 	});

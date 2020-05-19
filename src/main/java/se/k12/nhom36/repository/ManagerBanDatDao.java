@@ -24,9 +24,9 @@ public class ManagerBanDatDao {
   public List<HoaDonBanDat> getDSBanDatKhachHang(String maKH) {
     return ttBanDatDao.getDSTTBanDatTheoCustomer(maKH);
   }
-  public HoaDonBanDat getBanDat(String maBD) {
-    return ttBanDatDao.get(maBD);
-  }
+//  public HoaDonBanDat getBanDat(String maBD) {
+//    return ttBanDatDao.get(maBD);
+//  }
   /*
   public boolean capNhatTongTienBanDat(String maBD, long tongTien) {
     return ttBanDatDao.updateTongTien(maBD, tongTien);

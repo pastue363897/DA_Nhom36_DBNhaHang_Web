@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import com.google.gson.Gson;
 import entites.BanAn;
 import entites.MonAn;
 import se.k12.nhom36.model.CustomerModel;
+import se.k12.nhom36.model.ItemCartBanDat;
 import se.k12.nhom36.model.TTBanDatModel;
 import se.k12.nhom36.service.ManagerBanAnService;
 import se.k12.nhom36.service.ManagerBanDatService;
@@ -58,6 +60,25 @@ public class DatBanController {
       CustomerModel khachHang = (CustomerModel) session.getAttribute("customer");
       ttBD.setMaKH(khachHang.getMaKH());
       result = managerBanDatService.datBan(ttBD);
+    }
+    Gson gson = new Gson();
+    return gson.toJson(result);
+  }
+  @RequestMapping(value = "add-shopping-cart", produces = "application/json", method = RequestMethod.POST)
+  public @ResponseBody String themBanDatGioHang(@RequestBody(required = false) ItemCartBanDat itemCart, HttpSession session) {
+    System.out.println(itemCart.getNgayPhucVu());
+    boolean result = false;
+    if (itemCart != null) {
+      Object obj = session.getAttribute("cart");
+      if (obj != null) {
+        List<ItemCartBanDat> cart = (List<ItemCartBanDat>) obj;
+        cart.add(itemCart);
+      } else {
+        List<ItemCartBanDat> cart = new ArrayList<ItemCartBanDat>();
+        cart.add(itemCart);
+        session.setAttribute("cart", cart);
+      }
+      result = true;
     }
     Gson gson = new Gson();
     return gson.toJson(result);

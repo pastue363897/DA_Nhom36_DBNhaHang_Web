@@ -68,16 +68,55 @@ $(document).ready(function() {
 		});
 	});
 	$("#manager-order").on("click", function() {
-		activeManager(this);
-		$(".manager-content").hide();
-		$("#manager-order-content").show();
-		console.log("manager-order")
+		console.log("manager-order");
+		window.location.href = 'banan';
 	});
 	$("#shopping-cart").on("click", function() {
 		activeManager(this);
 		$(".manager-content").hide();
 		$("#manager-shopping-cart-content").show();
 		console.log("shopping-cart")
+		$.ajax({
+			type : "POST",
+			url : "shopping-cart",
+			dataType : 'json',
+			timeout : 100000,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				var content = $("#manager-shopping-cart-content");
+				var item = $("#example-item-cart-bandat > div");
+				var dsMonAn = $("#example-item-cart-bandat > .item-cart-bandat > .item-cart-right > .dansach-monan");
+				var monAn = $("#example-item-cart-monan > div");
+				var time;
+				$(content).empty();
+				for (i of data) {
+					item.find(".item-cart-left > .img-item-cart").css("background-image", "url('" + i.banAn.hinhAnhBA + "')");
+					time = i.ngayPhucVu.split(' ');
+					item.find(".item-cart-left .gioPhucVu").val(time[1]);
+					item.find(".item-cart-left .itemCartNgayPhucVu").val( new Date(i.ngayPhucVu).toLocaleDateString('en-GB'));
+					item.find(".item-cart-right > .info-banan > .heading > span").text(i.banAn.kySoBA);
+					item.find(".item-cart-right > .info-banan > .moTa").text(i.banAn.moTaBA);
+					item.find(".item-cart-right > .info-banan > .soGhe > span").text(i.banAn.soGhe);
+					item.find(".item-cart-right > .info-banan > .phuGia > span").text(i.banAn.phuGia);
+					$(dsMonAn).empty();
+					for (j of i.dsMonAn) {
+						monAn.find(".item-food > input").val(j.maMA);
+						monAn.find(".item-food > .item-img").css("background-image", "url('" + j.hinhAnh + "')");
+						monAn.find(".item-food > .info-monan > .item-info > h5").text(j.tenMA);
+						monAn.find(".item-food > .info-monan > .item-info  .itemCount").val(j.soLuong);
+						monAn.find(".item-food > .info-monan > .item-info .price").text(j.giaTien);
+						$(dsMonAn).append($(monAn).clone());
+					}
+					$(content).append($(item).clone());
+				}
+				$(".itemCartNgayPhucVu").datepicker({
+					dateFormat : "dd/mm/yy"
+				});
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+			}
+		});
 	});
 	$("#close").on("click", function() {
 		window.location.href = "logout";

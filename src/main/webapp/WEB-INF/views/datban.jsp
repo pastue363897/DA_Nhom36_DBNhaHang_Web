@@ -33,14 +33,13 @@
 				<div class="justify-content-center order-table">
 					<div class="text-center info-datban">
 					    <input type="hidden" id="maBA" value="${banAn.maBA }">
-						<div class="img image" style="background-image: url('<c:url value="/data/${banAn.hinhAnh }" />');"></div>
-						<h2 class="heading">${banAn.kySoBA }</h2>
-						<p>${banAn.motaBA }</p>
-						<p>${banAn.soLuongGhe }</p>
+						<div id="hinhAnhBA" class="img image" style="background-image: url('<c:url value="/data/${banAn.hinhAnh }" />');"></div>
+						<h2 id="kySoBA" class="heading">${banAn.kySoBA }</h2>
+						<p id="moTaBA">${banAn.motaBA }</p>
+						<p><span id="soGhe" >${banAn.soLuongGhe }</span></p>
 						<div class="price">
 							giá
-							<fmt:formatNumber pattern="#,###">${banAn.phuGia }</fmt:formatNumber>
-							<span> Đ</span>
+							<span id="phuGia"><fmt:formatNumber pattern="#,###">${banAn.phuGia }</fmt:formatNumber></span> Đ
 						</div>
 					</div>
 					<div class="align-item-center justify-content-center">

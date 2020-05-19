@@ -21,7 +21,7 @@ public class ManagerCTTTBanDatMonAnDao {
   public boolean addCTTTBanDatMonAn(CTHoaDonBanDat ct) {
     return cTTTBanDatMonAnDao.saveOrUpdate(ct);
   }
-  public List<CTHoaDonBanDat> getDSCTTheoMaBD(String maBD){
-    return cTTTBanDatMonAnDao.getDSCTTBanDatMonAnTheoMaBD(maBD);
-  }
+//  public List<CTHoaDonBanDat> getDSCTTheoMaBD(String maBD){
+//    return cTTTBanDatMonAnDao.getDSCTTBanDatMonAnTheoMaBD(maBD);
+//  }
 }

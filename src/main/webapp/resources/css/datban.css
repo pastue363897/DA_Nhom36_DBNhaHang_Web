@@ -68,3 +68,7 @@
 	width: 25px;
 	height: 25px;
 }
+
+.cancel:hover {
+    cursor: pointer;
+}

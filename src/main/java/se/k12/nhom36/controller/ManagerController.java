@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,8 @@ import com.google.gson.GsonBuilder;
 import entites.HoaDonBanDat;
 import se.k12.nhom36.model.AccountModel;
 import se.k12.nhom36.model.CustomerModel;
+import se.k12.nhom36.model.ItemCartBanDat;
+import se.k12.nhom36.model.TTBanDatModel;
 import se.k12.nhom36.model.TTBanDatViewModel;
 import se.k12.nhom36.service.ManagerBanDatService;
 import se.k12.nhom36.service.ManagerUserService;
@@ -74,10 +77,20 @@ public class ManagerController {
     Gson gson = new Gson();
     return gson.toJson(dsBD);
   }
-  @RequestMapping(value = "chitiet-ttbandat/{maBD}", method = RequestMethod.POST)
-  public @ResponseBody String detailTTBanDat(@PathVariable("maBD") String maBD) {
-    HoaDonBanDat ttBD = managerBanDatService.getBanDat(maBD);
+//  @RequestMapping(value = "chitiet-ttbandat/{maBD}", method = RequestMethod.POST)
+//  public @ResponseBody String detailTTBanDat(@PathVariable("maBD") String maBD) {
+//    HoaDonBanDat ttBD = managerBanDatService.getBanDat(maBD);
+//    Gson gson = new Gson();
+//    return gson.toJson(ttBD);
+//  }
+  @RequestMapping(value = "shopping-cart")
+  public @ResponseBody String shoppingCart(HttpSession session) {
+    Object obj = session.getAttribute("cart");
+    List<ItemCartBanDat> cart = null;
+    if (obj != null) {
+      cart = (List<ItemCartBanDat>) obj;
+    }
     Gson gson = new Gson();
-    return gson.toJson(ttBD);
+    return gson.toJson(cart);
   }
 }

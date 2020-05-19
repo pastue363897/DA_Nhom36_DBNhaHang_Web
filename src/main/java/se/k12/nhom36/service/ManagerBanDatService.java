@@ -91,12 +91,12 @@ public class ManagerBanDatService {
     }
     return ds;
   }
-  public HoaDonBanDat getBanDat(String maBD) {
-    HoaDonBanDat ttBD = managerBanDatDao.getBanDat(maBD);
-    if (ttBD != null) {
-      List<CTHoaDonBanDat> ds = managerCTTTBanDatMonAnDao.getDSCTTheoMaBD(ttBD.getMaBD());
-      ttBD.setDsMonAn(ds);
-    }
-    return ttBD;
-  }
+//  public HoaDonBanDat getBanDat(String maBD) {
+//    HoaDonBanDat ttBD = managerBanDatDao.getBanDat(maBD);
+//    if (ttBD != null) {
+//      List<CTHoaDonBanDat> ds = managerCTTTBanDatMonAnDao.getDSCTTheoMaBD(ttBD.getMaBD());
+//      ttBD.setDsMonAn(ds);
+//    }
+//    return ttBD;
+//  }
 }
