@@ -5,6 +5,7 @@
 
 package se.k12.nhom36.repository;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,13 @@ public class ManagerBanAnDao {
     return banAnDao.danhSachBanAnCoTheDat();
   }
   public List<BanAn> searchDanhSachBanAn(String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong){
+    if (gio == null || gio.trim().isEmpty()) {
+      if (ngayPhucVu != null) {
+        Date date = new Date(ngayPhucVu.getTime());
+        System.out.println(date);
+        return banAnDao.timBanAn(moTaBA, date, soLuong);
+      }
+    }
     return banAnDao.timBanAn(moTaBA, gio, ngayPhucVu, soLuong);
   }
 }
