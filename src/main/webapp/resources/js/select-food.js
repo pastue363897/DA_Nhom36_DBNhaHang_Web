@@ -17,7 +17,8 @@ $(document).ready(function() {
 		
 		var node = $("<div></div>").addClass("col-12 d-flex item-food-select");
 		var maMA = $("<input type='hidden' class='itemSelectMaMA' value='" + itemMa + "'>")
-		var img = $("<div></div").addClass("img item-img");img.css("background-image", "url(" + itemImg + ")");
+		var img = $("<div></div").addClass("img item-img");
+		img.css("background-image", "url(" + itemImg + ")");
 		var content = $("<div></div>").addClass("text-info d-flex");
 		var contentLeft = $("<div><h5>" + itemName + "</h5></div>").addClass("item-info-left");
 		var contentRight = $("<div><span>Số lượng: <input type='text' class='itemCount' value='1'></span><span class='price'>" + itemPrice + "</span></div>").addClass("item-info-right");

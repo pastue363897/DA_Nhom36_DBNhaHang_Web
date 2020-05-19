@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -40,5 +41,13 @@ public class MonAnController {
     MonAn monAn = managerMonAnService.thongTinChiTietMonAn(maMA);
     Gson gson = new Gson();
     return gson.toJson(monAn);
+  }
+  
+  @RequestMapping(value = "search-monan")
+  public @ResponseBody String searchMonAn(@RequestParam(name = "tenOrMoTaMA", required = false) String tenOrMoTa, @RequestParam(name = "giaTienMA", defaultValue = "0") long giaTien,
+                                            @RequestParam(name = "soNguoiAnMA", defaultValue = "0") int soNguoiAn) {
+    List<MonAn> dsMonAn = managerMonAnService.timDanhSachMonAn(tenOrMoTa, giaTien, soNguoiAn);
+    Gson gson = new Gson();
+    return gson.toJson(dsMonAn);
   }
 }

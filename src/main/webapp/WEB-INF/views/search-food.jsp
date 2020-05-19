@@ -10,18 +10,18 @@
 						<div class="fields d-block d-lg-flex">
 
 							<div class="one-third">
-								<input type="text" class="form-control" placeholder="Tên hoặc mô tả">
+								<input type="text" id="tenOrMoTaMA" name="tenOrMoTaMA" class="form-control" placeholder="Tên hoặc mô tả">
 							</div>
 
                             <div class="one-third">
-                                <input type="text" class="form-control" placeholder="Giá tiền">
+                                <input type="text" id="giaTienMA" name="giaTienMA" class="form-control" placeholder="Giá tiền">
                             </div>
                             
 							<div class="one-third">
-                                <input type="text" class="form-control" placeholder="Số người ăn">
+                                <input type="text" id="soNguoiAnMA" name="soNguoiAnMA" class="form-control" placeholder="Số người ăn">
                             </div>
 						</div>
-						<input type="submit" class="search-submit btn btn-primary" value="Tìm kiếm">
+						<input type="submit" id="search-food" class="search-submit btn btn-primary" value="Tìm kiếm">
 					</form>
 				</div>
 			</div>

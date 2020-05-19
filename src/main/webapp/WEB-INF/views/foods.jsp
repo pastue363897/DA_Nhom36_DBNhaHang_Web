@@ -111,6 +111,25 @@
 				    </div>
 				  </div>
 				</div>
+				<div id="example-item-monan" style="display: none;">
+				    <div class="menus d-flex ftco-animate">
+                        <input type="hidden" class="maMA" value="MA000001">
+                        <div class="menu-img" style="background-image: url('<c:url value="/resources/images/dish-3.jpg" />');"></div>
+                        <div class="text d-flex">
+                            <div class="one-half">
+                                <h3>Tên món ăn</h3>
+                                <p>Nguyên liệu</p>
+                            </div>
+                            <div class="one-forth">
+                                <span class="price">Giá<span>
+                                        Đ</span></span>
+                                        <div>
+                                            <a class="a" href="chitiet-monan/MA000001">Xem chi tiết</a>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
 				<%-- 
 				<div class="tab-content py-5" id="v-pills-tabContent">
 					<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">

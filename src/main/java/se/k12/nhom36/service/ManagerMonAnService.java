@@ -31,4 +31,7 @@ public class ManagerMonAnService {
   public MonAn thongTinChiTietMonAn(String maMA) {
     return managerMonAnDao.getMonAn(maMA);
   }
+  public List<MonAn> timDanhSachMonAn(String tenOrMoTa, long giaTien, int soNguoiAn){
+    return managerMonAnDao.searchDanhSachMonAn(tenOrMoTa, giaTien, soNguoiAn);
+  }
 }

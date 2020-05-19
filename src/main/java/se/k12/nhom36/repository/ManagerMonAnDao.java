@@ -28,5 +28,8 @@ public class ManagerMonAnDao {
   public MonAn getMonAn(String maMA) {
     return monAnDao.get(maMA);
   }
+  public List<MonAn> searchDanhSachMonAn(String tenOrMoTa, long giaTien, int soNguoiAn) {
+    return monAnDao.timMonAn(tenOrMoTa, giaTien, soNguoiAn);
+  }
   
 }
