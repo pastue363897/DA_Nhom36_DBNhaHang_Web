@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,6 +86,7 @@ public class DatBanController {
     Gson gson = new Gson();
     return gson.toJson(message);
   }
+  
   @RequestMapping(value = "add-shopping-cart", produces = "application/json", method = RequestMethod.POST)
   public @ResponseBody String themBanDatGioHang(@RequestBody(required = false) ItemCartBanDat itemCart, HttpSession session) {
     System.out.println(itemCart.getNgayPhucVu());
@@ -100,6 +102,23 @@ public class DatBanController {
         session.setAttribute("cart", cart);
       }
       result = true;
+    }
+    Gson gson = new Gson();
+    return gson.toJson(result);
+  }
+  @RequestMapping(value = "remove-shopping-cart")
+  public @ResponseBody String xoaBanDatGioHang(@RequestParam(name = "index", defaultValue = "-1") int index, HttpSession session) {
+    System.out.println(index);
+    boolean result = false;
+    if (index >= 0) {
+      Object obj = session.getAttribute("cart");
+      if (obj != null) {
+        List<ItemCartBanDat> cart = (List<ItemCartBanDat>) obj;
+        if (index < cart.size()) {
+          cart.remove(index);
+          result = true;
+        }
+      }
     }
     Gson gson = new Gson();
     return gson.toJson(result);

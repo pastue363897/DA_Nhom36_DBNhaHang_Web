@@ -88,8 +88,11 @@ $(document).ready(function() {
 				var dsMonAn = $("#example-item-cart-bandat > .item-cart-bandat > .item-cart-right > .dansach-monan");
 				var monAn = $("#example-item-cart-monan > div");
 				var time;
+				var index = 0;
 				$(content).empty();
 				for (i of data) {
+					item.children(".index-bandat").val(index++);
+					item.find(".item-cart-left > .maBA").val(i.banAn.maBA);
 					item.find(".item-cart-left > .img-item-cart").css("background-image", "url('" + i.banAn.hinhAnhBA + "')");
 					time = i.ngayPhucVu.split(' ');
 					item.find(".item-cart-left .gioPhucVu").val(time[1]);
@@ -111,6 +114,77 @@ $(document).ready(function() {
 				}
 				$(".itemCartNgayPhucVu").datepicker({
 					dateFormat : "dd/mm/yy"
+				});
+				$(".datban").on("click", function() {
+					var bandat = $(this).parent(".group-button").parent(".item-cart-left").parent(".item-cart-bandat");
+					var $this = $(bandat).find(".item-cart-right > .dansach-monan").children();
+					var dataMonAn = [];
+					var monAn;
+					for (i of $this){
+						monAn = {}
+						monAn.maMA = $(i).find(".item-food > .itemSelectMaMA").val();
+						monAn.soLuong = parseInt($(i).find(".itemCount").val());
+						dataMonAn.push(monAn);
+					}
+					var data = {};
+					var maBA = $(bandat).find(".item-cart-left > .maBA").val();
+					var ngayDat = new Date().toLocaleString('en-GB').replace(",", "");
+					var ngayPhucVu = $(bandat).find(".item-cart-left .itemCartNgayPhucVu").val() + " " + $(bandat).find(".item-cart-left .gioPhucVu").val() + ":00";
+					data.maBA = maBA;
+					data.dsMonAn = dataMonAn;
+					data.ngayDat = ngayDat;
+					data.ngayPhucVu = ngayPhucVu;
+					console.log(JSON.stringify(data, null, 4));
+					$.ajax({
+						type : "POST",
+						accept : "application/json",
+						contentType : "application/json",
+						url : "order",
+						data : JSON.stringify(data, null, 4),
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							console.log("SUCCESS: ", data);
+							if (data.result == true && Object.keys(data.error) == 0 && Object.keys(data.info) == 0){
+								$(bandat).find(".huyban").click();
+							}
+						},
+						error : function(e) {
+							console.log("ERROR: ", e);
+						}
+					});
+				});
+				$(".huyban").on("click", function() {
+					var bandat = $(this).parent(".group-button").parent(".item-cart-left").parent(".item-cart-bandat");
+					var index = $(bandat).children(".index-bandat").val();
+					var data = {}
+					data.index = index;
+					console.log(data)
+					$.ajax({
+						type : "POST",
+						url : "remove-shopping-cart",
+						data : data,
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							console.log("SUCCESS: ", data);
+							if (data == true) {
+								$("#shopping-cart").click();
+							}
+						},
+						error : function(e) {
+							console.log("ERROR: ", e);
+						}
+					});
+				});
+				$(".huymon").click(function() {
+					var monan = $(this).parent(".item-food").parent(".item-food-select");
+					var dsmonan = $(monan).parent(".dansach-monan");
+					monan.remove();
+					if ($(dsmonan).children().length <= 0) {
+						var bandat =  $(dsmonan).parent(".item-cart-right").parent(".item-cart-bandat");
+						$(bandat).find(".huyban").click();
+					}
 				});
 			},
 			error : function(e) {

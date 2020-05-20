@@ -268,11 +268,13 @@
 				</div>
 				<div id="example-item-cart-bandat" style="display: none;">
 				    <div class="row item-cart-bandat">
+				       <input type="hidden" class="index-bandat" value="0">
                        <div class="col-md-3 item-cart-left">
+                           <input type="hidden" class="maBA" value="BA000001">
                            <div class="img img-item-cart" style="background-image: url('/nhom36/data/images/ban-an/BA000001_table_image.jpg');"></div>
                            <div class="group-button">
-                               <button type="button" class="btn btn-danger">Đặt bàn</button>
-                               <button type="button" class="btn btn-warning">Hủy</button>
+                               <button type="button" class="btn btn-danger datban">Đặt bàn</button>
+                               <button type="button" class="btn btn-warning huyban">Hủy</button>
                            </div>
                            <div>
                             <input type="time" class="gioPhucVu" value="12:00">
@@ -309,7 +311,7 @@
 	                                 </div>
 	                             </div>
 	                         </div>
-	                         <span class="img cancel" style="background-image: url(/nhom36/resources/images/icons/cancel.png)"></span>
+	                         <span class="img cancel huymon" style="background-image: url(/nhom36/resources/images/icons/cancel.png)"></span>
 	                     </div>
 	                 </div>
 				</div>
