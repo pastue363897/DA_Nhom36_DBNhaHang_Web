@@ -21,7 +21,7 @@
 		<header>
 			<center>
 				<img class="profile-image" src='<c:url value="/resources/images/icons/avatar.png" />' alt="icon-account">
-				<h3>${customer.hoTen }</h3>
+				<h3 id="tenKH">${customer.hoTen }</h3>
 			</center>
 		</header>
 		<nav>
