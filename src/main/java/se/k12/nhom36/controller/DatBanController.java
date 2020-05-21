@@ -61,26 +61,35 @@ public class DatBanController {
     Map<String, Object> message = new HashMap<String, Object>();
     Map<String, Object> error = new HashMap<String, Object>();
     Map<String, Object> info = new HashMap<String, Object>();
-    boolean result = true;
+    boolean result = false;
+    boolean signin = false;
     if (ttBD != null) {
-      Object customer = session.getAttribute("customer");
-      if (customer != null) {
-        CustomerModel khachHang = (CustomerModel) customer;
-        ttBD.setMaKH(khachHang.getMaKH());
-        if (!managerBanDatService.kiemTraBanDaDat(ttBD.getMaBA(), ttBD.getNgayPhucVu())) {
-          if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(), ttBD.getDsMonAn().size())) {
-            result = managerBanDatService.datBan(ttBD);
-          } else {
-            info.put("soLuongMonAnQuaLon", true);
+      
+      // kiem tra du lieu nhap
+      
+      if (!managerBanDatService.kiemTraBanDaDat(ttBD.getMaBA(), ttBD.getNgayPhucVu())) {
+        if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(),
+            ttBD.getDsMonAn().size())) {
+          Object o = session.getAttribute("account");
+          if (o != null) {
+            o = session.getAttribute("customer");
+            if (o != null) {
+              signin = true;
+              Object customer = session.getAttribute("customer");
+              CustomerModel khachHang = (CustomerModel) customer;
+              ttBD.setMaKH(khachHang.getMaKH());
+              result = managerBanDatService.datBan(ttBD);
+            }
           }
         } else {
-          info.put("dadat", true);
+          info.put("soLuongMonAnQuaLon", true);
         }
       } else {
-        info.put("logged", false);
+        info.put("dadat", true);
       }
     }
     message.put("result", result);
+    message.put("signin", signin);
     message.put("error", error);
     message.put("info", info);
     Gson gson = new Gson();

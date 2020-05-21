@@ -6,7 +6,9 @@
 package se.k12.nhom36.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,43 +41,96 @@ public class ManagerController {
   private ManagerBanDatService managerBanDatService;
   
   @RequestMapping(value = "user-manager")
-  public String requestManger() {
-    return "manager";
+  public String requestManger(HttpSession session) {
+    Object o = session.getAttribute("account");
+    if (o != null) {
+      o = session.getAttribute("customer");
+      if (o != null) {
+        return "manager";
+      }
+    }
+    return "forward:sign-in";
   }
   @RequestMapping(value = "update-account", produces = "application/json", method = RequestMethod.POST)
   public @ResponseBody String requestUpdateAccount(@RequestBody(required = false) AccountModel account, HttpSession session) {
-    AccountModel ac = (AccountModel) session.getAttribute("account");
-    boolean result = managerUserService.updateAccount(account, ac.getUsername());
-    if (result) {
-      session.removeAttribute("account");
-      session.setAttribute("account", account);
+    Map<String, Object> message = new HashMap<String, Object>();
+    Map<String, Object> error = new HashMap<String, Object>();
+    boolean result = false;
+    boolean signin = false;
+    Object o = session.getAttribute("account");
+    if (o != null) {
+      o = session.getAttribute("customer");
+      if (o != null) {
+        signin = true;
+        
+        //kiem ta du lieu dau vao
+        
+        AccountModel ac = (AccountModel) session.getAttribute("account");
+        result = managerUserService.updateAccount(account, ac.getUsername());
+        if (result) {
+          session.removeAttribute("account");
+          session.setAttribute("account", account);
+        }
+      }
     }
+    message.put("result", result);
+    message.put("signin", signin);
+    message.put("error", error);
     Gson gson = new Gson();
-    return gson.toJson(result);
+    return gson.toJson(message);
   }
   @RequestMapping(value = "update-user", produces = "application/json", method = RequestMethod.POST)
   public @ResponseBody String requestUpdateUser(@RequestBody(required = false) CustomerModel customer, HttpSession session) {
-    CustomerModel c = (CustomerModel) session.getAttribute("customer");
-    customer.setMaKH(c.getMaKH());
-    boolean result = managerUserService.updateCustomer(customer);
-    if (result) {
-      c.setHoTen(customer.getHoTen());
-      c.setDiaChi(customer.getDiaChi());
-      c.setCmnd(customer.getCmnd());
-      c.setSdt(customer.getSdt());
-      c.setEmail(customer.getEmail());
-      session.removeAttribute("customer");
-      session.setAttribute("customer", c);
+    Map<String, Object> message = new HashMap<String, Object>();
+    Map<String, Object> error = new HashMap<String, Object>();
+    boolean result = false;
+    boolean signin = false;
+    Object o = session.getAttribute("account");
+    if (o != null) {
+      o = session.getAttribute("customer");
+      if (o != null) {
+        signin = true;
+        
+        //kiem ta du lieu dau vao
+        
+        CustomerModel c = (CustomerModel) session.getAttribute("customer");
+        customer.setMaKH(c.getMaKH());
+        result = managerUserService.updateCustomer(customer);
+        if (result) {
+          c.setHoTen(customer.getHoTen());
+          c.setDiaChi(customer.getDiaChi());
+          c.setCmnd(customer.getCmnd());
+          c.setSdt(customer.getSdt());
+          c.setEmail(customer.getEmail());
+          session.removeAttribute("customer");
+          session.setAttribute("customer", c);
+        }
+      }
     }
+    message.put("result", result);
+    message.put("signin", signin);
+    message.put("error", error);
     Gson gson = new Gson();
-    return gson.toJson(result);
+    return gson.toJson(message);
   }
   @RequestMapping(value = "danhsach-bandat", method = RequestMethod.POST)
   public @ResponseBody String danhSachTTBanDat(HttpSession session) {
-    CustomerModel customer = (CustomerModel) session.getAttribute("customer");
-    List<TTBanDatViewModel> dsBD = managerBanDatService.getDSBanDatKH(customer.getMaKH());
+    Map<String, Object> message = new HashMap<String, Object>();
+    boolean result = false;
+    List<TTBanDatViewModel> dsBD = null;
+    Object o = session.getAttribute("account");
+    if (o != null) {
+      o = session.getAttribute("customer");
+      if (o != null) {
+        result = true;
+        CustomerModel customer = (CustomerModel) session.getAttribute("customer");
+        dsBD = managerBanDatService.getDSBanDatKH(customer.getMaKH());
+      }
+    }
+    message.put("result", result);
+    message.put("dsBD", dsBD);
     Gson gson = new Gson();
-    return gson.toJson(dsBD);
+    return gson.toJson(message);
   }
 //  @RequestMapping(value = "chitiet-ttbandat/{maBD}", method = RequestMethod.POST)
 //  public @ResponseBody String detailTTBanDat(@PathVariable("maBD") String maBD) {

@@ -63,7 +63,27 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-
+				$("#messageModalLabel").text("Đặt bàn");
+				if (Object.keys(data.error).length > 0){
+					
+				} else if (Object.keys(data.info).length > 0){
+					if (data.info.dadat == true) {
+						$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");
+					} else if (data.info.soLuongMonAnQuaLon == true) {
+						$("#messageModelBody").text("Hiện tại chưa có bàn đặt nào tại thời gian này "
+														+ "nhưng số lượng món ăn bạn chọn quá lớn so với khoảng thời gian còn trống");
+					}
+				} else if (data.signin == false) {
+					$("#messageModelBody").text("Chưa đăng nhập, hãy thêm bàn đặt vào giỏ hàng và thực hiện đăng nhập vào hệ thống với tài khoản của bạn");
+				} else if (data.result == false) {
+					$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
+				} else {
+					$("#messageModelBody").text("Đặt bàn thành công");
+					$("#messageModal").modal('show');
+					window.location.href = 'home';
+					return;
+				}
+				$("#messageModal").modal('show');
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);

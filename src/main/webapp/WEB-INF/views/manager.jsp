@@ -318,5 +318,23 @@
 			</div>
 		</div>
 	</div>
+	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="messageModalLabel">Modal title</h5>
+	        <button type="button" class="close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div id="messageModelBody" class="modal-body">
+	        ...
+	      </div>
+	      <div id="messageModelFooter" class="modal-footer">
+	        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

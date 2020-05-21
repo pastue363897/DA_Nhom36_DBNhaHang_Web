@@ -19,11 +19,21 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
+				if (data.result == false) {
+					$("#messageModalLabel").text("Danh sách bàn đã đặt");
+					$("#messageModelBody").text("Chưa đăng nhập, hãy đăng nhập vào hệ thống với tài khoản của bạn");
+					return;
+				}
+				data = data.dsBD;
 				var content = $("#manager-bill-content > .row");
+				$(content).empty();
+				if (data == null || data.length == 0) {
+					$(content).append('<h3 style="margin-left: 10px">Không có danh sách bàn đã đặt</h3>');
+					return;
+				}
 				var item = $("#example-item-bandat > div");
 				var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
 				var monAn = $("#example-item-monan > div");
-				$(content).empty();
 				for (i of data) {
 					item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
 					item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
@@ -84,12 +94,16 @@ $(document).ready(function() {
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				var content = $("#manager-shopping-cart-content");
+				$(content).empty();
+				if (data == null || data.length == 0) {
+					$(content).append('<h3 style="margin-left: 10px">Giỏ hàng hiện tại đang trống</h3>');
+					return;
+				}
 				var item = $("#example-item-cart-bandat > div");
 				var dsMonAn = $("#example-item-cart-bandat > .item-cart-bandat > .item-cart-right > .dansach-monan");
 				var monAn = $("#example-item-cart-monan > div");
 				var time;
 				var index = 0;
-				$(content).empty();
 				for (i of data) {
 					item.children(".index-bandat").val(index++);
 					item.find(".item-cart-left > .maBA").val(i.banAn.maBA);
@@ -145,9 +159,27 @@ $(document).ready(function() {
 						timeout : 100000,
 						success : function(data) {
 							console.log("SUCCESS: ", data);
-							if (data.result == true && Object.keys(data.error) == 0 && Object.keys(data.info) == 0){
+							$("#messageModalLabel").text("Đặt bàn");
+							if (Object.keys(data.error).length > 0){
+								
+							} else if (Object.keys(data.info).length > 0){
+								if (data.info.dadat == true) {
+									$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");
+								} else if (data.info.soLuongMonAnQuaLon == true) {
+									$("#messageModelBody").text("Hiện tại chưa có bàn đặt nào tại thời gian này "
+																	+ "nhưng số lượng món ăn bạn chọn quá lớn so với khoảng thời gian còn trống");
+								}
+							} else if (data.signin == false) {
+								$("#messageModelBody").text("Chưa đăng nhập, hãy thêm bàn đặt vào giỏ hàng và thực hiện đăng nhập vào hệ thống với tài khoản của bạn");
+							} else if (data.result == false) {
+								$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
+							} else {
+								$("#messageModelBody").text("Đặt bàn thành công");
+								$("#messageModal").modal('show');
 								$(bandat).find(".huyban").click();
+								return;
 							}
+							$("#messageModal").modal('show');
 						},
 						error : function(e) {
 							console.log("ERROR: ", e);
@@ -211,7 +243,21 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-
+				$("#messageModalLabel").text("Cập nhật tài khoản");
+				if (data.result == true) {
+					$("#messageModelBody").text("Thông tin tài khoản đã cập nhật thành công");
+				} else {
+					if (data.signin == true) {
+						if (Object.keys(data.error) > 0) {
+							
+						} else {
+							$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
+						}
+					}  else {
+						$("#messageModelBody").text("Chưa đăng nhập, hãy đăng nhập vào hệ thống với tài khoản của bạn");
+					}
+				}
+				$("#messageModal").modal('show');
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
@@ -240,7 +286,22 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-				$("#tenKH").text(hoTen);
+				$("#messageModalLabel").text("Cập nhật thông tin người dùng");
+				if (data.result == true) {
+					$("#tenKH").text(hoTen);
+					$("#messageModelBody").text("Thông tin người dùng đã cập nhật thành công");
+				} else {
+					if (data.signin == true) {
+						if (Object.keys(data.error) > 0) {
+							
+						} else {
+							$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
+						}
+					}  else {
+						$("#messageModelBody").text("Chưa đăng nhập, hãy đăng nhập vào hệ thống với tài khoản của bạn");
+					}
+				}
+				$("#messageModal").modal('show');
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
