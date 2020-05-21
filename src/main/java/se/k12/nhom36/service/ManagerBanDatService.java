@@ -5,9 +5,11 @@
 
 package se.k12.nhom36.service;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,5 +108,8 @@ public class ManagerBanDatService {
   }
   public boolean kiemTraSoLuongMonAnBanDat(String maBA, Timestamp date, int soLuongMonAn) {
     return managerBanDatDao.checkSoLuongMonAnDat(maBA, date, soLuongMonAn);
+  }
+  public Map<Timestamp, Timestamp> goiYDatBan(String maBA, Date ngayPhucVu) {
+    return managerBanDatDao.toolTipDatBan(maBA, ngayPhucVu);
   }
 }

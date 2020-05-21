@@ -5,6 +5,8 @@
 
 package se.k12.nhom36.controller;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -131,5 +133,11 @@ public class DatBanController {
     }
     Gson gson = new Gson();
     return gson.toJson(result);
+  }
+  @RequestMapping(value = "tooltip-datban", method = RequestMethod.POST)
+  public @ResponseBody String toolTipDatBan(@RequestParam(name = "maBA") String maBA, @RequestParam(name = "ngayPhucVu") Date ngayPhucVu) {
+    Map<Timestamp, Timestamp> map = managerBanDatService.goiYDatBan(maBA, ngayPhucVu);
+    Gson gson = new Gson();
+    return gson.toJson(map);
   }
 }

@@ -48,6 +48,7 @@
                       <div>
                         <input type="time" id="gioPhucVu" value="12:00">
                         <input type="text" id="ngayPhucVu" class="form-control">
+                        <button type="button" id="btn-tooltip" class="btn btn-secondary btn-sm">Gợi ý</button>
                       </div>
                     </div>
 					<div id="foods-select" class="container choose">
@@ -64,7 +65,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="messageModalLabel">Modal title</h5>
-            <button type="button" class="close">
+            <button type="button" class="close" data-dismiss="modal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
