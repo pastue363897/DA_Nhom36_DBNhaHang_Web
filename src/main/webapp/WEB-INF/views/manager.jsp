@@ -279,6 +279,7 @@
                            <div>
                             <input type="time" class="gioPhucVu" value="12:00">
                             <input type="text" class="itemCartNgayPhucVu form-control">
+                            <button type="button" class="btn btn-secondary btn-sm btn-tooltip">Gợi ý</button>
                           </div>
                        </div>
                        <div class="col-md-9 item-cart-right">

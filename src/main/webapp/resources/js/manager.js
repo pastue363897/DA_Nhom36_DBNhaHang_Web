@@ -218,6 +218,53 @@ $(document).ready(function() {
 						$(bandat).find(".huyban").click();
 					}
 				});
+				$(".btn-tooltip").on("click", function() {
+					var bandat = $(this).parent("div").parent(".item-cart-left").parent(".item-cart-bandat");
+					var maBA = $(bandat).find(".item-cart-left > .maBA").val();
+					var ngayPhucVu = $(this).prev().val().split("/");
+					var data = {};
+					data.maBA = maBA;
+					data.ngayPhucVu = ngayPhucVu[2] + "-" + ngayPhucVu[1] + "-" + ngayPhucVu[0];
+					console.log(data)
+					$.ajax({
+						type : "POST",
+						url : "tooltip-datban",
+						data : data,
+						dataType : 'json',
+						timeout : 100000,
+						success : function(data) {
+							console.log("SUCCESS: ", data);
+							$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
+							if (data == null) {
+								$("#messageModelBody").text("Bàn chưa có khách nào đặt trong ngày " + ngayPhucVu[0] + "/" + ngayPhucVu[1] + "/" + ngayPhucVu[2] + ", có thể đặt thời gian mà bạn muốn");
+							} else{
+								var keys = Object.keys(data);
+								if (keys.length <= 0) {
+									$("#messageModelBody").text("Bàn không còn giờ trống trong ngày " + ngayPhucVu[0] + "/" + ngayPhucVu[1] + "/" + ngayPhucVu[2]);
+								} else {
+									var s;
+									var e;
+									var tooltip = "<ul class='suggestions'>";
+									for (const start of keys) {
+										s = new Date(start);
+										e = new Date(data[start]);
+										tooltip += "<li><span class='time'>" + s.toLocaleTimeString("es-GB") + " - " + e.toLocaleTimeString("es-GB") + "</span>" +
+												" có thể chọn tối đa " + (parseInt(((e.getHours() * 60 + e.getMinutes()) - (s.getHours() * 60 + s.getMinutes())) / 10) - 2) + " món </li>";
+									}
+									tooltip += "</ul>";
+									console.log(tooltip)
+									$("#messageModelBody").empty();
+									$("#messageModelBody").append(tooltip);
+								}
+							}
+							
+							$("#messageModal").modal('show');
+						},
+						error : function(e) {
+							console.log("ERROR: ", e);
+						}
+					});
+				});
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
