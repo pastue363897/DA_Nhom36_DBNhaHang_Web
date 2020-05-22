@@ -5,10 +5,17 @@
 
 package se.k12.nhom36.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class ItemCartMonAn {
+  @Pattern(regexp = "^(MA)\\d{6}$", message = "Không xác định được món ăn")
   private String maMA;
+  @NotEmpty(message = "Không xác định được tên món ăn")
   private String tenMA;
   private String hinhAnh;
+  @Min(value = 1, message = "Số lượng của một món phải lớn hơn hoặc bằng 1")
   private int soLuong;
   private long giaTien;
   public ItemCartMonAn() {

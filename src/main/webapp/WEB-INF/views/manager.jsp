@@ -69,6 +69,7 @@
 									<legend>Thông tin tài khoản</legend>
 									<div class="form-group">
 										<label for="username">Username</label>
+										<p id="error-username" class="error" style="display: none;">* Vui lòng nhập username có độ dài từ 3-20 ký tự bắt đầu là chữ cái</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-username"
@@ -81,6 +82,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password">Mật khẩu</label>
+										<p id="error-password" class="error" style="display: none;">* Vui lòng nhập password có độ dài từ 8-20 ký tự, có bao gồm chữ cái, số, và ký tự đặc biệt</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-password"
@@ -103,6 +105,7 @@
 									<legend> Thông tin người dùng </legend>
 									<div class="form-group">
 										<label for="hoTen">Họ tên</label>
+										<p id="error-hoTen" class="error" style="display: none;">* Vui lòng nhập tên</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-fullname"
@@ -115,6 +118,7 @@
 									</div>
 									<div class="form-group">
 										<label for="diaChi">Địa chỉ</label>
+										<p id="error-diaChi" class="error" style="display: none;">* Vui lòng nhập địa chỉ</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-address"
@@ -128,6 +132,7 @@
 									</div>
 									<div class="form-group">
 										<label for="Email">CMND</label>
+										<p id="error-cmnd" class="error" style="display: none;">* Vui lòng nhập cmnd có 9 số hoặc căn cước có 12 số</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-identification"
@@ -141,6 +146,7 @@
 									</div>
 									<div class="form-group">
 										<label for="Email">Số điện thoại</label>
+										<p id="error-sdt" class="error" style="display: none;">* Vui lòng nhập số điện thoại có 10 số</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-phone"
@@ -154,6 +160,7 @@
 									</div>
 									<div class="form-group">
 										<label for="email">Email</label>
+										<p id="error-email" class="error" style="display: none;">* Vui lòng nhập email</p>
 										<div class="input-group">
 											<div class="input-group-prepend">
 												<span class="input-group-text"> <img alt="icon-email"

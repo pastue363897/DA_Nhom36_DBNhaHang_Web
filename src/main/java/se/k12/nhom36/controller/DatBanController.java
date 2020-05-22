@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.validation.constraints.FutureOrPresent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,11 @@ public class DatBanController {
   @RequestMapping(value = "dat-ban")
   public String requestDatBan(@RequestParam(required = false) String maBA, Model model) {
     System.out.println(maBA);
+    if (maBA == null || !maBA.matches("^(BA)\\d{6}$")) {
+      model.addAttribute("codeError", 500);
+      model.addAttribute("messageError", "Không xác nhận được yêu cầu đặt bàn ăn, hãy thử lại");
+      return "forward:error";
+    }
     List<MonAn> danhSachMonAn = managerMonAnService.danhSachMonAn();
     BanAn b = managerBanAnService.layThongTinBanAn(maBA);
     
@@ -58,7 +65,7 @@ public class DatBanController {
   }
   
   @RequestMapping(value = "order", produces = "application/json", method = RequestMethod.POST)
-  public @ResponseBody String datBan(@RequestBody(required = false) TTBanDatModel ttBD, HttpSession session) {
+  public @ResponseBody String datBan(@Valid @RequestBody(required = false) TTBanDatModel ttBD, HttpSession session) {
     System.out.println(ttBD.toString());
     Map<String, Object> message = new HashMap<String, Object>();
     Map<String, Object> error = new HashMap<String, Object>();
@@ -66,8 +73,6 @@ public class DatBanController {
     boolean result = false;
     boolean signin = false;
     if (ttBD != null) {
-      
-      // kiem tra du lieu nhap
       
       if (!managerBanDatService.kiemTraBanDaDat(ttBD.getMaBA(), ttBD.getNgayPhucVu())) {
         if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(),
@@ -99,7 +104,7 @@ public class DatBanController {
   }
   
   @RequestMapping(value = "add-shopping-cart", produces = "application/json", method = RequestMethod.POST)
-  public @ResponseBody String themBanDatGioHang(@RequestBody(required = false) ItemCartBanDat itemCart, HttpSession session) {
+  public @ResponseBody String themBanDatGioHang(@Valid @RequestBody(required = false) ItemCartBanDat itemCart, HttpSession session) {
     System.out.println(itemCart.getNgayPhucVu());
     boolean result = false;
     if (itemCart != null) {
@@ -136,8 +141,11 @@ public class DatBanController {
   }
   @RequestMapping(value = "tooltip-datban", method = RequestMethod.POST)
   public @ResponseBody String toolTipDatBan(@RequestParam(name = "maBA") String maBA, @RequestParam(name = "ngayPhucVu") Date ngayPhucVu) {
-    Map<Timestamp, Timestamp> map = managerBanDatService.goiYDatBan(maBA, ngayPhucVu);
     Gson gson = new Gson();
+    if (maBA == null || !maBA.matches("^(BA)\\d{6}$")) {
+      return gson.toJson(false);
+    }
+    Map<Timestamp, Timestamp> map = managerBanDatService.goiYDatBan(maBA, ngayPhucVu);
     return gson.toJson(map);
   }
 }

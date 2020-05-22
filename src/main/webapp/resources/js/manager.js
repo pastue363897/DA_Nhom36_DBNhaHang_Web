@@ -160,9 +160,7 @@ $(document).ready(function() {
 						success : function(data) {
 							console.log("SUCCESS: ", data);
 							$("#messageModalLabel").text("Đặt bàn");
-							if (Object.keys(data.error).length > 0){
-								
-							} else if (Object.keys(data.info).length > 0){
+							if (Object.keys(data.info).length > 0){
 								if (data.info.dadat == true) {
 									$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");
 								} else if (data.info.soLuongMonAnQuaLon == true) {
@@ -183,6 +181,18 @@ $(document).ready(function() {
 						},
 						error : function(e) {
 							console.log("ERROR: ", e);
+							$("#messageModalLabel").text("Đặt bàn");
+							if (e.status == 400) {
+								if (e.responseJSON.errors.length > 0) {
+									var listerror = "<ul class='error-warning'>";
+									for (i of e.responseJSON.errors) {
+										listerror += "<li>" + i + "</li>";
+									}
+									$("#messageModelBody").empty();
+									$("#messageModelBody").append(listerror);
+								}
+							}
+							$("#messageModal").modal('show');
 						}
 					});
 				});
@@ -202,6 +212,10 @@ $(document).ready(function() {
 							console.log("SUCCESS: ", data);
 							if (data == true) {
 								$("#shopping-cart").click();
+							} else {
+								$("#messageModalLabel").text("Hủy bàn");
+								$("#messageModelBody").text("Có sự cố trong xác định bàn muốn hủy, hãy thử lại");
+								$("#messageModal").modal('show');
 							}
 						},
 						error : function(e) {
@@ -262,6 +276,11 @@ $(document).ready(function() {
 						},
 						error : function(e) {
 							console.log("ERROR: ", e);
+							if (e.status == 400) {
+								$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
+								$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+								$("#messageModal").modal('show');
+							}
 						}
 					});
 				});
@@ -274,9 +293,26 @@ $(document).ready(function() {
 	$("#close").on("click", function() {
 		window.location.href = "logout";
 	});
-	$("#update-account").on("click", function() {
+	$("#update-account").on("click", function(event) {
 		var username = $("#username").val();
 		var password = $("#password").val();
+		var result = true;
+		if (!username.match(/^[a-zA-Z][a-zA-Z0-9]{2,19}$/)) {
+			$("#error-username").show();
+			result = false;
+		} else {
+			$("#error-username").hide();
+		}
+		if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,20}$/)) {
+			$("#error-password").show();
+			result = false;
+		} else {
+			$("#error-password").hide();
+		}
+		if (!result){
+			event.preventDefault();
+			return;
+		}
 		var data = {};
 		data["username"] = username;
 		data["password"] = password;
@@ -295,8 +331,22 @@ $(document).ready(function() {
 					$("#messageModelBody").text("Thông tin tài khoản đã cập nhật thành công");
 				} else {
 					if (data.signin == true) {
-						if (Object.keys(data.error) > 0) {
-							
+						if (Object.keys(data.error).length > 0) {
+							if (data.error.account == false) {
+								$("#messageModelBody").text("Không xác định được tài khoản, hãy đăng nhập lại");
+							} else {
+								if (data.error.username == false) {
+									$("#error-username").show();
+								} else {
+									$("#error-username").hide();
+								}
+								if (data.error.password == false) {
+									$("#error-password").show();
+								} else {
+									$("#error-password").hide();
+								}
+								return;
+							}
 						} else {
 							$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
 						}
@@ -311,12 +361,46 @@ $(document).ready(function() {
 			}
 		});
 	});
-	$("#update-user").on("click", function() {
+	$("#update-user").on("click", function(event) {
 		var hoTen = $("#hoTen").val();
 		var diaChi = $("#diaChi").val();
 		var cmnd = $("#cmnd").val();
 		var sdt = $("#sdt").val();
 		var email = $("#email").val();
+		var result = true;
+		if (!hoTen.match(/^\p{L}{1,7}( \p{L}{1,7}){0,5}$/gu)) {
+			$("#error-hoTen").show();
+			result = false;
+		} else {
+			$("#error-hoTen").hide();
+		}
+		if (!diaChi.match(/^([1-9][0-9]{0,}[A-Z]?)(\/([1-9][0-9]{0,}[A-Z]?)){0,5}(( [\p{L}]{2,7}){1,15}( [1-9][0-9]{0,}[A-Z]?)?,){2,10}(( \p{L}{2,7}){1,15})$/gu)) {
+			$("#error-diaChi").show();
+			result = false;
+		} else {
+			$("#error-diaChi").hide();
+		}
+		if (!cmnd.match(/^[1-9](\d{8}|\d{11})$/)) {
+			$("#error-cmnd").show();
+			result = false;
+		} else {
+			$("#error-cmnd").hide();
+		}
+		if (!sdt.match(/^0[1-9][0-9]{8}$/)) {
+			$("#error-sdt").show();
+			result = false;
+		} else {
+			$("#error-sdt").hide();
+		}
+		if (!email.match(/^[a-zA-Z][a-zA-Z0-9_\.]{5,32}@[a-z0-9]{2,30}(\.[a-z0-9]{2,4}){1,2}$/)) {
+			$("#error-email").show();
+			result = false;
+		} else {
+			$("#error-email").hide();
+		}
+		if (!result){
+			event.preventDefault();
+		}
 		var data = {};
 		data["hoTen"] = hoTen;
 		data["diaChi"] = diaChi;
@@ -339,8 +423,37 @@ $(document).ready(function() {
 					$("#messageModelBody").text("Thông tin người dùng đã cập nhật thành công");
 				} else {
 					if (data.signin == true) {
-						if (Object.keys(data.error) > 0) {
-							
+						if (Object.keys(data.error).length > 0) {
+							if (data.error.customer == false) {
+								$("#messageModelBody").text("Không xác định được tài khoản, hãy đăng nhập lại");
+							} else {
+								if (data.error.hoTen == false) {
+									$("#error-hoTen").show();
+								} else {
+									$("#error-hoTen").hide();
+								}
+								if (data.error.diaChi == false) {
+									$("#error-diaChi").show();
+								} else {
+									$("#error-diaChi").hide();
+								}
+								if (data.error.cmnd == false) {
+									$("#error-cmnd").show();
+								} else {
+									$("#error-cmnd").hide();
+								}
+								if (data.error.sdt == false) {
+									$("#error-sdt").show();
+								} else {
+									$("#error-sdt").hide();
+								}
+								if (data.error.email == false) {
+									$("#error-email").show();
+								} else {
+									$("#error-email").hide();
+								}
+								return;
+							}
 						} else {
 							$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
 						}

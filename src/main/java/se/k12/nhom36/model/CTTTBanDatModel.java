@@ -5,8 +5,13 @@
 
 package se.k12.nhom36.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 public class CTTTBanDatModel {
+  @Pattern(regexp = "^(MA)\\d{6}$", message = "Không xác định được món ăn")
   private String maMA;
+  @Min(value = 1, message = "Số lượng của một món phải lớn hơn hoặc bằng 1")
   private int soLuong;
   public CTTTBanDatModel() {
     super();

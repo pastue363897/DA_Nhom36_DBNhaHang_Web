@@ -11,6 +11,7 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/sign-in&register.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/sign-in&register.js" />'></script>
 </head>
 <body>
 	<div class="container">
@@ -27,6 +28,7 @@
 								<div class="form-group">
 									<label for="Email">Username</label>
 									<p class="error"><form:errors path="username" ></form:errors></p>
+									<p id="error-username" class="error" style="display: none;">* Vui lòng nhập username có độ dài từ 3-20 ký tự bắt đầu là chữ cái</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-username"
@@ -39,6 +41,7 @@
 								<div class="form-group">
 									<label for="password">Mật khẩu</label>
 									<p class="error"><form:errors path="password"></form:errors></p>
+									<p id="error-password" class="error" style="display: none;">* Vui lòng nhập password có độ dài từ 8-20 ký tự, có bao gồm chữ cái, số, và ký tự đặc biệt</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-password"
@@ -49,7 +52,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-primary btn-block" type="submit">
+									<button id="btn-signin" class="btn btn-primary btn-block" type="submit">
 										<img alt="icon-signin" src="<c:url value="/resources/images/icons/login.png" />"> Đăng nhập
 									</button>
 								</div>

@@ -64,9 +64,7 @@ $(document).ready(function() {
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				$("#messageModalLabel").text("Đặt bàn");
-				if (Object.keys(data.error).length > 0){
-					
-				} else if (Object.keys(data.info).length > 0){
+				if (Object.keys(data.info).length > 0){
 					if (data.info.dadat == true) {
 						$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");
 					} else if (data.info.soLuongMonAnQuaLon == true) {
@@ -87,6 +85,18 @@ $(document).ready(function() {
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
+				$("#messageModalLabel").text("Đặt bàn");
+				if (e.status == 400) {
+					if (e.responseJSON.errors.length > 0) {
+						var listerror = "<ul class='error-warning'>";
+						for (i of e.responseJSON.errors) {
+							listerror += "<li>" + i + "</li>";
+						}
+						$("#messageModelBody").empty();
+						$("#messageModelBody").append(listerror);
+					}
+				}
+				$("#messageModal").modal('show');
 			}
 		});
 	});
@@ -128,10 +138,28 @@ $(document).ready(function() {
 			timeout : 100000,
 			success : function(data) {
 				console.log("SUCCESS: ", data);
-				window.location.href = 'banan';
+				if (data != null && data != false) {
+					window.location.href = 'banan';
+				} else {
+					$("#messageModalLabel").text("Thêm bàn đặt vào giỏ hàng");
+					$("#messageModelBody").text("Có sự cố trong xác định thông tin bàn đặt, hãy thử lại");
+					$("#messageModal").modal('show');
+				}
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
+				$("#messageModalLabel").text("Thêm bàn đặt vào giỏ hàng");
+				if (e.status == 400) {
+					if (e.responseJSON.errors.length > 0) {
+						var listerror = "<ul class='error-warning'>";
+						for (i of e.responseJSON.errors) {
+							listerror += "<li>" + i + "</li>";
+						}
+						$("#messageModelBody").empty();
+						$("#messageModelBody").append(listerror);
+					}
+				}
+				$("#messageModal").modal('show');
 			}
 		});
 	});
@@ -153,7 +181,9 @@ $(document).ready(function() {
 				$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
 				if (data == null) {
 					$("#messageModelBody").text("Bàn chưa có khách nào đặt trong ngày " + $("#ngayPhucVu").val() + ", có thể đặt thời gian mà bạn muốn");
-				} else{
+				} else if (data == false) {
+					$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+				} else {
 					var keys = Object.keys(data);
 					if (keys.length <= 0) {
 						$("#messageModelBody").text("Bàn không còn giờ trống trong ngày " + $("#ngayPhucVu").val());
@@ -178,6 +208,11 @@ $(document).ready(function() {
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
+				if (e.status == 400) {
+					$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
+					$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+					$("#messageModal").modal('show');
+				}
 			}
 		});
 	});

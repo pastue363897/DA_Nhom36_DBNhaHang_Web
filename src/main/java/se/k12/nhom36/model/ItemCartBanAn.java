@@ -5,7 +5,10 @@
 
 package se.k12.nhom36.model;
 
+import javax.validation.constraints.Pattern;
+
 public class ItemCartBanAn {
+  @Pattern(regexp = "^(BA)\\d{6}$", message = "Không xác định được bàn ăn đã chọn")
   private String maBA;
   private String kySoBA;
   private String moTaBA;

@@ -63,13 +63,26 @@ public class ManagerController {
       if (o != null) {
         signin = true;
         
-        //kiem ta du lieu dau vao
-        
-        AccountModel ac = (AccountModel) session.getAttribute("account");
-        result = managerUserService.updateAccount(account, ac.getUsername());
-        if (result) {
-          session.removeAttribute("account");
-          session.setAttribute("account", account);
+        if (account != null) {
+          if (account.getUsername() != null && account.getUsername().matches("^[a-zA-Z][a-zA-Z0-9]{2,19}$")) {
+            if (account.getPassword() != null && account.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,20}$")) {
+              AccountModel ac = (AccountModel) session.getAttribute("account");
+              result = managerUserService.updateAccount(account, ac.getUsername());
+              if (result) {
+                session.removeAttribute("account");
+                session.setAttribute("account", account);
+              }
+            } else {
+              error.put("password", false);
+            }
+          } else {
+            error.put("username", false);
+            if (account.getPassword() == null || !account.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,20}$")) {
+              error.put("password", false);
+            }
+          }
+        } else {
+          error.put("account", false);
         }
       }
     }
@@ -91,19 +104,44 @@ public class ManagerController {
       if (o != null) {
         signin = true;
         
-        //kiem ta du lieu dau vao
-        
-        CustomerModel c = (CustomerModel) session.getAttribute("customer");
-        customer.setMaKH(c.getMaKH());
-        result = managerUserService.updateCustomer(customer);
-        if (result) {
-          c.setHoTen(customer.getHoTen());
-          c.setDiaChi(customer.getDiaChi());
-          c.setCmnd(customer.getCmnd());
-          c.setSdt(customer.getSdt());
-          c.setEmail(customer.getEmail());
-          session.removeAttribute("customer");
-          session.setAttribute("customer", c);
+        if (customer != null) {
+          boolean check = true;
+          if (customer.getHoTen() == null || !customer.getHoTen().matches("^\\p{L}{1,7}( \\p{L}{1,7}){0,5}$")) {
+            error.put("hoTen", false);
+            check = false;
+          }
+          if (customer.getDiaChi() == null || !customer.getDiaChi().matches("^([1-9][0-9]{0,}[A-Z]?)(/([1-9][0-9]{0,}[A-Z]?)){0,5}(( [\\p{L}]{2,7}){1,15}( [1-9][0-9]{0,}[A-Z]?)?,){2,10}(( \\p{L}{2,7}){1,15})$")) {
+            error.put("diaChi", false);
+            check = false;
+          }
+          if (customer.getCmnd() == null || !customer.getCmnd().matches("^[1-9](\\d{8}|\\d{11})$")) {
+            error.put("cmnd", false);
+            check = false;
+          }
+          if (customer.getSdt() == null || !customer.getSdt().matches("^0[1-9][0-9]{8}$")) {
+            error.put("sdt", false);
+            check = false;
+          }
+          if (customer.getEmail() == null || !customer.getEmail().matches("^[a-zA-Z][a-zA-Z0-9_\\.]{5,32}@[a-z0-9]{2,30}(\\.[a-z0-9]{2,4}){1,2}$")) {
+            error.put("email", false);
+            check = false;
+          }
+          if (check == true) {
+            CustomerModel c = (CustomerModel) session.getAttribute("customer");
+            customer.setMaKH(c.getMaKH());
+            result = managerUserService.updateCustomer(customer);
+            if (result) {
+              c.setHoTen(customer.getHoTen());
+              c.setDiaChi(customer.getDiaChi());
+              c.setCmnd(customer.getCmnd());
+              c.setSdt(customer.getSdt());
+              c.setEmail(customer.getEmail());
+              session.removeAttribute("customer");
+              session.setAttribute("customer", c);
+            }
+          }
+        } else {
+          error.put("customer", false);
         }
       }
     }

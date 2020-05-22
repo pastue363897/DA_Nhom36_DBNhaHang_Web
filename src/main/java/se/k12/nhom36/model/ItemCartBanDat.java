@@ -8,11 +8,19 @@ package se.k12.nhom36.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.google.gson.annotations.JsonAdapter;
 
 public class ItemCartBanDat {
+  @Valid
   private ItemCartBanAn banAn;
+  @NotEmpty(message = "Chưa chọn món ăn")
+  @Valid
   private List<ItemCartMonAn> dsMonAn;
+  @NotNull(message = "Thời gian đặt không đúng")
   @JsonAdapter(GsonTimestamp.class)
   private Timestamp ngayPhucVu;
   public ItemCartBanDat() {

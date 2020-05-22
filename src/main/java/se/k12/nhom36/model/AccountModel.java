@@ -8,7 +8,7 @@ package se.k12.nhom36.model;
 import javax.validation.constraints.Pattern;
 
 public class AccountModel {
-  @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]{2,19}")
+  @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]{2,19}$")
   private String username;
   @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,20}$")
   private String password;

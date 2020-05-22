@@ -12,6 +12,7 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/sign-in&register.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/sign-in&register.js" />'></script>
 </head>
 <body>
 	<div class="container">
@@ -29,6 +30,7 @@
 								<div class="form-group">
 									<label for="username">Username</label> 
 									<p class="error"><form:errors path="account.username" ></form:errors></p>
+									<p id="error-username" class="error" style="display: none;">* Vui lòng nhập username có độ dài từ 3-20 ký tự bắt đầu là chữ cái</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-username"
@@ -44,6 +46,7 @@
 								<div class="form-group">
 									<label for="password">Mật khẩu</label>
 									<p class="error"><form:errors path="account.password"></form:errors></p>
+									<p id="error-password" class="error" style="display: none;">* Vui lòng nhập password có độ dài từ 8-20 ký tự, có bao gồm chữ cái, số, và ký tự đặc biệt</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-password"
@@ -58,6 +61,7 @@
 								</div>
 								<div class="form-group">
 									<label for="ConfirmPassword">Nhập lại mật khẩu</label>
+									<p id="error-repassword" class="error" style="display: none;">* Nhập sai mật khẩu, hãy nhập lại</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-lock"
@@ -84,6 +88,7 @@
 								<div class="form-group">
 									<label for="hoTen">Họ tên</label>
 									<p class="error"><form:errors path="customer.hoTen"></form:errors></p>
+									<p id="error-hoTen" class="error" style="display: none;">* Vui lòng nhập tên</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-fullname"
@@ -99,6 +104,7 @@
 								<div class="form-group">
 									<label for="diaChi">Địa chỉ</label>
 									<p class="error"><form:errors path="customer.diaChi"></form:errors></p>
+									<p id="error-diaChi" class="error" style="display: none;">* Vui lòng nhập địa chỉ</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-address"
@@ -113,6 +119,7 @@
 								<div class="form-group">
 									<label for="Email">CMND</label>
 									<p class="error"><form:errors path="customer.cmnd"></form:errors></p>
+									<p id="error-cmnd" class="error" style="display: none;">* Vui lòng nhập cmnd có 9 số hoặc căn cước có 12 số</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-identification"
@@ -127,6 +134,7 @@
 								<div class="form-group">
 									<label for="Email">Số điện thoại</label>
 									<p class="error"><form:errors path="customer.sdt"></form:errors></p>
+									<p id="error-sdt" class="error" style="display: none;">* Vui lòng nhập số điện thoại có 10 số</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-phone"
@@ -141,6 +149,7 @@
 								<div class="form-group">
 									<label for="email">Email</label>
 									<p class="error"><form:errors path="customer.email"></form:errors></p>
+									<p id="error-email" class="error" style="display: none;">* Vui lòng nhập email</p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-email"
@@ -153,7 +162,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<button class="btn btn-primary btn-block">
+									<button id="btn-register" class="btn btn-primary btn-block">
 										<img alt="icon-register" src="<c:url value="/resources/images/icons/registered.png" />"> Đăng ký
 									</button>
 								</div>
@@ -168,18 +177,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			var speed = 1000;
-			$("#btn-continue").on("click", function() {
-				$(".infor-account").slideUp(speed);
-				$(".infor-user").slideDown(speed);
-			})
-			$("#btn-undo").on("click", function() {
-				$(".infor-account").slideDown(speed);
-				$(".infor-user").slideUp(speed);
-			})
-		})
-	</script>
 </body>
 </html>

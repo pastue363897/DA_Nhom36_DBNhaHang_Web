@@ -1,0 +1,48 @@
+html, body {
+    color: #636b6f;
+    font-family: "Nunito", sans-serif;
+    font-weight: 100;
+    margin: 0;
+}
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-image: linear-gradient(#8b9da9, #fff6e4);
+    box-shadow: inset 0 0 100px hsla(0, 0%, 0%, .3);
+}
+.logo {
+    color: white;
+    font-size: 40px;
+}
+.logo:hover {
+    color: white;
+    text-decoration: none;
+}
+.logo>span {
+    font-family: 'Dancing Script', cursive;
+    font-size: 50px;
+    font-weight: 400px;
+    font-style: italic;
+    color: red;
+}
+.full-height {
+    height: 20vh;
+}
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.position-ref {
+    position: relative;
+}
+.code {
+    border-right: 2px solid;
+    font-size: 26px;
+    padding: 0 15px 0 15px;
+    text-align: center;
+}
+.message {
+    font-size: 18px;
+    text-align: center;
+}

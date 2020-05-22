@@ -8,14 +8,24 @@ package se.k12.nhom36.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.google.gson.annotations.JsonAdapter;
 
 public class TTBanDatModel {
   private String maKH;
+  @Pattern(regexp = "^(BA)\\d{6}$", message = "Không xác định được bàn ăn đã chọn")
   private String maBA;
+  @NotEmpty(message = "Chưa chọn món ăn")
+  @Valid
   private List<CTTTBanDatModel> dsMonAn;
+  @NotNull(message = "Hệ thống không xác định được thời gian, hãy thử lại sau")
   @JsonAdapter(GsonTimestamp.class)
   private Timestamp ngayDat;
+  @NotNull(message = "Thời gian đặt không đúng")
   @JsonAdapter(GsonTimestamp.class)
   private Timestamp ngayPhucVu;
   public TTBanDatModel() {
