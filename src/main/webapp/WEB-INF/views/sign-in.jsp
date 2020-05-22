@@ -26,6 +26,7 @@
 							<fieldset>
 								<div class="form-group">
 									<label for="Email">Username</label>
+									<p class="error"><form:errors path="username" ></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-username"
@@ -37,6 +38,7 @@
 								</div>
 								<div class="form-group">
 									<label for="password">Mật khẩu</label>
+									<p class="error"><form:errors path="password"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-password"

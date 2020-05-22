@@ -22,6 +22,10 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	<beans:bean id="messageSource" name="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <beans:property name="basename" value="classpath:message"></beans:property>
+	   <beans:property name="defaultEncoding" value="utf-8"></beans:property>
+	</beans:bean>
 	
 	<context:component-scan base-package="se.k12.nhom36" />
 	

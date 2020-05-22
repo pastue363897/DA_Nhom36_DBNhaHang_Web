@@ -1,5 +1,31 @@
 $(document).ready(function() {
 	function loadChiTiet() {
+		$("#giaTienMA").on("keydown", function(e) {
+			if(!((e.keyCode > 95 && e.keyCode < 106)
+		      || (e.keyCode > 47 && e.keyCode < 58) 
+		      || e.keyCode == 8)) {
+		        return false;
+		    }
+			if (parseInt($(this).val()) > 1000000
+					&& e.keyCode !== 46 // keycode for delete
+			        && e.keyCode !== 8 // keycode for backspace
+			        ){
+				return false;
+			}
+		});
+		$("#soNguoiAnMA").on("keydown", function(e) {
+			if(!((e.keyCode > 95 && e.keyCode < 106)
+		      || (e.keyCode > 47 && e.keyCode < 58) 
+		      || e.keyCode == 8)) {
+		        return false;
+		    }
+			if (parseInt($(this).val()) > 10
+					&& e.keyCode !== 46 // keycode for delete
+			        && e.keyCode !== 8 // keycode for backspace
+			        ){
+				return false;
+			}
+		});
 		$(".a").on("click", function(event) {
 			event.preventDefault();
 			var url = $(this).attr('href');
@@ -11,6 +37,12 @@ $(document).ready(function() {
 				timeout : 100000,
 				success : function(data) {
 					console.log("SUCCESS: ", data);
+					if (data == null) {
+						$("#messageModalLabel").text("Chi tiết món ăn");
+						$("#messageModelBody").text("Hệ thống không xác định được món ăn bạn đã chọn, hãy thử lại");
+						$("#messageModal").modal('show');
+						return;
+					}
 					var tenMA = data.tenMA;
 					var hinhAnh = data.hinhAnhMA.replace(/"/g, '');
 					var nguyenLieu = data.nguyenLieu;
@@ -55,6 +87,14 @@ $(document).ready(function() {
 				var item = $("#example-item-monan > div");
 				$(contentLeft).empty();
 				$(contentRight).empty();
+				if (data == null ) {
+					$(contentLeft).append('<h3 style="margin-left: 10px">Hệ thống gặp sự cố, hãy thử lại</h3>');
+					return;
+				}
+				if (data.length == 0) {
+					$(contentLeft).append('<h3 style="margin-left: 10px">Không có món ăn có thông tin phù hợp với tìm kiếm</h3>');
+					return;
+				}
 				if (data.length > 0) {
 					var half = data.length / 2;
 					for (i = 0; i < half; i++) {

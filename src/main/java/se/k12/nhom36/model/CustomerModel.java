@@ -5,12 +5,19 @@
 
 package se.k12.nhom36.model;
 
+import javax.validation.constraints.Pattern;
+
 public class CustomerModel {
   private String maKH;
+  @Pattern(regexp = "^\\p{L}{1,7}( \\p{L}{1,7}){0,5}$")
   private String hoTen;
+  @Pattern(regexp = "^([1-9][0-9]{0,}[A-Z]?)(/([1-9][0-9]{0,}[A-Z]?)){0,5}(( [\\p{L}]{2,7}){1,15}( [1-9][0-9]{0,}[A-Z]?)?,){2,10}(( \\p{L}{2,7}){1,15})$")
   private String diaChi;
+  @Pattern(regexp = "^[1-9](\\d{8}|\\d{11})$")
   private String cmnd;
+  @Pattern(regexp = "^0[1-9][0-9]{8}$")
   private String sdt;
+  @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_\\.]{5,32}@[a-z0-9]{2,30}(\\.[a-z0-9]{2,4}){1,2}$")
   private String email;
   public CustomerModel() {
     super();

@@ -7,6 +7,7 @@
 package se.k12.nhom36.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,8 +36,11 @@ public class SignInController {
   }
   
   @RequestMapping(value = "sign-in", method = RequestMethod.POST)
-  public String signIn(@ModelAttribute("account") AccountModel account, BindingResult accountBind, HttpSession session) {
+  public String signIn(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, HttpSession session) {
       System.out.println(account.getUsername());
+      if (accountBind.hasErrors()) {
+        return "sign-in";
+      }
       CustomerModel customer = managerUserService.login(account);
       System.out.println(customer);
       if (customer != null) {

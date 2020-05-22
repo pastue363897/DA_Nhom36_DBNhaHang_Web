@@ -14,11 +14,11 @@
 							</div>
 
                             <div class="one-third">
-                                <input type="text" id="giaTienMA" name="giaTienMA" class="form-control" placeholder="Giá tiền">
+                                <input type="number" id="giaTienMA" name="giaTienMA" class="form-control" placeholder="Giá tiền">
                             </div>
                             
 							<div class="one-third">
-                                <input type="text" id="soNguoiAnMA" name="soNguoiAnMA" class="form-control" placeholder="Số người ăn">
+                                <input type="number" id="soNguoiAnMA" name="soNguoiAnMA" class="form-control" placeholder="Số người ăn">
                             </div>
 						</div>
 						<input type="submit" id="search-food" class="search-submit btn btn-primary" value="Tìm kiếm">

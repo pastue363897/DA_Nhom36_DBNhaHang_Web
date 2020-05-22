@@ -5,6 +5,8 @@
 
 package se.k12.nhom36.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +36,13 @@ public class RegisterController {
     return "register";
   }
   @RequestMapping(value = "register", method = RequestMethod.POST)
-  public String requestRegister(@ModelAttribute("account") AccountModel account, BindingResult accountBind, @ModelAttribute("customer") CustomerModel customer, BindingResult customerBind) {
+  public String requestRegister(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, @ModelAttribute("customer") @Valid CustomerModel customer, BindingResult customerBind) {
     System.out.println(account);
     System.out.println(customer);
+    if (accountBind.hasErrors() || customerBind.hasErrors()) {
+      System.out.println("error");
+      return "register";
+    }
     if (managerUserService.register(account, customer)) {
       return "redirect:sign-in";
     }

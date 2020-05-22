@@ -30,51 +30,59 @@
 					<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 						<div class="row">
 							<div class="col-lg-6">
-								<c:forEach var="monan" items="${dsMonAn }">
-									<c:choose>
-										<c:when test="${i >= halfLength}">
-											</div><div class="col-lg-6">
-											<div class="menus d-flex ftco-animate">
-											    <input type="hidden" class="maMA" value="${monan.maMA }">
-												<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
-												<div class="text d-flex">
-													<div class="one-half">
-														<h3>${monan.tenMA }</h3>
-														<p>${monan.nguyenLieu }</p>
+							    <c:choose>
+								    <c:when test="${dsMonAn == null || fn:length(dsMonAn) == 0 }">
+								             <h3 style="margin-left: 10px">Hiện tại không có món ăn có thể chọn</h3>
+								         </div><div class="col-lg-6">
+								    </c:when>
+								    <c:otherwise>
+										<c:forEach var="monan" items="${dsMonAn }">
+											<c:choose>
+												<c:when test="${i >= halfLength}">
+													</div><div class="col-lg-6">
+													<div class="menus d-flex ftco-animate">
+													    <input type="hidden" class="maMA" value="${monan.maMA }">
+														<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
+														<div class="text d-flex">
+															<div class="one-half">
+																<h3>${monan.tenMA }</h3>
+																<p>${monan.nguyenLieu }</p>
+															</div>
+															<div class="one-forth">
+																<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
+																		Đ</span></span>
+																		<div>
+																		    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
+																		</div>
+															</div>
+														</div>
 													</div>
-													<div class="one-forth">
-														<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
-																Đ</span></span>
-																<div>
-																    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
-																</div>
+													<c:set var="i" value="${0 }"></c:set>
+												</c:when>
+												<c:otherwise>
+													<div class="menus d-flex ftco-animate">
+													    <input type="hidden" class="maMA" value="${monan.maMA }">
+														<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
+														<div class="text d-flex">
+															<div class="one-half">
+																<h3>${monan.tenMA }</h3>
+																<p>${monan.nguyenLieu }</p>
+															</div>
+															<div class="one-forth">
+																<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
+																		Đ</span></span>
+																		<div>
+		                                                                    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
+		                                                                </div>
+															</div>
+														</div>
 													</div>
-												</div>
-											</div>
-											<c:set var="i" value="${0 }"></c:set>
-										</c:when>
-										<c:otherwise>
-											<div class="menus d-flex ftco-animate">
-											    <input type="hidden" class="maMA" value="${monan.maMA }">
-												<div class="menu-img" style="background-image: url('<c:url value="/data/${monan.hinhAnhMA }" />');"></div>
-												<div class="text d-flex">
-													<div class="one-half">
-														<h3>${monan.tenMA }</h3>
-														<p>${monan.nguyenLieu }</p>
-													</div>
-													<div class="one-forth">
-														<span class="price"><fmt:formatNumber pattern="#,###">${monan.giaTien }</fmt:formatNumber><span>
-																Đ</span></span>
-																<div>
-                                                                    <a class="a" href="chitiet-monan/${monan.maMA }">Xem chi tiết</a>
-                                                                </div>
-													</div>
-												</div>
-											</div>
-											<c:set var="i" value="${i+1 }"></c:set>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
+													<c:set var="i" value="${i+1 }"></c:set>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>

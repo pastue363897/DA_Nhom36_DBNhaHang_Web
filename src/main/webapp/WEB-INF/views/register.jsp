@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,8 @@
 							<fieldset class="infor-account">
 								<legend>Thông tin tài khoản</legend>
 								<div class="form-group">
-									<label for="username">Username</label>
+									<label for="username">Username</label> 
+									<p class="error"><form:errors path="account.username" ></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-username"
@@ -41,6 +43,7 @@
 								</div>
 								<div class="form-group">
 									<label for="password">Mật khẩu</label>
+									<p class="error"><form:errors path="account.password"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-password"
@@ -80,6 +83,7 @@
 								</legend>
 								<div class="form-group">
 									<label for="hoTen">Họ tên</label>
+									<p class="error"><form:errors path="customer.hoTen"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-fullname"
@@ -94,6 +98,7 @@
 								</div>
 								<div class="form-group">
 									<label for="diaChi">Địa chỉ</label>
+									<p class="error"><form:errors path="customer.diaChi"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-address"
@@ -107,6 +112,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Email">CMND</label>
+									<p class="error"><form:errors path="customer.cmnd"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-identification"
@@ -120,6 +126,7 @@
 								</div>
 								<div class="form-group">
 									<label for="Email">Số điện thoại</label>
+									<p class="error"><form:errors path="customer.sdt"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-phone"
@@ -133,6 +140,7 @@
 								</div>
 								<div class="form-group">
 									<label for="email">Email</label>
+									<p class="error"><form:errors path="customer.email"></form:errors></p>
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<span class="input-group-text"> <img alt="icon-email"

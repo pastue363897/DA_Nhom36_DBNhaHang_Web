@@ -22,39 +22,47 @@
                 <c:set var="halfLength" value="${dsBanAn.size() / 2 }"></c:set>
                 <c:set var="i" value="0"></c:set>
                 <div class="col-lg-6">
-                    <c:forEach var="banan" items="${dsBanAn }">
-                        <c:choose>
-                            <c:when test="${i >= halfLength}">
-                                </div><div class="col-lg-6">
-                                <div class="block-3 d-md-flex ftco-animate item-table">
-                                    <input type="hidden" value="${banan.maBA }">
-			                        <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
-			                        <div class="text text-center order-first">
-			                            <h2 class="heading">${banan.kySoBA }</h2>
-			                            <p>${banan.motaBA }</p>
-			                            <div class="price">
-			                                giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
-			                            </div>
-			                        </div>
-			                    </div>
-                                <c:set var="i" value="${0 }"></c:set>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="block-3 d-md-flex ftco-animate item-table">
-                                    <input type="hidden" value="${banan.maBA }" >
-                                    <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
-                                    <div class="text text-center order-first">
-                                        <h2 class="heading">${banan.kySoBA }</h2>
-                                        <p>${banan.motaBA }</p>
-                                        <div class="price">
-                                            giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:set var="i" value="${i+1 }"></c:set>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
+                    <c:choose>
+                       <c:when test="${dsBanAn == null || dsBanAn.size() == 0 }">
+                                <h3 style="margin-left: 10px; color: white;">Không có bàn ăn có thể chọn</h3>
+                            </div><div class="col-lg-6">
+                       </c:when>
+                       <c:otherwise>
+		                    <c:forEach var="banan" items="${dsBanAn }">
+		                        <c:choose>
+		                            <c:when test="${i >= halfLength}">
+		                                </div><div class="col-lg-6">
+		                                <div class="block-3 d-md-flex ftco-animate item-table">
+		                                    <input type="hidden" value="${banan.maBA }">
+					                        <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
+					                        <div class="text text-center order-first">
+					                            <h2 class="heading">${banan.kySoBA }</h2>
+					                            <p>${banan.motaBA }</p>
+					                            <div class="price">
+					                                giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
+					                            </div>
+					                        </div>
+					                    </div>
+		                                <c:set var="i" value="${0 }"></c:set>
+		                            </c:when>
+		                            <c:otherwise>
+		                                <div class="block-3 d-md-flex ftco-animate item-table">
+		                                    <input type="hidden" value="${banan.maBA }" >
+		                                    <div class="image order-last" style="background-image: url('<c:url value="/data/${banan.hinhAnh }" />');"></div>
+		                                    <div class="text text-center order-first">
+		                                        <h2 class="heading">${banan.kySoBA }</h2>
+		                                        <p>${banan.motaBA }</p>
+		                                        <div class="price">
+		                                            giá <fmt:formatNumber pattern="#,###">${banan.phuGia }</fmt:formatNumber> <span> Đ</span>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                                <c:set var="i" value="${i+1 }"></c:set>
+		                            </c:otherwise>
+		                        </c:choose>
+		                    </c:forEach>
+		                </c:otherwise>
+		            </c:choose>
                 </div>
                 <form action="dat-ban" id="order" method="POST">
                     <input type="hidden" id="maBA" name="maBA" value="">
