@@ -40,5 +40,29 @@ $(document).ready(function() {
 		$("#maBA").val(maBA);
 		console.log($("#maBA").val());
 		$("#order")[0].submit();
-	})
+	});
+	
+	function loadHeightTable() {
+		var tableLeft = $(".row-table :nth-child(1)").children(".item-table");
+		var tableRight = $(".row-table :nth-child(2)").children(".item-table");
+		var maxHeight = 0;
+		var height;
+		for (i of tableLeft) {
+			height = $(i).height();
+			if (maxHeight < height) {
+				maxHeight = height;
+			}
+		}
+		for (i of tableRight) {
+			height = $(i).height();
+			if (maxHeight < height) {
+				maxHeight = height;
+			}
+		}
+		var list = $(".row-table > .col-lg-6").children(".item-table");
+		for (i of list) {
+			$(i).height(maxHeight);
+		}
+	}
+	loadHeightTable();
 });

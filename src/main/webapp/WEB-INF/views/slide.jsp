@@ -8,7 +8,7 @@
 			<div class="criteria">
 				<h1 class="criteria-item">Đặt bàn tại một thời điểm thuận tiện cho bạn</h1>
 				<p>
-					<button type="button" class="btn btn-outline-white px-5 py-3">Đặt bàn</button>
+					<a href="banan" class="btn btn-outline-white px-5 py-3">Đặt bàn</a>
 				</p>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 			<div class="criteria">
 				<h1 class="criteria-item">Món ngon &amp; đậm hương vị</h1>
 				<p>
-					<button type="button" class="btn btn-outline-white px-5 py-3">Đặt bàn</button>
+					<a href="banan" class="btn btn-outline-white px-5 py-3">Đặt bàn</a>
 				</p>
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 			<div class="criteria">
 				<h1 class="criteria-item">Không gian yên bình</h1>
 				<p>
-					<button type="button" class="btn btn-outline-white px-5 py-3">Đặt bàn</button>
+					<a href="banan" class="btn btn-outline-white px-5 py-3">Đặt bàn</a>
 				</p>
 			</div>
 		</div>

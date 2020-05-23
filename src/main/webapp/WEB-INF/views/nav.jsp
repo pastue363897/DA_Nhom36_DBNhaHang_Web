@@ -12,8 +12,8 @@
 					<li class="nav-item active"><a class="nav-link" href="home">Trang chủ</a></li>
 					<li class="nav-item"><a class="nav-link" href="banan">Bàn ăn</a></li>
 					<li class="nav-item"><a class="nav-link" href="monan">Món ăn</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+					<li class="nav-item"><a class="nav-link" href="about">Giới thiệu</a></li>
+					<li class="nav-item"><a class="nav-link" href="contact">Liên hệ</a></li>
 				</ul>
 				<jsp:include page="manager-account.jsp"></jsp:include>
 			</div>

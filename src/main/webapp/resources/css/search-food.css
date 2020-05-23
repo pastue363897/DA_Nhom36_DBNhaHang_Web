@@ -1,6 +1,7 @@
 @charset "UTF-8";
 .reservation {
 	background: #fff;
+	padding-bottom: 3rem !important;
 }
 .form-control {
 	background: transparent !important;
@@ -24,4 +25,10 @@ form .search-submit {
     color: #212529;
     background-color: rgba(60, 222, 106, 1);
     border-color: #ffb400;
+}
+@media ( max-width : 992px) {
+    .search-submit {
+        margin-left: calc(50% - 60px) !important;
+        margin-top: 20px;
+    }
 }

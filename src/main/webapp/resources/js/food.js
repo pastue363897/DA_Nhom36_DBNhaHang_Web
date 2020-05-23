@@ -55,7 +55,7 @@ $(document).ready(function() {
 					$("#nguyenLieu").text(nguyenLieu);
 					$("#moTa").text(moTa);
 					$("#soNguoi").text(soNguoi);
-					$("#giaTien").text(giaTien);
+					$("#giaTien").text((giaTien).toLocaleString());
 					$("#chitiet-monan").modal('show');
 				},
 				error : function(e) {
@@ -115,6 +115,7 @@ $(document).ready(function() {
 						item.find(">.text >.one-forth .a").attr("href", "chitiet-monan/" + data[i].maMA);
 						$(contentRight).append($(item).clone());
 					}
+					loadHeightFood();
 					loadChiTiet();
 				}
 			},
@@ -123,5 +124,28 @@ $(document).ready(function() {
 			}
 		});
 	});
+	function loadHeightFood() {
+		var tableLeft = $("#v-pills-home>.row :nth-child(1)").children(".menus");
+		var tableRight = $("#v-pills-home>.row :nth-child(2)").children(".menus");
+		var maxHeight = 0;
+		var height;
+		for (i of tableLeft) {
+			height = $(i).height();
+			if (maxHeight < height) {
+				maxHeight = height;
+			}
+		}
+		for (i of tableRight) {
+			height = $(i).height();
+			if (maxHeight < height) {
+				maxHeight = height;
+			}
+		}
+		var list = $("#v-pills-home>.row .col-lg-6").children(".menus");
+		for (i of list) {
+			$(i).height(maxHeight);
+		}
+	}
+	loadHeightFood();
 	loadChiTiet();
 });

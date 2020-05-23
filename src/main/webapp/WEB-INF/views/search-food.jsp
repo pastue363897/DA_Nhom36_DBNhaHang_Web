@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-12 reservation pt-5 px-5">
 				<div class="block-17">
-					<form action="" method="post" class="d-block d-lg-flex">
+					<form action="" method="post" class="d-block d-lg-flex justify-content-center">
 						<div class="fields d-block d-lg-flex">
 
 							<div class="one-third">
@@ -14,11 +14,11 @@
 							</div>
 
                             <div class="one-third">
-                                <input type="number" id="giaTienMA" name="giaTienMA" class="form-control" placeholder="Giá tiền">
+                                <input type="text" id="giaTienMA" name="giaTienMA" class="form-control" placeholder="Giá tiền">
                             </div>
                             
 							<div class="one-third">
-                                <input type="number" id="soNguoiAnMA" name="soNguoiAnMA" class="form-control" placeholder="Số người ăn">
+                                <input type="text" id="soNguoiAnMA" name="soNguoiAnMA" class="form-control" placeholder="Số người ăn">
                             </div>
 						</div>
 						<input type="submit" id="search-food" class="search-submit btn btn-primary" value="Tìm kiếm">

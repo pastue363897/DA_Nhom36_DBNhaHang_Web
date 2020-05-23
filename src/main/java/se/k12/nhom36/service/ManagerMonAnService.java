@@ -22,7 +22,7 @@ public class ManagerMonAnService {
   private ManagerMonAnDao managerMonAnDao;
   
   public List<MonAn> danhSachMonAnHome(){
-    int count = Integer.parseInt("10"/* evm.getProperty("monan.visiable-home") */);
+    int count = Integer.parseInt("20"/* evm.getProperty("monan.visiable-home") */);
     return managerMonAnDao.getDanhSachMonAnHome(count);
   }
   public List<MonAn> danhSachMonAn(){

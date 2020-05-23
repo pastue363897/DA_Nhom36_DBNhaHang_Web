@@ -8,39 +8,38 @@
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">VietFood</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                            blind texts.</p>
+                        <p>Uy tín và chất lượng, giúp thực khách đặt bàn dễ dàng. Giải pháp đột phá mới cho câu chuyện ăn gì, ở đâu!</p>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Opening Hours</h2>
+                        <h2 class="ftco-heading-2">Giờ mở cửa</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Monday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Tuesday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Wednesday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Thursday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Friday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Saturday: <span>08: - 22:00</span></a></li>
-                            <li><a href="#" class="py-2 d-block">Sunday: <span>08: - 22:00</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ hai: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ ba: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ tư: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ năm: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ sáu: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Thứ bảy: <span>Cả ngày</span></a></li>
+                            <li><a href="#" class="py-2 d-block">Chủ nhật: <span>Cả ngày</span></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Contact Information</h2>
+                        <h2 class="ftco-heading-2">Thông tin liên hệ</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a></li>
-                            <li><a href="#" class="py-2 d-block">+ 1235 2355 98</a></li>
-                            <li><a href="#" class="py-2 d-block">info@yoursite.com</a></li>
-                            <li><a href="#" class="py-2 d-block">email@email.com</a></li>
+                            <li><a href="#" class="py-2 d-block">Địa chỉ : Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, Thành phố Hồ Chí Minh</a></li>
+                            <li><a href="#" class="py-2 d-block">0941 758 115</a></li>
+                            <li><a href="#" class="py-2 d-block">Nhóm 36, Đồ án tốt nghiệp k12</a></li>
+                            <li><a href="#" class="py-2 d-block">dungyknbiuh@gmail.com</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Newsletter</h2>
-                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <h2 class="ftco-heading-2">Tham gia với chúng tôi</h2>
+                        <p>Đăng ký tài khoản để nhận những thông tin ưu đãi hấp dẫn và khám phá, cập nhật các xu hướng ẩm thực mới lạ, thú vị.</p>
                     </div>
                 </div>
             </div>
@@ -48,14 +47,12 @@
                 <div class="col-md-12 text-center">
 
                     <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-                            href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Đồ án tốt nghiệp k12 | Trường đại học công nghiệp Thành Phố Hồ Chí Minh <i class="icon-heart" aria-hidden="true"></i> thực hiện bởi <a
+                            href="#" target="_blank">Nhóm 36</a>
                     </p>
                 </div>
             </div>

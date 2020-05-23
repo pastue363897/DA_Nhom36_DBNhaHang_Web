@@ -79,3 +79,14 @@
 .item-table:hover .text {
 	background-color: rgba(247, 235, 203, 1);
 }
+@media ( max-width : 768px) {
+	.item-table {
+	   margin-bottom: 20px;
+	}
+	.block-3 .image {
+	    min-height: 30vh;
+	}
+	.item-table {
+	   height: auto;
+	}
+}

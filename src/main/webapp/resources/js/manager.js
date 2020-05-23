@@ -34,36 +34,42 @@ $(document).ready(function() {
 				var item = $("#example-item-bandat > div");
 				var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
 				var monAn = $("#example-item-monan > div");
+				var time;
 				for (i of data) {
 					item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
 					item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
-					item.find(".content-info-bandat > .tongTien > span").text(i.tongTien)
+					item.find(".content-info-bandat > .tongTien > span").text((i.tongTien).toLocaleString())
 					item.find(".content-info-bandat > .soGhe > span").text(i.banAn.soLuongGhe)
-					item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(i.ngayDat)
-					item.find(".content-info-bandat > .bandat-time > .ngayPhucVu > span").text(i.ngayPhucVu)
+					time = new Date(i.ngayDat);
+					item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(time.toLocaleDateString('en-GB') + " " + 
+							(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":" + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
+					time = new Date(i.ngayPhucVu);
+					item.find(".content-info-bandat > .bandat-time > .ngayPhucVu > span").text(time.toLocaleDateString('en-GB') + " " + 
+							(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
 					if (i.daHuy) {
 						item.find(".bandat-pay").children().hide();
 						item.find(".bandat-pay > .daHuy").show();
 					} else if (i.daThanhToan) {
 						item.find(".bandat-pay").children().hide();
 						item.find(".bandat-pay > .daThanhToan").show();
-						item.find(".bandat-pay > .chiTietThanhToan > .ngayThanhToan > span").text(item.ngayThanhToan);
+						time = new Date(i.ngayThanhToan);
+						item.find(".bandat-pay > .daThanhToan > .chiTietThanhToan > .ngayThanhToan > span").text(time.toLocaleDateString('en-GB') + " " + 
+								(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds());
 					} else {
 						item.find(".bandat-pay").children().hide();
 						item.find(".bandat-pay > .chuaThanhToan").show();
 					}
 					item.find(".content-detail-bandat > .content-banan > p").text(i.banAn.motaBA);
-					item.find(".content-detail-bandat > .content-banan > .phuGia > span").text(i.banAn.phuGia);
+					item.find(".content-detail-bandat > .content-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
 					$(dsMonAn).empty();
 					for (j of i.dsMonAn) {
 						monAn.find("div > img").attr("src", "data/" + j.monAn.hinhAnhMA);
 						monAn.find("div > .content-monan > h5").text(j.monAn.tenMA);
-						monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text(j.donGia);
+						monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text((j.donGia).toLocaleString());
 						monAn.find("div > .content-monan > .detail-monan-selectd > .soLuongChon > span").text(j.soLuong);
 						$(dsMonAn).append($(monAn).clone());
 					}					
 					$(content).append($(item).clone());
-					console.log("a")
 				}
 				$(".a").on("click", function(event) {
 					event.preventDefault();
@@ -114,36 +120,96 @@ $(document).ready(function() {
 					item.find(".item-cart-right > .info-banan > .heading > span").text(i.banAn.kySoBA);
 					item.find(".item-cart-right > .info-banan > .moTa").text(i.banAn.moTaBA);
 					item.find(".item-cart-right > .info-banan > .soGhe > span").text(i.banAn.soGhe);
-					item.find(".item-cart-right > .info-banan > .phuGia > span").text(i.banAn.phuGia);
+					item.find(".item-cart-right > .info-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
 					$(dsMonAn).empty();
 					for (j of i.dsMonAn) {
 						monAn.find(".item-food > input").val(j.maMA);
 						monAn.find(".item-food > .item-img").css("background-image", "url('" + j.hinhAnh + "')");
 						monAn.find(".item-food > .info-monan > .item-info > h5").text(j.tenMA);
 						monAn.find(".item-food > .info-monan > .item-info  .itemCount").val(j.soLuong);
-						monAn.find(".item-food > .info-monan > .item-info .price").text(j.giaTien);
+						monAn.find(".item-food > .info-monan > .item-info .price").text((j.giaTien).toLocaleString());
 						$(dsMonAn).append($(monAn).clone());
 					}
 					$(content).append($(item).clone());
 				}
 				$(".itemCartNgayPhucVu").datepicker({
-					dateFormat : "dd/mm/yy"
+					dateFormat : "dd/mm/yy",
+					minDate: "+1"
+				});
+				$('.gioPhucVu').timepicker({
+				    timeFormat: 'HH:mm:ss',
+				    interval: 30,
+				    minTime: '0',
+				    maxTime: '23:59:59',
+				    dynamic: false,
+				    dropdown: true,
+				    scrollbar: true
+				});
+				$(".itemCount").on("keydown", function(e) {
+					if(!((e.keyCode > 95 && e.keyCode < 106)
+				      || (e.keyCode > 47 && e.keyCode < 58) 
+				      || e.keyCode == 8)) {
+				        return false;
+				    }
+					if (parseInt($(this).val()) > 2
+							&& e.keyCode !== 46 // keycode for delete
+					        && e.keyCode !== 8 // keycode for backspace
+					        ){
+						return false;
+					}
 				});
 				$(".datban").on("click", function() {
 					var bandat = $(this).parent(".group-button").parent(".item-cart-left").parent(".item-cart-bandat");
 					var $this = $(bandat).find(".item-cart-right > .dansach-monan").children();
 					var dataMonAn = [];
 					var monAn;
+					$("#messageModalLabel").text("Đặt bàn");
 					for (i of $this){
 						monAn = {}
 						monAn.maMA = $(i).find(".item-food > .itemSelectMaMA").val();
 						monAn.soLuong = parseInt($(i).find(".itemCount").val());
+						if (isNaN(monAn.soLuong) || monAn.soLuong <= 0 || monAn.soLuong >= 30) {
+							$("#messageModelBody").text("Số lượng của một món phải lớn hơn 0 và nhỏ hơn 30, hãy kiểm tra lại");
+							$("#messageModal").modal('show');
+							return;
+						}
 						dataMonAn.push(monAn);
+					}
+					if (dataMonAn.length == 0) {
+						$("#messageModelBody").text("Chưa chọn món ăn");
+						$("#messageModal").modal('show');
+						return;
 					}
 					var data = {};
 					var maBA = $(bandat).find(".item-cart-left > .maBA").val();
+					if (maBA == null || !maBA.match(/^(BA)\d{6}$/)){
+						$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+						$("#messageModal").modal('show');
+						return;
+					}
 					var ngayDat = new Date().toLocaleString('en-GB').replace(",", "");
-					var ngayPhucVu = $(bandat).find(".item-cart-left .itemCartNgayPhucVu").val() + " " + $(bandat).find(".item-cart-left .gioPhucVu").val() + ":00";
+					var gioPhucVu = $(bandat).find(".item-cart-left .gioPhucVu").val();
+					if (gioPhucVu == null || gioPhucVu == '' || !gioPhucVu.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/)) {
+						$("#messageModelBody").text("Chưa chọn giờ hoặc giờ không đúng, hãy chọn lại");
+						$("#messageModal").modal('show');
+						return;
+					}
+					var ngayPhucVu = $(bandat).find(".item-cart-left .itemCartNgayPhucVu").val();
+					if (ngayPhucVu == null || !ngayPhucVu.match(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{1,4}$/)){
+						$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+						$("#messageModal").modal('show');
+						return;
+					}
+					var ngay = ngayPhucVu.split("/");
+					ngay = ngay[2] + "-" + ngay[1] + "-" + ngay[0];
+					var date = new Date(ngay + " 00:00:00").getTime();
+					
+					if (isNaN(date) || date <= new Date(new Date().toDateString()).getTime()) {
+						$("#messageModelBody").text("Ngày không hợp lệ, hãy chọn ngày lớn hơn ngày hiện tại");
+						$("#messageModal").modal('show');
+						return;
+					}
+					ngayPhucVu += " " + gioPhucVu;
 					data.maBA = maBA;
 					data.dsMonAn = dataMonAn;
 					data.ngayDat = ngayDat;
@@ -239,6 +305,25 @@ $(document).ready(function() {
 					var data = {};
 					data.maBA = maBA;
 					data.ngayPhucVu = ngayPhucVu[2] + "-" + ngayPhucVu[1] + "-" + ngayPhucVu[0];
+					$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
+					if (data.maBA == null || !data.maBA.match(/^(BA)\d{6}$/)){
+						$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+						$("#messageModal").modal('show');
+						return;
+					}
+					if (data.ngayPhucVu == null || !data.ngayPhucVu.match(/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/)){
+						$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+						$("#messageModal").modal('show');
+						return;
+					} else {
+						var date = new Date(data.ngayPhucVu + " 00:00:00").getTime();
+						
+						if (isNaN(date) || date <= new Date(new Date().toDateString()).getTime()) {
+							$("#messageModelBody").text("Ngày không hợp lệ, hãy chọn ngày lớn hơn ngày hiện tại");
+							$("#messageModal").modal('show');
+							return;
+						}
+					}
 					console.log(data)
 					$.ajax({
 						type : "POST",

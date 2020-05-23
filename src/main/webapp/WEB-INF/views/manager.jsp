@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Roboto&display=swap" rel="stylesheet">
+<title>Quản lý thông tin</title>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/bootstrap.min.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery-ui.css" />'>
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery.timepicker.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/sign-in&register.css" />'>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/manager.css" />">
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery-ui.min.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/jquery.timepicker.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/manager.js" />'></script>
 </head>
@@ -212,10 +213,10 @@
 											</div>
 										</div>
 										<div class="bandat-pay">
-											<div class="daHuy">Đã hủy</div>
-											<div class="chuaThanhToan">Chưa thanh toán</div>
+											<div class="daHuy"><span class="bg-danger rounded">Đã hủy</span></div>
+											<div class="chuaThanhToan"><span class="bg-info rounded">Chưa thanh toán</span></div>
 											<div class="daThanhToan">
-												Đã thanh toán
+												<span class="bg-success rounded">Đã thanh toán</span>
 												<div class="chiTietThanhToan">
 												    <div class="ngayThanhToan">Ngày thanh toán: <span>May 19, 2020, 12:00:00 PM</span></div>
 												</div>
@@ -284,17 +285,17 @@
                                <button type="button" class="btn btn-warning huyban">Hủy</button>
                            </div>
                            <div>
-                            <input type="time" class="gioPhucVu" value="12:00">
-                            <input type="text" class="itemCartNgayPhucVu form-control">
+                            <input type="text" class="form-control mr-5 gioPhucVu" value="12:00">
+                            <input type="text" class="form-control itemCartNgayPhucVu form-control">
                             <button type="button" class="btn btn-secondary btn-sm btn-tooltip">Gợi ý</button>
                           </div>
                        </div>
                        <div class="col-md-9 item-cart-right">
                             <div class="row info-banan">
-                                <h3 class="heading"><span>A1-01</span></h3>
+                                <h3 class="heading">Bàn ăn <span>A1-01</span></h3>
                                 <p class="moTa">Quý khách nên đặt chỗ trước từ 60 phút để được hỗ trợ tốt nhất.Bàn đặt của Quý khách được giữ tối đa 15 phút.</p>
-                                <p class="soGhe"><span>2</span></p>
-                                <div class="phuGia">giá <span>50,000</span> Đ</div>
+                                <p class="soGhe">Số ghế: <span>2</span></p>
+                                <div class="phuGia">Phụ giá: <span>50,000</span> Đ</div>
                             </div>
                             <div class="row dansach-monan">
                                 

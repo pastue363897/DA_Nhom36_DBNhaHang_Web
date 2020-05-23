@@ -9,13 +9,16 @@
                     style="background-image: url('<c:url value="/resources/images/about-2.jpg" />');"></div>
                 <div class="text col-lg-6 ftco-animate">
                     <div class="text-inner align-self-start">
-                        <span class="subheading">About VietFood</span>
-                        <h3 class="heading">Our chef cooks the most delicious food for you</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-                            blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                        <span class="subheading">Giới thiệu về VietFood</span>
+                        <h3 class="heading">Đầu bếp của chúng tôi nấu những món ăn ngon nhất cho bạn</h3>
+                        <p>Bạn tìm kiếm một không gian lịch sự để tiếp khách, một không gian ấm áp cho gia đình ? 
+                        Bạn cũng muốn thưởng thức những món ăn ngon miệng, đủ dinh dưỡng và “mãn nhãn”? 
+                        Vậy thì những món ăn đến từ nhà hàng VietFood có thể là gợi ý phù hợp với bạn đó!</p>
+                        
+                        <p>Những món ăn của VietFood được làm ra từ bàn tay của những đầu bếp chuyên nghiệp, yêu nghề, luôn tận tâm trong từng món ăn mà họ tạo ra nhằm đem lại những bữa ăn ngon cho khách hàng.</p>
 
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a
-                            paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <p>Nhà hàng sở hữu những món ăn phong phú với nhiều món ăn nổi tiếng gắn liền với Việt Nam như: Phở, Bún chả, Bánh mì, Bánh xèo, Mì quảng... với điểm nhấn là nguồn nguyên liệu tươi ngon, cách trình bày đẹp mắt. 
+                        VietFood phục vụ theo hình thức đặt món trực tiếp tại quầy thu ngân hoặc chọn món đặt bàn tự chọn trên website giúp khách hàng có những lựa chọn trong đặt bàn.</p>
                     </div>
                 </div>
             </div>

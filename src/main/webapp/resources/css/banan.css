@@ -4,3 +4,8 @@
 .container-search-table > div:first-child {
     height: 145px;
 }
+@media ( max-width : 992px) {
+	.container-search-table > div:first-child {
+	   height: 0;
+	}
+}

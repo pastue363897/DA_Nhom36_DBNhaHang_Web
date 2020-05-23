@@ -22,7 +22,7 @@
 							</div>
 
 							<div class="one-third">
-                                <input type="number" id="soNguoiBA" name="soNguoiBA" class="form-control" placeholder="Số lượng người">
+                                <input type="text" id="soNguoiBA" name="soNguoiBA" class="form-control" placeholder="Số lượng người">
                             </div>
 						</div>
 						<input type="submit" id="search-table" class="search-submit btn btn-primary" value="Tìm bàn">

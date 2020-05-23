@@ -24,7 +24,7 @@ public class ManagerBanAnService {
     return managerBanAnDao.getBanAn(idBA);
   }
   public List<BanAn> danhSachBanAnHome() {
-    int count = Integer.parseInt("4");
+    int count = Integer.parseInt("10");
     return managerBanAnDao.getDanhSachBanAnHome(count);
   }
   public List<BanAn> danhSachBanAn() {

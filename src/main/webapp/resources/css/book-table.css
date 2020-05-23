@@ -26,3 +26,16 @@ form .search-submit {
     background-color: #ffb400;
     border-color: #fff;
 }
+@media ( max-width : 992px) {
+    form .fields .one-third {
+        width: 100%;
+    }
+    .reservation {
+        margin-top: 0;
+    }
+    .search-submit {
+        margin-left: calc(50% - 60px) !important;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}

@@ -3,6 +3,11 @@
 	color: #404044;
 	line-height: 1.8;
 }
+.about-chef .img {
+	min-height: 50vh;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 .ftco-section-2 .section-2-blocks-wrapper .text {
 	position: relative;
 	z-index: -1;
@@ -16,7 +21,7 @@
 .img, .chef-img, .insta-img, .menu-img, .user-img {
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: top center !important;
 }
 .ftco-section-2 .section-2-blocks-wrapper .subheading {
     font-size: 12px;

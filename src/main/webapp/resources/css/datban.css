@@ -72,3 +72,9 @@
 .cancel:hover {
     cursor: pointer;
 }
+.action{
+	margin: 20px 20px;
+}
+.action *{
+    margin-bottom: 10px;
+}

@@ -8,7 +8,14 @@ $(document).ready(function() {
 		var itemMa = $(this).children(".maMA").val();
 		if (listMaMAItemSelect.has(itemMa)) {
 			var item = $(listMaMAItemSelect.get(itemMa)).find(".itemCount");
-			$(item).val(parseInt($(item).val()) + 1);
+			var count = parseInt($(item).val()) + 1;
+			if (count >= 30) {
+				$("#messageModalLabel").text("Chọn món");
+				$("#messageModelBody").text("Số lượng chọn không được vượt quá 29, hãy kiểm tra lại");
+				$("#messageModal").modal('show');
+			} else {
+				$(item).val(count);
+			}
 			return;
 		}
 		var itemImg = $(this).children(".menu-img").css("background-image").split(window.location.origin)[1].slice(0, -2);
@@ -26,33 +33,79 @@ $(document).ready(function() {
 		cancel.click(function (){
 			node.remove();
 		});
-		console.log(img)
-		console.log(itemImg)
 		content.append(contentLeft, contentRight);
 		node.append(maMA, img, content, cancel);
 		
-		/*$("#foods-select > .row").append('<div class="col-12 d-flex item-food-select"><div class="img item-img" style="background-image: url("\/nhom36\/data\/images\/mon-an\/food-view.png");"></div><div class="text-info d-flex"><div class="item-info-left"><h5>Com</h5> </div><div class="item-info-right"><span>Số lượng: <input type="text" value="1"></span><span class="price"><fmt:formatNumber pattern="#,###">120000</fmt:formatNumber><span> Đ</span></span></div></div></div></div>')*/
 		$("#foods-select > .row").append(node);
+		$(".itemCount").on("keydown", function(e) {
+			if(!((e.keyCode > 95 && e.keyCode < 106)
+		      || (e.keyCode > 47 && e.keyCode < 58) 
+		      || e.keyCode == 8)) {
+		        return false;
+		    }
+			if (parseInt($(this).val()) > 2
+					&& e.keyCode !== 46 // keycode for delete
+			        && e.keyCode !== 8 // keycode for backspace
+			        ){
+				return false;
+			}
+		});
 	});
 	$("#btn-datban").on("click", function() {
 		var $this = $("#foods-select > .row").children();
 		var dataMonAn = [];
 		var monAn;
+		$("#messageModalLabel").text("Đặt bàn");
 		for (i of $this){
 			monAn = {}
 			monAn.maMA = $(i).children(".itemSelectMaMA").val();
 			monAn.soLuong = parseInt($(i).find(".itemCount").val());
+			if (isNaN(monAn.soLuong) || monAn.soLuong <= 0 || monAn.soLuong >= 30) {
+				$("#messageModelBody").text("Số lượng của một món phải lớn hơn 0 và nhỏ hơn 30, hãy kiểm tra lại");
+				$("#messageModal").modal('show');
+				return;
+			}
 			dataMonAn.push(monAn);
+		}
+		if (dataMonAn.length == 0) {
+			$("#messageModelBody").text("Chưa chọn món ăn");
+			$("#messageModal").modal('show');
+			return;
 		}
 		var data = {};
 		var maBA = $("#maBA").val();
+		if (maBA == null || !maBA.match(/^(BA)\d{6}$/)){
+			$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+			$("#messageModal").modal('show');
+			return;
+		}
 		var ngayDat = new Date().toLocaleString('en-GB').replace(",", "");
-		var ngayPhucVu = $("#ngayPhucVu").val() + " " + $("#gioPhucVu").val() + ":00";
+		var gioPhucVu = $("#gioPhucVu").val();
+		if (gioPhucVu == null || gioPhucVu == '' || !gioPhucVu.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/)) {
+			$("#messageModelBody").text("Chưa chọn giờ hoặc giờ không đúng, hãy chọn lại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		var ngayPhucVu = $("#ngayPhucVu").val()
+		if (ngayPhucVu == null || !ngayPhucVu.match(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{1,4}$/)){
+			$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		var ngay = ngayPhucVu.split("/");
+		ngay = ngay[2] + "-" + ngay[1] + "-" + ngay[0];
+		var date = new Date(ngay + " 00:00:00").getTime();
+		
+		if (isNaN(date) || date <= new Date(new Date().toDateString()).getTime()) {
+			$("#messageModelBody").text("Ngày không hợp lệ, hãy chọn ngày lớn hơn ngày hiện tại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		ngayPhucVu += " " + gioPhucVu;
 		data.maBA = maBA;
 		data.dsMonAn = dataMonAn;
 		data.ngayDat = ngayDat;
 		data.ngayPhucVu = ngayPhucVu;
-		console.log(JSON.stringify(data, null, 4));
 		$.ajax({
 			type : "POST",
 			accept : "application/json",
@@ -78,7 +131,9 @@ $(document).ready(function() {
 				} else {
 					$("#messageModelBody").text("Đặt bàn thành công");
 					$("#messageModal").modal('show');
-					window.location.href = 'home';
+					$('#messageModal').on('hidden.bs.modal', function () {
+						window.location.href = 'home';
+		            });
 					return;
 				}
 				$("#messageModal").modal('show');
@@ -104,25 +159,62 @@ $(document).ready(function() {
 		var $this = $("#foods-select > .row").children();
 		var dataMonAn = [];
 		var monAn;
+		$("#messageModalLabel").text("Thêm bàn đặt vào giỏ hàng");
 		for (i of $this){
 			monAn = {}
 			monAn.maMA = $(i).children(".itemSelectMaMA").val();
 			monAn.tenMA = $(i).find(".text-info > .item-info-left > h5").text();
 			monAn.hinhAnh = $(i).children(".item-img").css("background-image").split(window.location.origin)[1].slice(0, -2);
 			monAn.soLuong = parseInt($(i).find(".itemCount").val());
+			if (isNaN(monAn.soLuong) || monAn.soLuong <= 0 || monAn.soLuong >= 30) {
+				$("#messageModelBody").text("Số lượng của một món phải lớn hơn 0 và nhỏ hơn 30, hãy kiểm tra lại");
+				$("#messageModal").modal('show');
+				return;
+			}
 			monAn.giaTien = parseInt($(i).find(".price").text().replace(/\D/g, ''));
 			dataMonAn.push(monAn);
+		}
+		if (dataMonAn.length == 0) {
+			$("#messageModelBody").text("Chưa chọn món ăn");
+			$("#messageModal").modal('show');
+			return;
 		}
 		var data = {};
 		var banAn = {};
 		banAn.maBA = $("#maBA").val();
+		if (banAn.maBA == null || !banAn.maBA.match(/^(BA)\d{6}$/)){
+			$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+			$("#messageModal").modal('show');
+			return;
+		}
 		banAn.kySoBA = $("#kySoBA").text();
 		banAn.moTaBA = $("#moTaBA").text();
 		banAn.hinhAnhBA = $("#hinhAnhBA").css("background-image").split(window.location.origin)[1].slice(0, -2);
 		banAn.soGhe = parseInt($("#soGhe").text().trim());
 		banAn.phuGia = parseInt($("#phuGia").text().trim().replace(/,/g, ''));;
 		var ngayDat = new Date().toLocaleString('en-GB').replace(",", "");
-		var ngayPhucVu = $("#ngayPhucVu").val() + " " + $("#gioPhucVu").val() + ":00";
+		var gioPhucVu = $("#gioPhucVu").val();
+		if (gioPhucVu == null || gioPhucVu == '' || !gioPhucVu.match(/^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/)) {
+			$("#messageModelBody").text("Chưa chọn giờ hoặc giờ không đúng, hãy chọn lại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		var ngayPhucVu = $("#ngayPhucVu").val()
+		if (ngayPhucVu == null || !ngayPhucVu.match(/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{1,4}$/)){
+			$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		var ngay = ngayPhucVu.split("/");
+		ngay = ngay[2] + "-" + ngay[1] + "-" + ngay[0];
+		var date = new Date(ngay + " 00:00:00").getTime();
+		
+		if (isNaN(date) || date <= new Date(new Date().toDateString()).getTime()) {
+			$("#messageModelBody").text("Ngày không hợp lệ, hãy chọn ngày lớn hơn ngày hiện tại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		ngayPhucVu += " " + gioPhucVu;
 		data.banAn = banAn;
 		data.dsMonAn = dataMonAn;
 		data.ngayDat = ngayDat;
@@ -139,7 +231,13 @@ $(document).ready(function() {
 			success : function(data) {
 				console.log("SUCCESS: ", data);
 				if (data != null && data != false) {
-					window.location.href = 'banan';
+					$("#messageModalLabel").text("Thêm bàn đặt vào giỏ hàng");
+					$("#messageModelBody").text("Đã thêm bàn đặt vào giỏ hàng");
+					$("#messageModal").modal('show');
+					$('#messageModal').on('hidden.bs.modal', function () { 
+						window.location.href = 'banan';
+					});
+					
 				} else {
 					$("#messageModalLabel").text("Thêm bàn đặt vào giỏ hàng");
 					$("#messageModelBody").text("Có sự cố trong xác định thông tin bàn đặt, hãy thử lại");
@@ -169,6 +267,26 @@ $(document).ready(function() {
 		var data = {};
 		data.maBA = maBA;
 		data.ngayPhucVu = ngayPhucVu[2] + "-" + ngayPhucVu[1] + "-" + ngayPhucVu[0];
+		var result = true;
+		$("#messageModalLabel").text("Thông tin giờ bàn ăn còn trống có thể đặt");
+		if (data.maBA == null || !data.maBA.match(/^(BA)\d{6}$/)){
+			$("#messageModelBody").text("Không xác định được thông tin bàn ăn hãy thử lại");
+			$("#messageModal").modal('show');
+			return;
+		}
+		if (data.ngayPhucVu == null || !data.ngayPhucVu.match(/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/)){
+			$("#messageModelBody").text("Ngày chưa chọn, hoặc không xác định hãy chọn lại");
+			$("#messageModal").modal('show');
+			return;
+		} else {
+			var date = new Date(data.ngayPhucVu + " 00:00:00").getTime();
+			
+			if (isNaN(date) || date <= new Date(new Date().toDateString()).getTime()) {
+				$("#messageModelBody").text("Ngày không hợp lệ, hãy chọn ngày lớn hơn ngày hiện tại");
+				$("#messageModal").modal('show');
+				return;
+			}
+		}
 		console.log(data)
 		$.ajax({
 			type : "POST",
