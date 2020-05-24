@@ -36,16 +36,14 @@ public class RegisterController {
     return "register";
   }
   @RequestMapping(value = "register", method = RequestMethod.POST)
-  public String requestRegister(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, @ModelAttribute("customer") @Valid CustomerModel customer, BindingResult customerBind) {
-    System.out.println(account);
-    System.out.println(customer);
+  public String requestRegister(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, @ModelAttribute("customer") @Valid CustomerModel customer, BindingResult customerBind, Model model) {
     if (accountBind.hasErrors() || customerBind.hasErrors()) {
-      System.out.println("error");
       return "register";
     }
     if (managerUserService.register(account, customer)) {
       return "redirect:sign-in";
     }
+    model.addAttribute("existAccount", "exist");
     return "register";
   }
 }

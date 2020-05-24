@@ -37,18 +37,16 @@ public class SignInController {
   
   @RequestMapping(value = "sign-in", method = RequestMethod.POST)
   public String signIn(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, HttpSession session, Model model) {
-      System.out.println(account.getUsername());
       if (accountBind.hasErrors()) {
         return "sign-in";
       }
       CustomerModel customer = managerUserService.login(account);
-      System.out.println(customer);
       if (customer != null) {
         session.setAttribute("account", account);
         session.setAttribute("customer", customer);
         return "redirect:/";
       }
-      model.addAttribute("username", account.getUsername());
+      model.addAttribute("existAccount", "exist");
       return "sign-in";
   }
 }

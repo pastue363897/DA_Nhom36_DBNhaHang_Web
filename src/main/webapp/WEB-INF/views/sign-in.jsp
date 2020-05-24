@@ -25,7 +25,7 @@
 						<form:form action="sign-in" id="loginForm" method="post" role="form" modelAttribute="account">
 							<fieldset>
 								<div class="form-group">
-								    <c:if test="${username != null }">
+								    <c:if test="${existAccount != null }">
 								        <p style="color:red">Thông tin đăng nhập không chính xác</p>
 								    </c:if>
 									<label for="Email">Username</label>

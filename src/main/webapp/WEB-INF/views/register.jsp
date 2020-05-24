@@ -25,6 +25,9 @@
 					<div class="card-body">
 						<form action="register" id="registerForm" method="post" role="form" novalidate="novalidate">
 							<fieldset class="infor-account">
+							    <c:if test="${existAccount != null }">
+                                    <p style="color:red">Đã tồn tại user</p>
+                                </c:if>
 								<legend>Thông tin tài khoản</legend>
 								<div class="form-group">
 									<label for="username">Username</label> 
@@ -38,7 +41,7 @@
 										</div>
 										<spring:bind path="account.username">
 											<input class="form-control" id="username" name="username" placeholder="Nhập username bao gồm 8 ký tự"
-												type="text" value="">
+												type="text" value="${account.username }">
 										</spring:bind>
 									</div>
 								</div>
@@ -54,7 +57,7 @@
 										</div>
 										<spring:bind path="account.password">
 											<input class="form-control" id="password" name="password" placeholder="Nhập mật khẩu bao gồm 8 ký tự"
-												type="password">
+												type="password" value="${account.password }">
 										</spring:bind>
 									</div>
 								</div>
@@ -68,7 +71,7 @@
 											</span>
 										</div>
 										<input class="form-control" data-val="true" id="ConfirmPassword" name="ConfirmPassword"
-											placeholder="Xác nhận mật khẩu" type="password">
+											placeholder="Xác nhận mật khẩu" type="password" value="${account.password }">
 									</div>
 								</div>
 								<div class="form-group">
@@ -95,8 +98,8 @@
 											</span>
 										</div>
 										<spring:bind path="customer.hoTen">
-											<input class="form-control" id="hoTen" name="hoTen" placeholder="Nhập họ tên bao gồm 8 ký tự" type="text"
-												value="">
+											<input class="form-control" id="hoTen" name="hoTen" placeholder="Nhập họ tên" type="text"
+												value="${customer.hoTen }">
 										</spring:bind>
 									</div>
 								</div>
@@ -111,7 +114,8 @@
 											</span>
 										</div>
 										<spring:bind path="customer.diaChi">
-											<input class="form-control" id="diaChi" name="diaChi" placeholder="Nhập địa chỉ" type="text" value="">
+											<input class="form-control" id="diaChi" name="diaChi" placeholder="Nhập địa chỉ" type="text" 
+											     value="${customer.diaChi }">
 										</spring:bind>
 									</div>
 								</div>
@@ -126,7 +130,8 @@
 											</span>
 										</div>
 										<spring:bind path="customer.cmnd">
-											<input class="form-control" id="cmnd" name="cmnd" placeholder="Nhập chứng minh nhân dân" type="text" value="">
+											<input class="form-control" id="cmnd" name="cmnd" placeholder="Nhập chứng minh nhân dân" type="text" 
+											       value="${customer.cmnd }">
 										</spring:bind>
 									</div>
 								</div>
@@ -141,7 +146,8 @@
 											</span>
 										</div>
 										<spring:bind path="customer.sdt">
-											<input class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" type="text" value="">
+											<input class="form-control" id="sdt" name="sdt" placeholder="Nhập số điện thoại" type="text" 
+											     value="${customer.sdt }">
 										</spring:bind>
 									</div>
 								</div>
@@ -156,7 +162,8 @@
 											</span>
 										</div>
 										<spring:bind path="customer.email">
-											<input class="form-control" id="email" name="email" placeholder="Nhập email" type="text" value="">
+											<input class="form-control" id="email" name="email" placeholder="Nhập email" type="text" 
+											     value="${customer.email }">
 										</spring:bind>
 									</div>
 								</div>
