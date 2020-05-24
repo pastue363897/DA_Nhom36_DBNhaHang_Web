@@ -200,6 +200,9 @@ fieldset {
 	display: inline-block;
 	margin: 0 5px;
 }
+.item-cart-right .info-banan {
+	margin-bottom: 10px;
+}
 .soGhe {
 	margin-right: 20px;
 }

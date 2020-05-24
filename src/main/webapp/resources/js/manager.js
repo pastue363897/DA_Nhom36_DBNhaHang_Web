@@ -120,7 +120,7 @@ $(document).ready(function() {
 					item.find(".item-cart-right > .info-banan > .heading > span").text(i.banAn.kySoBA);
 					item.find(".item-cart-right > .info-banan > .moTa").text(i.banAn.moTaBA);
 					item.find(".item-cart-right > .info-banan > .soGhe > span").text(i.banAn.soGhe);
-					item.find(".item-cart-right > .info-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
+					item.find(".item-cart-right > .info-banan .phuGia > span").text((i.banAn.phuGia).toLocaleString());
 					$(dsMonAn).empty();
 					for (j of i.dsMonAn) {
 						monAn.find(".item-food > input").val(j.maMA);
@@ -130,6 +130,7 @@ $(document).ready(function() {
 						monAn.find(".item-food > .info-monan > .item-info .price").text((j.giaTien).toLocaleString());
 						$(dsMonAn).append($(monAn).clone());
 					}
+					tongTienItemCart(item);
 					$(content).append($(item).clone());
 				}
 				$(".itemCartNgayPhucVu").datepicker({
@@ -155,8 +156,20 @@ $(document).ready(function() {
 							&& e.keyCode !== 46 // keycode for delete
 					        && e.keyCode !== 8 // keycode for backspace
 					        ){
+						$("#messageModalLabel").text("Số lượng của món ăn");
+						$("#messageModelBody").text("Số lượng của một món phải lớn hơn 0 và nhỏ hơn 30");
+						$("#messageModal").modal('show');
 						return false;
 					}
+				});
+				$(".itemCount").on("keyup", function() {
+					var monan = $(this).parent("span").parent("div").parent(".item-info").parent(".info-monan").parent(".item-food").parent(".item-food-select");
+					var dsmonan = $(monan).parent(".dansach-monan");
+					var bandat =  $(dsmonan).parent(".item-cart-right").parent(".item-cart-bandat");
+					console.log(monan)
+					console.log(dsmonan)
+					console.log(bandat)
+					tongTienItemCart(bandat);
 				});
 				$(".datban").on("click", function() {
 					var bandat = $(this).parent(".group-button").parent(".item-cart-left").parent(".item-cart-bandat");
@@ -293,9 +306,11 @@ $(document).ready(function() {
 					var monan = $(this).parent(".item-food").parent(".item-food-select");
 					var dsmonan = $(monan).parent(".dansach-monan");
 					monan.remove();
+					var bandat =  $(dsmonan).parent(".item-cart-right").parent(".item-cart-bandat");
 					if ($(dsmonan).children().length <= 0) {
-						var bandat =  $(dsmonan).parent(".item-cart-right").parent(".item-cart-bandat");
 						$(bandat).find(".huyban").click();
+					} else {
+						tongTienItemCart(bandat);
 					}
 				});
 				$(".btn-tooltip").on("click", function() {
@@ -556,5 +571,30 @@ $(document).ready(function() {
 	function activeManager(typeManager) {
 		$(".manger > li").removeClass();
 		$(typeManager).addClass("manager-active");
+	}
+	function tongTienItemCart(itemCart) {
+		var $this = $(itemCart).find(".item-cart-right > .dansach-monan").children();
+		var dataMonAn = [];
+		var tong = 0;
+		for (i of $this){
+			soLuong = parseInt($(i).find(".itemCount").val());
+			giaTien = parseInt($(i).find(".price").text().replace(/\D/g, ''));
+			giaTien *= soLuong;
+			if (!isNaN(giaTien)){
+				tong += giaTien;
+			}
+		}
+		var tongTienMonAn = $(itemCart).find(".item-cart-right > .info-banan .tongTienMonAn");
+		var tongTien = $(itemCart).find(".item-cart-right > .info-banan .tongTien");
+		if (tong > 0) {
+			$(tongTienMonAn).text((tong).toLocaleString());
+			tong += parseInt($(itemCart).find(".item-cart-right > .info-banan .phuGia > span").text().trim().replace(/,/g, ''));
+			$(tongTien).text((tong).toLocaleString());
+			$(itemCart).find(".item-cart-right > .info-banan .ttma").show();
+			$(itemCart).find(".item-cart-right > .info-banan .tt").show();
+		} else {
+			$(itemCart).find(".item-cart-right > .info-banan .ttma").hide();
+			$(itemCart).find(".item-cart-right > .info-banan .tt").hide();
+		}
 	}
 });

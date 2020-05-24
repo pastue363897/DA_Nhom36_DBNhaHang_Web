@@ -295,7 +295,18 @@
                                 <h3 class="heading">Bàn ăn <span>A1-01</span></h3>
                                 <p class="moTa">Quý khách nên đặt chỗ trước từ 60 phút để được hỗ trợ tốt nhất.Bàn đặt của Quý khách được giữ tối đa 15 phút.</p>
                                 <p class="soGhe">Số ghế: <span>2</span></p>
-                                <div class="phuGia">Phụ giá: <span>50,000</span> Đ</div>
+                                <div>
+                                    <div class="phuGia">Phụ giá: <span>50,000</span> Đ</div>
+	                                <div class="price ttma" >
+	                                    Tổng tiền món ăn: 
+	                                    <span class="tongTienMonAn">0</span> Đ
+	                                </div>
+	                                <div class="price tt" >
+	                                    <hr style="margin: 0;">
+	                                    Tổng tiền: 
+	                                    <span class="tongTien">0</span> Đ
+	                                </div>
+                                </div>
                             </div>
                             <div class="row dansach-monan">
                                 

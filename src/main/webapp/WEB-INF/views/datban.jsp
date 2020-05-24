@@ -39,9 +39,18 @@
 						<p id="moTaBA">${banAn.motaBA }</p>
 						<p>Số ghế: <span id="soGhe" >${banAn.soLuongGhe }</span></p>
 						<div class="price">
-							Phụ giá:
+							Phụ giá: 
 							<span id="phuGia"><fmt:formatNumber pattern="#,###">${banAn.phuGia }</fmt:formatNumber></span> Đ
 						</div>
+						<div id="ttma" class="price" style="display: none;">
+                            Tổng tiền món ăn: 
+                            <span id="tongTienMonAn">0</span> Đ
+                        </div>
+                        <div id="tt" class="price" style="display: none;">
+                            <hr>
+                            Tổng tiền: 
+                            <span id="tongTien">0</span> Đ
+                        </div>
 					</div>
 					<div class="align-item-center justify-content-center action">
                       <button type="button" id="btn-datban" class="btn-danger">Đặt bàn</button>
