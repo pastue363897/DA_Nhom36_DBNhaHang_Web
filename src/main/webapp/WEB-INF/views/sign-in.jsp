@@ -25,6 +25,9 @@
 						<form:form action="sign-in" id="loginForm" method="post" role="form" modelAttribute="account">
 							<fieldset>
 								<div class="form-group">
+								    <c:if test="${username != null }">
+								        <p style="color:red">Thông tin đăng nhập không chính xác</p>
+								    </c:if>
 									<label for="Email">Username</label>
 									<p class="error"><form:errors path="username" ></form:errors></p>
 									<p id="error-username" class="error" style="display: none;">* Vui lòng nhập username có độ dài từ 3-20 ký tự bắt đầu là chữ cái</p>

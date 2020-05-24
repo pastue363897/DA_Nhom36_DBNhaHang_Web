@@ -36,7 +36,7 @@ public class SignInController {
   }
   
   @RequestMapping(value = "sign-in", method = RequestMethod.POST)
-  public String signIn(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, HttpSession session) {
+  public String signIn(@ModelAttribute("account") @Valid AccountModel account, BindingResult accountBind, HttpSession session, Model model) {
       System.out.println(account.getUsername());
       if (accountBind.hasErrors()) {
         return "sign-in";
@@ -48,6 +48,7 @@ public class SignInController {
         session.setAttribute("customer", customer);
         return "redirect:/";
       }
+      model.addAttribute("username", account.getUsername());
       return "sign-in";
   }
 }
