@@ -448,7 +448,7 @@ $(document).ready(function() {
 								return;
 							}
 						} else {
-							$("#messageModelBody").text("Hệ thống đang gặp sự cố, hãy thử lại sau");
+							$("#messageModelBody").text("Đã tồn tại usename");
 						}
 					}  else {
 						$("#messageModelBody").text("Chưa đăng nhập, hãy đăng nhập vào hệ thống với tài khoản của bạn");
