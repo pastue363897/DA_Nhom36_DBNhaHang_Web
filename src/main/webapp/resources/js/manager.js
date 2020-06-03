@@ -363,7 +363,7 @@ $(document).ready(function() {
 										s = new Date(start);
 										e = new Date(data[start]);
 										tooltip += "<li><span class='time'>" + s.toLocaleTimeString("es-GB") + " - " + e.toLocaleTimeString("es-GB") + "</span>" +
-												" có thể chọn tối đa " + (parseInt(((e.getHours() * 60 + e.getMinutes()) - (s.getHours() * 60 + s.getMinutes())) / 10) - 2) + " món </li>";
+												" có thể chọn tối đa " + (parseInt(((e.getHours() * 60 + e.getMinutes()) - (s.getHours() * 60 + s.getMinutes())) / 15)) + " món </li>";
 									}
 									tooltip += "</ul>";
 									console.log(tooltip)

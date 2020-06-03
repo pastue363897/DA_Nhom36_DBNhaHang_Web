@@ -57,20 +57,19 @@ public class ManagerBanDatDao {
       int len = start.length - 1;
       Timestamp s = new Timestamp(date.getYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
       boolean c = start[0].after(s);
-      boolean h = thoiGianDaDat.get(start[len]).before(new Timestamp(date.getYear(), date.getMonth(), date.getDate(), 23, 30, 0, 0));
+      boolean h = thoiGianDaDat.get(start[len]).before(new Timestamp(date.getYear(), date.getMonth(), date.getDate(), 23, 5, 0, 0));
       if (c == true || h == true) {
         if (c == true) {
-          thoiGianTrong.put(s, new Timestamp(start[0].getTime() + (29 * 60 * 1000)));
+          thoiGianTrong.put(s, new Timestamp(start[0].getTime()));
         }
-        for(int i = 1; i < len; i++) {
+        for(int i = 0; i < len; i++) {
           s = thoiGianDaDat.get(start[i]);
-          System.out.println(start[i] + " - " + new Timestamp(s.getTime() + (29 * 60 * 1000)));
           if (s.before(start[i + 1])) {
-            thoiGianTrong.put(new Timestamp(s.getTime() + (60 * 1000)), new Timestamp(start[i + 1].getTime() + (29 * 60 * 1000)));
+            thoiGianTrong.put(new Timestamp(s.getTime() + (60 * 1000)), new Timestamp(start[i + 1].getTime()));
           }
         }
         if (h == true) {
-          thoiGianTrong.put(new Timestamp(thoiGianDaDat.get(start[len]).getTime() + (60 * 1000)), new Timestamp(date.getYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999999999));
+          thoiGianTrong.put(new Timestamp(thoiGianDaDat.get(start[len]).getTime() + (60 * 1000)), new Timestamp(date.getYear(), date.getMonth(), date.getDate(), 23, 5, 0, 0));
         }
       }
     }
