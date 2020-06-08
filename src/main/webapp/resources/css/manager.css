@@ -66,13 +66,14 @@ html, body {
 	transition-property: background;
 }
 
-.sidebar ul li:hover {
+.sidebar ul li:hover:not(.manager-active) {
 	padding-left: 45px;
 	background: rgba(255, 191, 0, 0.8);
 	cursor: pointer;
 }
 
 .manager-active {
+	pointer-events: none;
 	background: rgba(146, 219, 222, 1);
 }
 
