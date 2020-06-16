@@ -56,11 +56,13 @@ public class DatBanController {
       model.addAttribute("messageError", "Không xác nhận được yêu cầu đặt bàn ăn, hãy thử lại");
       return "forward:error";
     }
-    List<MonAn> danhSachMonAn = managerMonAnService.danhSachMonAn();
+    int pagecount = managerMonAnService.soPageMonAn();
+    List<MonAn> danhSachMonAn = managerMonAnService.danhSachMonAn(0);
     BanAn b = managerBanAnService.layThongTinBanAn(maBA);
     
     model.addAttribute("dsMonAn", danhSachMonAn);
     model.addAttribute("banAn", b);
+    model.addAttribute("pagecount", pagecount);
     return "datban";
   }
   

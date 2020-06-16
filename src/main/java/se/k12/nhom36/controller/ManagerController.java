@@ -5,10 +5,12 @@
 
 package se.k12.nhom36.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import entites.HoaDonBanDat;
+import enums.ETinhTrangHoaDon;
 import se.k12.nhom36.model.AccountModel;
 import se.k12.nhom36.model.CustomerModel;
 import se.k12.nhom36.model.ItemCartBanDat;
@@ -152,7 +156,13 @@ public class ManagerController {
     return gson.toJson(message);
   }
   @RequestMapping(value = "danhsach-bandat", method = RequestMethod.POST)
-  public @ResponseBody String danhSachTTBanDat(HttpSession session) {
+  public @ResponseBody String danhSachTTBanDat(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "ngayPhucVu", required = false) Date ngayPhucVu,
+                                                  @RequestParam(name = "tt", required = false) ETinhTrangHoaDon tt, HttpSession session) {
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
     Map<String, Object> message = new HashMap<String, Object>();
     boolean result = false;
     List<TTBanDatViewModel> dsBD = null;
@@ -162,7 +172,9 @@ public class ManagerController {
       if (o != null) {
         result = true;
         CustomerModel customer = (CustomerModel) session.getAttribute("customer");
-        dsBD = managerBanDatService.getDSBanDatKH(customer.getMaKH());
+        AtomicInteger pagecount = new AtomicInteger(0);
+        dsBD = managerBanDatService.getDSBanDatKH(pagecount, customer.getMaKH(), ngayPhucVu, tt, page);
+        message.put("pagecount", pagecount.get());
       }
     }
     message.put("result", result);
@@ -177,13 +189,36 @@ public class ManagerController {
 //    return gson.toJson(ttBD);
 //  }
   @RequestMapping(value = "shopping-cart")
-  public @ResponseBody String shoppingCart(HttpSession session) {
+  public @ResponseBody String shoppingCart(@RequestParam(name = "page", defaultValue = "0") int page, HttpSession session) {
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
     Object obj = session.getAttribute("cart");
+    Map<String, Object> result = new HashMap<String, Object>();
     List<ItemCartBanDat> cart = null;
     if (obj != null) {
       cart = (List<ItemCartBanDat>) obj;
+      int pagecount = cart.size() / 20;
+      if (cart.size() % 2 != 0) {
+        pagecount++;
+      }
+      result.put("pagecount", pagecount);
+      if (pagecount >=2) {
+        List<ItemCartBanDat> pageCart = new ArrayList<ItemCartBanDat>();
+        for (int i = page * 20; i < cart.size(); i++) {
+          pageCart.add(cart.get(i));
+          if (pageCart.size() == 20) {
+            break;
+          }
+        }
+        result.put("data", pageCart);
+      } else {
+        result.put("data", cart);
+      }
     }
     Gson gson = new Gson();
-    return gson.toJson(cart);
+    return gson.toJson(result);
   }
 }

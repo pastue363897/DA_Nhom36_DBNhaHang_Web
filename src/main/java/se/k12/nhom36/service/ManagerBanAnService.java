@@ -6,6 +6,7 @@
 package se.k12.nhom36.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +28,26 @@ public class ManagerBanAnService {
     int count = Integer.parseInt("10");
     return managerBanAnDao.getDanhSachBanAnHome(count);
   }
-  public List<BanAn> danhSachBanAn() {
-    return managerBanAnDao.getDanhSachBanAn();
+  public int soPageBanAn() {
+    int page = managerBanAnDao.getSoBanAn() / 20;
+    return managerBanAnDao.getSoBanAn() % 20 == 0 ? page : page + 1;
   }
-  public List<BanAn> timDanhSachBanAn(String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong) {
-    return managerBanAnDao.searchDanhSachBanAn(moTaBA, gio, ngayPhucVu, soLuong);
+  public List<BanAn> danhSachBanAn(int page) {
+    return managerBanAnDao.getDanhSachBanAn(page);
+  }
+  public int timDanhSachBanAn(List<BanAn> output, String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong, int page) {
+    List<BanAn> ds = managerBanAnDao.searchDanhSachBanAn(moTaBA, gio, ngayPhucVu, soLuong);
+    if (ds == null) {
+      return 1;
+    }
+    for (int i = page * 20; i < ds.size(); i++) {
+      output.add(ds.get(i));
+      if (output.size() == 20) {
+        break;
+      }
+    }
+    page = ds.size() / 20;
+    return ds.size() % 20 == 0 ? page : page + 1;
   }
   
 }

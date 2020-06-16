@@ -10,11 +10,13 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/jquery.timepicker.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/sign-in&register.css" />'>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/manager.css" />">
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/pagination.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery-ui.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.timepicker.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/manager.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/pagination.js" />'></script>
 </head>
 <body>
 	<input type="checkbox" id="side-check">
@@ -186,6 +188,16 @@
 			</div>
 			<div class="row">
 				<div id="manager-bill-content" class="col-12 manager-content">
+				    <div id="search-bandat">
+	                    <input type="text" id="ngayPhucVuBA" name="ngayPhucVuBA" class="form-control" data-value="" placeholder="Ngày phục vụ">
+	                    <select id="tinhTrangBanDat" name="tinhTrangBanDat" class="form-control" data-value="">
+	                         <option selected="selected" value="">Tình trạng</option>
+	                         <option value="DaThanhToan">Đã thanh toán</option>
+	                         <option value="ChuaThanhToan">Chưa thanh toán</option>
+	                         <option value="DaHuy">Đã hủy</option>
+	                    </select>
+	                    <button type="button" id="timKiemBanDat" class="btn btn-primary">Tìm kiếm</button>
+	                </div>
 					<div class="row"></div>
 				</div>
 				<div id="example-item-bandat" style="display: none;">
@@ -337,6 +349,9 @@
 				</div>
 			</div>
 		</div>
+		<jsp:include page="pagination.jsp">
+			<jsp:param value="${(empty param.page || param.page <= 0 ) ? 1 : param.page }" name="page" />
+		</jsp:include>
 	</div>
 	<div id="messageModal" class="modal fade" tabindex="-1" role="dialog">
 	  <div class="modal-dialog">

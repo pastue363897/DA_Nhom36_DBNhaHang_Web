@@ -44,7 +44,7 @@ $(document).ready(function() {
 						return;
 					}
 					var tenMA = data.tenMA;
-					var hinhAnh = data.hinhAnhMA.replace(/"/g, '');
+					var hinhAnh = (data.hinhAnhMA || "").replace(/"/g, '');
 					var nguyenLieu = data.nguyenLieu;
 					var moTa = data.moTaMA;
 					var soNguoi = data.soLuongNguoi;
@@ -73,15 +73,36 @@ $(document).ready(function() {
 		data["tenOrMoTaMA"] = tenOrMoTaMA;
 		data["giaTienMA"] = giaTienMA;
 		data["soNguoiAnMA"] = soNguoiAnMA;
-		
+		loadFood("search-monan", data);
+		$("#tenOrMoTaMA").attr('data-value', tenOrMoTaMA);
+		$("#giaTienMA").attr('data-value', giaTienMA);
+		$("#soNguoiAnMA").attr('data-value', soNguoiAnMA);
+	});
+	function loadPagination() {
+		$(".pagination a:not(.action-pagination)").on("click", function(event) {
+			var data = {
+				tenOrMoTaMA: $("#tenOrMoTaMA").attr('data-value'),
+				giaTienMA: $("#giaTienMA").attr('data-value'),
+				soNguoiAnMA: $("#soNguoiAnMA").attr('data-value'),
+				page: this.text
+			}
+			var url = this.href;
+			loadFood('search-monan' + url.substring(url.lastIndexOf('?')), data);
+			event.preventDefault();
+			var aTag = $("#v-pills-home-tab");
+		    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+		})
+	}
+	function loadFood(url, dt) {
 		$.ajax({
 			type : "GET",
-			url : "search-monan",
-			data : data,
+			url : url,
+			data : dt,
 			dataType : 'json',
 			timeout : 100000,
-			success : function(data) {
-				console.log("SUCCESS: ", data);
+			success : function(result) {
+				console.log("SUCCESS: ", result);
+				var data = result.data;
 				var contentLeft = $("#v-pills-home > .row > .col-lg-6:nth-child(1)");
 				var contentRight = $("#v-pills-home > .row > .col-lg-6:nth-child(2)");
 				var item = $("#example-item-monan > div");
@@ -93,7 +114,7 @@ $(document).ready(function() {
 				}
 				if (data.length == 0) {
 					$(contentLeft).append('<h3 style="margin-left: 10px">Không có món ăn có thông tin phù hợp với tìm kiếm</h3>');
-					return;
+					//return;
 				}
 				if (data.length > 0) {
 					var half = data.length / 2;
@@ -118,12 +139,14 @@ $(document).ready(function() {
 					loadHeightFood();
 					loadChiTiet();
 				}
+				createPaginationPage(result.pagecount, dt.page > 0 ? dt.page : 0);
+				loadPagination();
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
 			}
 		});
-	});
+	}
 	function loadHeightFood() {
 		var tableLeft = $("#v-pills-home>.row :nth-child(1)").children(".menus");
 		var tableRight = $("#v-pills-home>.row :nth-child(2)").children(".menus");
@@ -148,4 +171,5 @@ $(document).ready(function() {
 	}
 	loadHeightFood();
 	loadChiTiet();
+	loadPagination();
 });

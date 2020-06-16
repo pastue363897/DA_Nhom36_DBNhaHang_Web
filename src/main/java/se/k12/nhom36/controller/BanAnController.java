@@ -6,6 +6,7 @@
 package se.k12.nhom36.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,20 +27,31 @@ public class BanAnController {
   private ManagerBanAnService managerBanAnService;
   
   @RequestMapping(value = "banan")
-  public String requestBanAn(Model model) {
-    List<BanAn> danhSachBanAn = managerBanAnService.danhSachBanAn();
+  public String requestBanAn(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
+    List<BanAn> danhSachBanAn = managerBanAnService.danhSachBanAn(page);
+    int pagecount = managerBanAnService.soPageBanAn();
     
     model.addAttribute("dsBanAn", danhSachBanAn);
-    
+    model.addAttribute("pagecount", pagecount);
     return "banan";
   }
   @RequestMapping(value = "search-banan")
-  public String searchBanAn(@RequestParam(name = "moTaBA", required = false) String moTa, @RequestParam(name = "gioBA", required = false) String gio,
+  public String searchBanAn(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "moTaBA", required = false) String moTa, @RequestParam(name = "gioBA", required = false) String gio,
       @RequestParam(name = "ngayPhucVuBA", required = false) String ngayPhucVu, @RequestParam(name = "soNguoiBA", defaultValue = "0") int soNguoi, Model model) {
     System.out.println("moTa: " + moTa);
     System.out.println("gio: " + gio);
     System.out.println("ngayPhucVu: " + ngayPhucVu);
     System.out.println("soNguoi: " + soNguoi);
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
     Timestamp ngayPV = null;
     if (ngayPhucVu != null && !ngayPhucVu.trim().isEmpty()) {
       ngayPhucVu = ngayPhucVu.replaceAll("/", "-");
@@ -51,9 +63,10 @@ public class BanAnController {
       ngayPV = DateUtil.getDate(ngayPhucVu);
     }
     
-    List<BanAn> danhSachBanAn = managerBanAnService.timDanhSachBanAn(moTa, gio, ngayPV, soNguoi);
-    
+    List<BanAn> danhSachBanAn = new ArrayList<BanAn>();
+    int pagecount = managerBanAnService.timDanhSachBanAn(danhSachBanAn, moTa, gio, ngayPV, soNguoi, page);
     model.addAttribute("dsBanAn", danhSachBanAn);
+    model.addAttribute("pagecount", pagecount);
     
     return "banan";
   }

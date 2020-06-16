@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import database.HoaDonBanDatDAO;
 import entites.HoaDonBanDat;
+import enums.ETinhTrangHoaDon;
 
 @Repository
 public class ManagerBanDatDao {
@@ -27,8 +28,8 @@ public class ManagerBanDatDao {
   public String themBanDat(HoaDonBanDat ttBanDat) {
     return ttBanDatDao.addBanDat(ttBanDat);
   }
-  public List<HoaDonBanDat> getDSBanDatKhachHang(String maKH) {
-    return ttBanDatDao.getDSTTBanDatTheoCustomer(maKH);
+  public List<HoaDonBanDat> getDSBanDatKhachHang(String maKH, Date ngayPhucVu, ETinhTrangHoaDon tt) {
+    return ttBanDatDao.getDSTTBanDatTheoCustomer(maKH, ngayPhucVu, tt);
   }
 //  public HoaDonBanDat getBanDat(String maBD) {
 //    return ttBanDatDao.get(maBD);

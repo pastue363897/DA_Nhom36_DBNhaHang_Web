@@ -22,8 +22,11 @@ public class ManagerMonAnDao {
   public List<MonAn> getDanhSachMonAnHome(int count){
     return monAnDao.danhSachMonAnHome(count);
   }
-  public List<MonAn> getDanhSachMonAn(){
+  public int getSoMonAn(){
     return monAnDao.danhSachMonAnCoTheDat();
+  }
+  public List<MonAn> getDanhSachMonAn(int page){
+    return monAnDao.danhSachMonAnCoTheDat(page);
   }
   public MonAn getMonAn(String maMA) {
     return monAnDao.get(maMA);

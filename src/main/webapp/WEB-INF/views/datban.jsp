@@ -13,12 +13,14 @@
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/manager-account.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/search-food.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/food.css" />'>
+<link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/pagination.css" />'>
 <link rel='stylesheet' type="text/css" href='<c:url value="/resources/css/datban.css" />'>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery-ui.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/jquery.timepicker.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/bootstrap.min.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/food.js" />'></script>
+<script type='text/javascript' src='<c:url value="/resources/js/pagination.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/select-food.js" />'></script>
 <script type='text/javascript' src='<c:url value="/resources/js/datban.js" />'></script>
 </head>
@@ -29,6 +31,9 @@
 			<div class="col-md-7" id="first">
 			    <jsp:include page="search-food.jsp"></jsp:include>
 				<jsp:include page="foods.jsp"></jsp:include>
+				<jsp:include page="pagination.jsp">
+			        <jsp:param value="${(empty param.page || param.page <= 0 ) ? 1 : param.page }" name="page"/>
+			    </jsp:include>
 			</div>
 			<div class="col-md-5 position-sticky" id="second">
 				<div class="justify-content-center order-table">

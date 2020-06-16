@@ -234,4 +234,19 @@ span.cancel {
 span.cancel:hover {
 	cursor: pointer;
 }
-
+#search-bandat {
+	display: grid;
+	grid-column-gap: 20px;
+	grid-template-columns: auto auto auto;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #ffb400;
+    border-radius: 5px;
+}
+@media ( max-width : 768px){
+	#search-bandat {
+	   grid-template-columns: 100%;
+       grid-row-gap: 10px;
+	}
+}

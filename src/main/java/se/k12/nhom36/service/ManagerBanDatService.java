@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import entites.BanAn;
 import entites.CTHoaDonBanDat;
 import entites.Customer;
 import entites.MonAn;
+import enums.ETinhTrangHoaDon;
 import entites.HoaDonBanDat;
 import se.k12.nhom36.model.BanAnViewModel;
 import se.k12.nhom36.model.CTTTBanDatModel;
@@ -68,10 +70,15 @@ public class ManagerBanDatService {
     
     return true;
   }
-  public List<TTBanDatViewModel> getDSBanDatKH(String maKH){
+  public List<TTBanDatViewModel> getDSBanDatKH(AtomicInteger pageCountOutput, String maKH, Date ngayPhucVu, ETinhTrangHoaDon tinhTrangHoaDon, int page){
     List<TTBanDatViewModel> ds = null;
-    List<HoaDonBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH);
+    List<HoaDonBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH, ngayPhucVu, tinhTrangHoaDon);
     if (dsBanDat != null) {
+      int pagecount = dsBanDat.size() / 20;
+      if (dsBanDat.size() % 2 == 0) {
+        pagecount++;
+      }
+      pageCountOutput.set(pagecount);
       ds = new ArrayList<TTBanDatViewModel>();
       TTBanDatViewModel b;
       BanAnViewModel banAn;
@@ -79,7 +86,8 @@ public class ManagerBanDatService {
       CTTTBanDatMonAnViewModel ct;
       List<CTTTBanDatMonAnViewModel> dsMonAn;
       long tongTien;
-      for (HoaDonBanDat tt : dsBanDat) {
+      for (int i = page * 20; i < dsBanDat.size(); i++) {
+        HoaDonBanDat tt = dsBanDat.get(i);
         banAn = new BanAnViewModel(tt.getBanAn().getMaBA(), tt.getBanAn().getKySoBA(), tt.getBanAn().getSoLuongGhe(), tt.getBanAn().getMotaBA(), tt.getBanAn().getPhuGia(), tt.getBanAn().getHinhAnh());
         dsMonAn = new ArrayList<CTTTBanDatMonAnViewModel>();
         tongTien = banAn.getPhuGia();
@@ -91,6 +99,9 @@ public class ManagerBanDatService {
         }
         b = new TTBanDatViewModel(banAn, tt.getNgayDatBan(), tt.getNgayPhucVu(), dsMonAn, tt.isDaHuy(), tt.isDaThanhToan(), tongTien, tt.getTienDaDua(), tt.getNgayThanhToan());
         ds.add(b);
+        if (ds.size() == 20) {
+          break;
+        }
       }
     }
     return ds;

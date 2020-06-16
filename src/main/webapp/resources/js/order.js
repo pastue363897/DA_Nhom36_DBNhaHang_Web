@@ -33,6 +33,28 @@ $(document).ready(function() {
 //		event.preventDefault();
 //		return false;
 	});
+	$(".pagination a:not(.action-pagination)").on("click", function(event) {
+		var data = {
+			moTaBA: $("#moTaBA").data('value'),
+			gioBA: $("#gioBA").data('value'),
+			ngayPhucVuBA: $("#ngayPhucVuBA").data('value'),
+			soNguoiBA: $("#soNguoiBA").data('value')
+		}
+		var url = this.href;
+		if (Object.values(data).filter(value => value != "").length > 0) {
+			var form = $('<form/>', {action : 'search-banan' + url.substring(url.lastIndexOf('?')), method : 'POST'});
+			for (var key in data) {
+				form.append($('<input>').attr({
+			        type: 'hidden',
+			        name: String(key),
+			        value: String(data[key])
+			    }))
+			}
+			form.appendTo('body').submit();
+			event.preventDefault();
+			return false;
+		}
+	})
 	
 	$(".item-table").on("click", function() {
 		var maBA = $(this).children(":first").val();

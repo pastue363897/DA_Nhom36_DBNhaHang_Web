@@ -7,14 +7,40 @@ $(document).ready(function() {
 		$("#manager-account-content").show();
 		console.log("manager-account")
 	});
+	$('#ngayPhucVuBA').datepicker({
+		dateFormat : "dd/mm/yy"
+	})
+	$("#timKiemBanDat").click(function(event) {
+		event.preventDefault();
+		page = 0;
+		let ngay = $("#ngayPhucVuBA").val().split("/");
+		let ngayPhucVuBA = ngay[2] + "-" + ngay[1] + "-" + ngay[0];
+		let tinhTrangBanDat = $("#tinhTrangBanDat").val();
+		$("#ngayPhucVuBA").attr('data-value', ngayPhucVuBA);
+		$("#tinhTrangBanDat").attr('data-value', tinhTrangBanDat);
+		$("#manager-bill").click();
+	})
 	$("#manager-bill").on("click", function() {
 		activeManager(this);
 		$(".manager-content").hide();
 		$("#manager-bill-content").show();
 		console.log("manager-bill")
+		let dt = {
+			page: page
+		}
+		let ngayPhucVu = $("#ngayPhucVuBA").attr('data-value') || "";
+		if (ngayPhucVu != "" && ngayPhucVu.match(/^[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}$/)) {
+			dt.ngayPhucVu = ngayPhucVu;
+		}
+		let tinhTrangBanDat = $("#tinhTrangBanDat").attr('data-value') || "";
+		if (tinhTrangBanDat != "") {
+			dt.tt = tinhTrangBanDat;
+		}
+		console.log(dt)
 		$.ajax({
 			type : "POST",
 			url : "danhsach-bandat",
+			data: dt,
 			dataType : 'json',
 			timeout : 100000,
 			success : function(data) {
@@ -24,59 +50,61 @@ $(document).ready(function() {
 					$("#messageModelBody").text("Chưa đăng nhập, hãy đăng nhập vào hệ thống với tài khoản của bạn");
 					return;
 				}
+				let pagecount = data.pagecount;
 				data = data.dsBD;
 				var content = $("#manager-bill-content > .row");
 				$(content).empty();
 				if (data == null || data.length == 0) {
 					$(content).append('<h3 style="margin-left: 10px">Không có danh sách bàn đã đặt</h3>');
-					return;
-				}
-				var item = $("#example-item-bandat > div");
-				var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
-				var monAn = $("#example-item-monan > div");
-				var time;
-				for (i of data) {
-					item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
-					item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
-					item.find(".content-info-bandat > .tongTien > span").text((i.tongTien).toLocaleString())
-					item.find(".content-info-bandat > .soGhe > span").text(i.banAn.soLuongGhe)
-					time = new Date(i.ngayDat);
-					item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(time.toLocaleDateString('en-GB') + " " + 
-							(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":" + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
-					time = new Date(i.ngayPhucVu);
-					item.find(".content-info-bandat > .bandat-time > .ngayPhucVu > span").text(time.toLocaleDateString('en-GB') + " " + 
-							(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
-					if (i.daHuy) {
-						item.find(".bandat-pay").children().hide();
-						item.find(".bandat-pay > .daHuy").show();
-					} else if (i.daThanhToan) {
-						item.find(".bandat-pay").children().hide();
-						item.find(".bandat-pay > .daThanhToan").show();
-						time = new Date(i.ngayThanhToan);
-						item.find(".bandat-pay > .daThanhToan > .chiTietThanhToan > .ngayThanhToan > span").text(time.toLocaleDateString('en-GB') + " " + 
-								(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds());
-					} else {
-						item.find(".bandat-pay").children().hide();
-						item.find(".bandat-pay > .chuaThanhToan").show();
+				} else {
+					var item = $("#example-item-bandat > div");
+					var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
+					var monAn = $("#example-item-monan > div");
+					var time;
+					for (i of data) {
+						item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
+						item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
+						item.find(".content-info-bandat > .tongTien > span").text((i.tongTien).toLocaleString())
+						item.find(".content-info-bandat > .soGhe > span").text(i.banAn.soLuongGhe)
+						time = new Date(i.ngayDat);
+						item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(time.toLocaleDateString('en-GB') + " " + 
+								(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":" + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
+						time = new Date(i.ngayPhucVu);
+						item.find(".content-info-bandat > .bandat-time > .ngayPhucVu > span").text(time.toLocaleDateString('en-GB') + " " + 
+								(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds())
+						if (i.daHuy) {
+							item.find(".bandat-pay").children().hide();
+							item.find(".bandat-pay > .daHuy").show();
+						} else if (i.daThanhToan) {
+							item.find(".bandat-pay").children().hide();
+							item.find(".bandat-pay > .daThanhToan").show();
+							time = new Date(i.ngayThanhToan);
+							item.find(".bandat-pay > .daThanhToan > .chiTietThanhToan > .ngayThanhToan > span").text(time.toLocaleDateString('en-GB') + " " + 
+									(time.getHours() >= 10 ? "" : "0") + time.getHours() + ":" + (time.getMinutes() >= 10 ? "" : "0") + time.getMinutes() + ":"  + (time.getSeconds() >= 10 ? "" : "0") + time.getSeconds());
+						} else {
+							item.find(".bandat-pay").children().hide();
+							item.find(".bandat-pay > .chuaThanhToan").show();
+						}
+						item.find(".content-detail-bandat > .content-banan > p").text(i.banAn.motaBA);
+						item.find(".content-detail-bandat > .content-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
+						$(dsMonAn).empty();
+						for (j of i.dsMonAn) {
+							monAn.find("div > img").attr("src", "data/" + j.monAn.hinhAnhMA);
+							monAn.find("div > .content-monan > h5").text(j.monAn.tenMA);
+							monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text((j.donGia).toLocaleString());
+							monAn.find("div > .content-monan > .detail-monan-selectd > .soLuongChon > span").text(j.soLuong);
+							$(dsMonAn).append($(monAn).clone());
+						}					
+						$(content).append($(item).clone());
 					}
-					item.find(".content-detail-bandat > .content-banan > p").text(i.banAn.motaBA);
-					item.find(".content-detail-bandat > .content-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
-					$(dsMonAn).empty();
-					for (j of i.dsMonAn) {
-						monAn.find("div > img").attr("src", "data/" + j.monAn.hinhAnhMA);
-						monAn.find("div > .content-monan > h5").text(j.monAn.tenMA);
-						monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text((j.donGia).toLocaleString());
-						monAn.find("div > .content-monan > .detail-monan-selectd > .soLuongChon > span").text(j.soLuong);
-						$(dsMonAn).append($(monAn).clone());
-					}					
-					$(content).append($(item).clone());
+					$(".a").on("click", function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+						console.log($(this).parent(".item-bandat"))
+						$(this).parent().parent().parent().parent(".item-bandat").find(".content-detail-bandat").toggle();
+					});
 				}
-				$(".a").on("click", function(event) {
-					event.preventDefault();
-					event.stopPropagation();
-					console.log($(this).parent(".item-bandat"))
-					$(this).parent().parent().parent().parent(".item-bandat").find(".content-detail-bandat").toggle();
-				});
+				loadPagination(pagecount);
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
@@ -95,10 +123,12 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			url : "shopping-cart",
+			data: {page: page},
 			dataType : 'json',
 			timeout : 100000,
-			success : function(data) {
-				console.log("SUCCESS: ", data);
+			success : function(dt) {
+				console.log("SUCCESS: ", dt);
+				let data = dt.data;
 				var content = $("#manager-shopping-cart-content");
 				$(content).empty();
 				if (data == null || data.length == 0) {
@@ -384,6 +414,7 @@ $(document).ready(function() {
 						}
 					});
 				});
+				loadPagination(dt.pagecount);
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
@@ -569,8 +600,14 @@ $(document).ready(function() {
 		});
 	});
 	function activeManager(typeManager) {
-		$(".manger > li").removeClass();
-		$(typeManager).addClass("manager-active");
+		let oldActive = $(".manger > li.manager-active");
+		let newActive = $(typeManager);
+		if (oldActive[0] != newActive[0]) {
+			$(".manger > li").removeClass();
+			newActive.addClass("manager-active");
+			$(".pagination a").remove();
+			page = 0;
+		}
 	}
 	function tongTienItemCart(itemCart) {
 		var $this = $(itemCart).find(".item-cart-right > .dansach-monan").children();
@@ -596,5 +633,15 @@ $(document).ready(function() {
 			$(itemCart).find(".item-cart-right > .info-banan .ttma").hide();
 			$(itemCart).find(".item-cart-right > .info-banan .tt").hide();
 		}
+	}
+	var page = 0;
+	function loadPagination(pagecount) {
+		createPaginationPage(pagecount, page);
+		$(".pagination a:not(.action-pagination)").on("click", function(event) {
+			page = this.text;
+			$(".manager-active").click();
+			event.preventDefault();
+		    $('html,body').animate({scrollTop: 0},'slow');
+		})
 	}
 });

@@ -27,8 +27,11 @@ public class ManagerBanAnDao {
   public List<BanAn> getDanhSachBanAnHome(int count){
     return banAnDao.danhSachBanAnHome(count);
   }
-  public List<BanAn> getDanhSachBanAn(){
+  public int getSoBanAn(){
     return banAnDao.danhSachBanAnCoTheDat();
+  }
+  public List<BanAn> getDanhSachBanAn(int page){
+    return banAnDao.danhSachBanAnCoTheDat(page);
   }
   public List<BanAn> searchDanhSachBanAn(String moTaBA, String gio, Timestamp ngayPhucVu, int soLuong){
     if (gio == null || gio.trim().isEmpty()) {

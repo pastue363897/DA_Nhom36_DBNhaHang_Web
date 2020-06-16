@@ -25,13 +25,28 @@ public class ManagerMonAnService {
     int count = Integer.parseInt("20"/* evm.getProperty("monan.visiable-home") */);
     return managerMonAnDao.getDanhSachMonAnHome(count);
   }
-  public List<MonAn> danhSachMonAn(){
-    return managerMonAnDao.getDanhSachMonAn();
+  public int soPageMonAn(){
+    int page = managerMonAnDao.getSoMonAn() / 20;
+    return managerMonAnDao.getSoMonAn() % 20 == 0 ? page : page + 1;
+  }
+  public List<MonAn> danhSachMonAn(int page){
+    return managerMonAnDao.getDanhSachMonAn(page);
   }
   public MonAn thongTinChiTietMonAn(String maMA) {
     return managerMonAnDao.getMonAn(maMA);
   }
-  public List<MonAn> timDanhSachMonAn(String tenOrMoTa, long giaTien, int soNguoiAn){
-    return managerMonAnDao.searchDanhSachMonAn(tenOrMoTa, giaTien, soNguoiAn);
+  public int timDanhSachMonAn(List<MonAn> output, String tenOrMoTa, long giaTien, int soNguoiAn, int page){
+    List<MonAn> ds = managerMonAnDao.searchDanhSachMonAn(tenOrMoTa, giaTien, soNguoiAn);
+    if (ds == null) {
+      return 1;
+    }
+    for (int i = page * 20; i < ds.size(); i++) {
+      output.add(ds.get(i));
+      if (output.size() == 20) {
+        break;
+      }
+    }
+    page = ds.size() / 20;
+    return ds.size() % 20 == 0 ? page : page + 1;
   }
 }

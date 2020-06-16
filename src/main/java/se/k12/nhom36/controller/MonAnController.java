@@ -5,7 +5,10 @@
 
 package se.k12.nhom36.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +31,17 @@ public class MonAnController {
   private ManagerMonAnService managerMonAnService;
   
   @RequestMapping(value = "monan")
-  public String requestMonAn(Model model) {
-    List<MonAn> danhSachMonAn = managerMonAnService.danhSachMonAn();
+  public String requestMonAn(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
+    List<MonAn> danhSachMonAn = managerMonAnService.danhSachMonAn(page);
+    int pagecount = managerMonAnService.soPageMonAn();
     
     model.addAttribute("dsMonAn", danhSachMonAn);
+    model.addAttribute("pagecount", pagecount);
     
     return "monan";
   }
@@ -44,10 +54,19 @@ public class MonAnController {
   }
   
   @RequestMapping(value = "search-monan")
-  public @ResponseBody String searchMonAn(@RequestParam(name = "tenOrMoTaMA", required = false) String tenOrMoTa, @RequestParam(name = "giaTienMA", defaultValue = "0") long giaTien,
-                                            @RequestParam(name = "soNguoiAnMA", defaultValue = "0") int soNguoiAn) {
-    List<MonAn> dsMonAn = managerMonAnService.timDanhSachMonAn(tenOrMoTa, giaTien, soNguoiAn);
+  public @ResponseBody String searchMonAn(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "tenOrMoTaMA", required = false) String tenOrMoTa,
+               @RequestParam(name = "giaTienMA", defaultValue = "0") long giaTien, @RequestParam(name = "soNguoiAnMA", defaultValue = "0") int soNguoiAn) {
+    if (page <= 0) {
+      page = 0;
+    } else {
+      page -= 1;
+    }
+    List<MonAn> dsMonAn = new ArrayList<MonAn>();
+    int pagecount = managerMonAnService.timDanhSachMonAn(dsMonAn, tenOrMoTa, giaTien, soNguoiAn, page);
     Gson gson = new Gson();
-    return gson.toJson(dsMonAn);
+    Map<String, Object> result = new HashMap<String, Object>();
+    result.put("pagecount", pagecount);
+    result.put("data", dsMonAn);
+    return gson.toJson(result);
   }
 }
