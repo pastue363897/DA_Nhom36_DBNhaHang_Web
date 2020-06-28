@@ -297,9 +297,9 @@
                                <button type="button" class="btn btn-warning huyban">Hủy</button>
                            </div>
                            <div>
-                            <input type="text" class="form-control mr-5 gioPhucVu" value="12:00">
-                            <input type="text" class="form-control itemCartNgayPhucVu form-control">
-                            <button type="button" class="btn btn-secondary btn-sm btn-tooltip">Gợi ý</button>
+                            <input type="text" class="form-control mr-5 gioPhucVu" value="12:00" readonly="readonly">
+                            <input type="text" class="form-control itemCartNgayPhucVu form-control" readonly="readonly">
+                            <!-- <button type="button" class="btn btn-secondary btn-sm btn-tooltip">Gợi ý</button> -->
                           </div>
                        </div>
                        <div class="col-md-9 item-cart-right">

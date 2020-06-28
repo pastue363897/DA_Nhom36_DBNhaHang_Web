@@ -6,8 +6,8 @@ $(document).ready(function() {
 	$('#gioPhucVu').timepicker({
 	    timeFormat: 'HH:mm:ss',
 	    interval: 30,
-	    minTime: '0',
-	    maxTime: '23:59:59',
+	    minTime: '05:00:00',
+	    maxTime: '23:00:00',
 	    dynamic: false,
 	    dropdown: true,
 	    scrollbar: true

@@ -9,13 +9,13 @@
 					<form action="search-banan" method="POST" class="d-block d-lg-flex">
 						<div class="fields d-block d-lg-flex">
 
-							<div class="one-third">
+							<div class="two-third">
 								<input type="text" id="moTaBA" name="moTaBA" class="form-control" data-value="${param.moTaBA }" placeholder="Mô tả">
 							</div>
 
-                            <div class="one-third">
+                            <%-- <div class="one-third">
                                 <input type="text" id="gioBA" name="gioBA" class="form-control" data-value="${param.gioBA }" placeholder="Thời gian">
-                            </div>
+                            </div> --%>
                             
 							<div class="one-third">
 								<input type="text" id="ngayPhucVuBA" name="ngayPhucVuBA" data-value="${param.ngayPhucVuBA }" class="form-control" placeholder="Ngày phục vụ">

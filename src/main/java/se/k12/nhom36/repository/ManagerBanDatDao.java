@@ -39,7 +39,8 @@ public class ManagerBanDatDao {
     return ttBanDatDao.updateTongTien(maBD, tongTien);
   }*/
   public boolean checkBanDaDat(String maBA, Timestamp date) {
-    return ttBanDatDao.checkBanDaDat(maBA, date);
+    //return ttBanDatDao.checkBanDaDat(maBA, date);
+    return ttBanDatDao.checkBanTrungDatTruoc(maBA, date);
   }
   public boolean checkSoLuongMonAnDat(String maBA, Timestamp date, int soLuongMonAn) {
     return ttBanDatDao.checkSoLuongMonAnHoaDonBanDat(maBA, date, soLuongMonAn);

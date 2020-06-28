@@ -9,14 +9,23 @@
 	border-radius: 0px;
 	height: 52px !important;
 }
+form {
+	justify-content: center;
+}
 form .fields .one-third {
     width: 25%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+form .fields .two-third {
+    width: 50%;
     padding-right: 10px;
     padding-left: 10px;
 }
 form .search-submit {
     width: 120px;
     margin-left: 20px;
+    margin-right: 20px;
     background: #fff;
     border: 2px solid #fff;
     color: #404044;
@@ -28,6 +37,9 @@ form .search-submit {
 }
 @media ( max-width : 992px) {
     form .fields .one-third {
+        width: 100%;
+    }
+    form .fields .two-third {
         width: 100%;
     }
     .reservation {

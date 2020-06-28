@@ -61,9 +61,9 @@
                       <button type="button" id="btn-datban" class="btn-danger">Đặt bàn</button>
                       <button type="button" id="btn-themgiohang" class="btn-warning">Thêm vào giỏ hàng</button>
                       <div>
-                        <input type="text" id="gioPhucVu" class="form-control" value="12:00:00">
-                        <input type="text" id="ngayPhucVu" class="form-control">
-                        <button type="button" id="btn-tooltip" class="btn btn-secondary btn-sm">Gợi ý</button>
+                        <input type="text" id="gioPhucVu" class="form-control" value="12:00:00" readonly="readonly">
+                        <input type="text" id="ngayPhucVu" class="form-control" readonly="readonly">
+                        <!-- <button type="button" id="btn-tooltip" class="btn btn-secondary btn-sm">Gợi ý</button> -->
                       </div>
                     </div>
 					<div id="foods-select" class="container choose">

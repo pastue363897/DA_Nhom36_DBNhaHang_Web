@@ -132,7 +132,8 @@ $(document).ready(function() {
 				$("#messageModalLabel").text("Đặt bàn");
 				if (Object.keys(data.info).length > 0){
 					if (data.info.dadat == true) {
-						$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");
+						/*$("#messageModelBody").text("Bàn ăn đã được đặt tại thời gian này, hãy chọn giờ khác");*/
+						$("#messageModelBody").text("Bàn ăn đã được đặt, hãy chọn ngày khác");
 					} else if (data.info.soLuongMonAnQuaLon == true) {
 						$("#messageModelBody").text("Hiện tại chưa có bàn đặt nào tại thời gian này "
 														+ "nhưng số lượng món ăn bạn chọn quá lớn so với khoảng thời gian còn trống");
@@ -326,7 +327,7 @@ $(document).ready(function() {
 							s = new Date(start);
 							e = new Date(data[start]);
 							tooltip += "<li><span class='time'>" + s.toLocaleTimeString("es-GB") + " - " + e.toLocaleTimeString("es-GB") + "</span>" +
-									" có thể chọn tối đa " + (parseInt(((e.getHours() * 60 + e.getMinutes()) - (s.getHours() * 60 + s.getMinutes())) / 15)) + " món </li>";
+									" có thể chọn tối đa " + (parseInt(((e.getHours() * 60 + e.getMinutes()) - (s.getHours() * 60 + s.getMinutes())) / 15) + 1) + " món </li>";
 						}
 						tooltip += "</ul>";
 						console.log(tooltip)

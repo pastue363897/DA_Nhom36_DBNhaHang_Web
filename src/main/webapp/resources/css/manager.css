@@ -201,6 +201,9 @@ fieldset {
 	display: inline-block;
 	margin: 0 5px;
 }
+.item-cart-left input[type="text"]:read-only {
+	background-color: white;
+}
 .item-cart-right .info-banan {
 	margin-bottom: 10px;
 }

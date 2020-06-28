@@ -77,8 +77,8 @@ public class DatBanController {
     if (ttBD != null) {
       
       if (!managerBanDatService.kiemTraBanDaDat(ttBD.getMaBA(), ttBD.getNgayPhucVu())) {
-        if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(),
-            ttBD.getDsMonAn().size())) {
+        /*if (!managerBanDatService.kiemTraSoLuongMonAnBanDat(ttBD.getMaBA(), ttBD.getNgayPhucVu(),
+            ttBD.getDsMonAn().size())) {*/
           Object o = session.getAttribute("account");
           if (o != null) {
             o = session.getAttribute("customer");
@@ -90,9 +90,9 @@ public class DatBanController {
               result = managerBanDatService.datBan(ttBD);
             }
           }
-        } else {
+        /*} else {
           info.put("soLuongMonAnQuaLon", true);
-        }
+        }*/
       } else {
         info.put("dadat", true);
       }
@@ -141,6 +141,7 @@ public class DatBanController {
     Gson gson = new Gson();
     return gson.toJson(result);
   }
+  /*
   @RequestMapping(value = "tooltip-datban", method = RequestMethod.POST)
   public @ResponseBody String toolTipDatBan(@RequestParam(name = "maBA") String maBA, @RequestParam(name = "ngayPhucVu") Date ngayPhucVu) {
     Gson gson = new Gson();
@@ -150,4 +151,5 @@ public class DatBanController {
     Map<Timestamp, Timestamp> map = managerBanDatService.goiYDatBan(maBA, ngayPhucVu);
     return gson.toJson(map);
   }
+  */
 }
