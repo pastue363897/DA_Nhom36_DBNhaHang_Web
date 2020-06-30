@@ -118,7 +118,7 @@ public class ManagerController {
             error.put("diaChi", false);
             check = false;
           }
-          if (customer.getCmnd() == null || !customer.getCmnd().matches("^[1-9](\\d{8}|\\d{11})$")) {
+          if (customer.getCmnd() == null || !customer.getCmnd().matches("^[0-9](\\d{8}|\\d{11})$")) {
             error.put("cmnd", false);
             check = false;
           }

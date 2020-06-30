@@ -13,7 +13,7 @@ public class CustomerModel {
   private String hoTen;
   @Pattern(regexp = "^([1-9][0-9]{0,}[A-Z]?)(/([1-9][0-9]{0,}[A-Z]?)){0,5}(( [\\p{L}]{2,7}){1,15}( [1-9][0-9]{0,}[A-Z]?)?,){2,10}(( \\p{L}{2,7}){1,15})$")
   private String diaChi;
-  @Pattern(regexp = "^[1-9](\\d{8}|\\d{11})$")
+  @Pattern(regexp = "^[0-9](\\d{8}|\\d{11})$")
   private String cmnd;
   @Pattern(regexp = "^0[1-9][0-9]{8}$")
   private String sdt;

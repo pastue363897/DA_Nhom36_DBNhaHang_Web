@@ -53,7 +53,7 @@ $(document).ready(function() {
 		} else {
 			$("#error-diaChi").hide();
 		}
-		if (!cmnd.match(/^[1-9](\d{8}|\d{11})$/)) {
+		if (!cmnd.match(/^[0-9](\d{8}|\d{11})$/)) {
 			$("#error-cmnd").show();
 			result = false;
 		} else {
