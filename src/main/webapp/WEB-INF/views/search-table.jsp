@@ -13,9 +13,9 @@
 								<input type="text" id="moTaBA" name="moTaBA" class="form-control" data-value="${param.moTaBA }" placeholder="Mô tả">
 							</div>
 
-                            <%-- <div class="one-third">
+                            <div class="one-third hiddenField">
                                 <input type="text" id="gioBA" name="gioBA" class="form-control" data-value="${param.gioBA }" placeholder="Thời gian">
-                            </div> --%>
+                            </div>
                             
 							<div class="one-third">
 								<input type="text" id="ngayPhucVuBA" name="ngayPhucVuBA" data-value="${param.ngayPhucVuBA }" class="form-control" placeholder="Ngày phục vụ">
