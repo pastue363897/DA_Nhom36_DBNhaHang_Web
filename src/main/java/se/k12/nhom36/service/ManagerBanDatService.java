@@ -75,7 +75,7 @@ public class ManagerBanDatService {
     List<HoaDonBanDat> dsBanDat = managerBanDatDao.getDSBanDatKhachHang(maKH, ngayPhucVu, tinhTrangHoaDon);
     if (dsBanDat != null) {
       int pagecount = dsBanDat.size() / 20;
-      if (dsBanDat.size() % 2 == 0) {
+      if (dsBanDat.size() % 2 != 0) {
         pagecount++;
       }
       pageCountOutput.set(pagecount);
