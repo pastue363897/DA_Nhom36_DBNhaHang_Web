@@ -61,10 +61,10 @@ $(document).ready(function() {
 					var dsMonAn = $("#example-item-bandat > div > .item-bandat > .content-detail-bandat > .content-danhsach-monan > .row");
 					var monAn = $("#example-item-monan > div");
 					var time;
+					var tongTien;
 					for (i of data) {
 						item.find(".box > img").attr("src", "data/" + i.banAn.hinhAnh)
 						item.find(".content-info-bandat > h3 > span").text(i.banAn.kySoBA)
-						item.find(".content-info-bandat > .tongTien > span").text((i.tongTien).toLocaleString())
 						item.find(".content-info-bandat > .soGhe > span").text(i.banAn.soLuongGhe)
 						time = new Date(i.ngayDat);
 						item.find(".content-info-bandat > .bandat-time > .ngayDat > span").text(time.toLocaleDateString('en-GB') + " " + 
@@ -86,15 +86,18 @@ $(document).ready(function() {
 							item.find(".bandat-pay > .chuaThanhToan").show();
 						}
 						item.find(".content-detail-bandat > .content-banan > p").text(i.banAn.motaBA);
-						item.find(".content-detail-bandat > .content-banan > .phuGia > span").text((i.banAn.phuGia).toLocaleString());
+						item.find(".content-detail-bandat > .content-banan > .phuGia > span").text((i.phuGiaBanAn).toLocaleString());
 						$(dsMonAn).empty();
+						tongTien = i.phuGiaBanAn;
 						for (j of i.dsMonAn) {
+							tongTien += j.donGia * j.soLuong;
 							monAn.find("div > img").attr("src", "data/" + j.monAn.hinhAnhMA);
 							monAn.find("div > .content-monan > h5").text(j.monAn.tenMA);
 							monAn.find("div > .content-monan > .detail-monan-selectd > .giaMA > span").text((j.donGia).toLocaleString());
 							monAn.find("div > .content-monan > .detail-monan-selectd > .soLuongChon > span").text(j.soLuong);
 							$(dsMonAn).append($(monAn).clone());
-						}					
+						}
+						item.find(".content-info-bandat > .tongTien > span").text((tongTien).toLocaleString())
 						$(content).append($(item).clone());
 					}
 					$(".a").on("click", function(event) {

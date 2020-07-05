@@ -201,7 +201,7 @@ public class ManagerController {
     if (obj != null) {
       cart = (List<ItemCartBanDat>) obj;
       int pagecount = cart.size() / 20;
-      if (cart.size() % 2 != 0) {
+      if (cart.size() % 20 != 0) {
         pagecount++;
       }
       result.put("pagecount", pagecount);

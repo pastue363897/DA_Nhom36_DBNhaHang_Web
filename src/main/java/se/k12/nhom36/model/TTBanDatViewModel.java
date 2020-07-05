@@ -15,14 +15,14 @@ public class TTBanDatViewModel {
   private List<CTTTBanDatMonAnViewModel> dsMonAn;
   private boolean daHuy;
   private boolean daThanhToan;
-  private long tongTien;
+  private long phuGiaBanAn;
   private long tienDaDua;
   private Timestamp ngayThanhToan;
   public TTBanDatViewModel() {
     super();
   }
   public TTBanDatViewModel(BanAnViewModel banAn, Timestamp ngayDat, Timestamp ngayPhucVu,
-      List<CTTTBanDatMonAnViewModel> dsMonAn, boolean daHuy, boolean daThanhToan, long tongTien, long tienDaDua,
+      List<CTTTBanDatMonAnViewModel> dsMonAn, boolean daHuy, boolean daThanhToan, long phuGiaBanAn, long tienDaDua,
       Timestamp ngayThanhToan) {
     super();
     this.banAn = banAn;
@@ -31,7 +31,7 @@ public class TTBanDatViewModel {
     this.dsMonAn = dsMonAn;
     this.daHuy = daHuy;
     this.daThanhToan = daThanhToan;
-    this.tongTien = tongTien;
+    this.phuGiaBanAn = phuGiaBanAn;
     this.tienDaDua = tienDaDua;
     this.ngayThanhToan = ngayThanhToan;
   }
@@ -71,11 +71,11 @@ public class TTBanDatViewModel {
   public void setDaThanhToan(boolean daThanhToan) {
     this.daThanhToan = daThanhToan;
   }
-  public long getTongTien() {
-    return tongTien;
+  public long getPhuGiaBanAn() {
+    return phuGiaBanAn;
   }
-  public void setTongTien(long tongTien) {
-    this.tongTien = tongTien;
+  public void setPhuGiaBanAn(long phuGiaBanAn) {
+    this.phuGiaBanAn = phuGiaBanAn;
   }
   public long getTienDaDua() {
     return tienDaDua;
